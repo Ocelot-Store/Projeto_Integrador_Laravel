@@ -9,7 +9,7 @@ Route::get('/', function () {
 
 Route::get('registration', function () {
     return view('registration');
-})->name('register.form');
+})->name('registration');
 
 
 Route::get('register', [RegistrationController::class, 'showRegistrationForm'])->name('register.form');
