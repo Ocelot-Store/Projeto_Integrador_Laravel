@@ -22,7 +22,7 @@
         <div class="div-buttons">
             <!-- Links atualizados para rotas Laravel -->
             <a href="{{ route('registration') }}"><button class="Register-button">Cadastro</button></a>
-            <a href="{{ url('pages/login') }}"><button class="Login-button">Login</button></a>
+            <a href="{{ url('login') }}"><button class="Login-button">Login</button></a>
         </div>
     </div>
 </body>
