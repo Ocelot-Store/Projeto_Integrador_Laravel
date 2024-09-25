@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
+use App\Http\Controllers\ShoeManager;
 
 
 
@@ -23,4 +24,8 @@ Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 Route::get('/home', function(){
     return view('home');
 })->name('home');
+
+Route::get('/addShoe', [ShoeManager::class, 'addShoe'])->name('addShoe');
+Route::post('/addShoe', [ShoeManager::class, 'addShoePost'])->name('addShoe.post');
+
 
