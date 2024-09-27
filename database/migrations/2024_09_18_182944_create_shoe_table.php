@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateShoeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('shoe', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Isso cria um campo 'id' auto-incremental
+            $table->string('model', 20);
+            $table->foreignId('brand_id')->constrained('brand')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('user')->onDelete('cascade');
+            $table->decimal('price', 10, 2);
+            $table->string('size', 100);
+            $table->string('description', 999);
+            $table->string('color', 100);
+            $table->string('path', 100);
+            $table->string('file_name', 100);
+            $table->timestamp('data_upload')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamps(); // Adiciona created_at e updated_at se necessário
         });
     }
 
@@ -28,4 +38,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('shoe');
     }
-};
+}

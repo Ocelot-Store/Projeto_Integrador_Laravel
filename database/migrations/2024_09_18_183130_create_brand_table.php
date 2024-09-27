@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateBrandTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('brand', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Isso cria um campo 'id' auto-incremental
+            $table->string('name', 100);
+            $table->string('description', 500);
         });
     }
 
@@ -28,4 +29,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('brand');
     }
-};
+}
+    
