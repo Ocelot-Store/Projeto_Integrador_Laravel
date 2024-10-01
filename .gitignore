@@ -1,3 +1,4 @@
 #/vendor
 /.vscode
 /storage/app/public/images/shoes/*
+/public/storage/images/shoes/*
