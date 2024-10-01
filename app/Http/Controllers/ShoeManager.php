@@ -41,5 +41,11 @@ class ShoeManager extends Controller
         }
         return redirect(route('addShoe'))->with("success", "Shoe successfully added.");
     }
+    
+    function displayShoes(){
+        $shoes = Shoe::with('brand')->get(); // Obtém todos os tênis com suas marcas associadas
+        return view('home', compact('shoes')); // Retorna a view com os dados
+    }
+    
 }
 

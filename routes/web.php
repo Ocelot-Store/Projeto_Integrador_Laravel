@@ -6,6 +6,7 @@ use App\Http\Controllers\ShoeManager;
 
 
 
+
 Route::get('/', function () {
     return view('index');
 });
@@ -27,5 +28,8 @@ Route::get('/home', function(){
 
 Route::get('/addShoe', [ShoeManager::class, 'addShoe'])->name('addShoe');
 Route::post('/addShoe', [ShoeManager::class, 'addShoePost'])->name('addShoe.post');
+
+
+Route::get('/home', [ShoeManager::class, 'displayShoes'])->name('home');
 
 
