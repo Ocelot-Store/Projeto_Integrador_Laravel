@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Shoe;
 
 class ShoeManager extends Controller
 {
     function addShoe(){
         return view('addShoe');
     }
-    function addShoePost(request $request){
+    function addShoePost(Request $request){
         $request->validate([
             'model' => 'required',
-            'size' => 'required', // email verifica se é um email válido @xxxx.com 
+            'size' => 'required', 
             'color' => 'required',
         ]);
 
