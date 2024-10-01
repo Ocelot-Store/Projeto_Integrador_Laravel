@@ -21,9 +21,9 @@ class Shoe extends Model
         'size',
         'description',
         'color',
-        'path',
-        'file_name',
+        'image',
         'data_upload',
+        
     ];
 
     // Define os relacionamentos

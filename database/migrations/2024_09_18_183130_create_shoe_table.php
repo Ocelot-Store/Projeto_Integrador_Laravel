@@ -22,8 +22,7 @@ class CreateShoeTable extends Migration
             $table->string('size', 100);
             $table->string('description', 999);
             $table->string('color', 100);
-            $table->string('path', 100);
-            $table->string('file_name', 100);
+            $table->string('image', 100);
             $table->timestamp('data_upload')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps(); // Adiciona created_at e updated_at se necessário
         });
