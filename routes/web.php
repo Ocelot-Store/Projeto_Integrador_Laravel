@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ShoeManager;
+use App\Http\Controllers\UserManager;
 
 
 
@@ -31,6 +32,9 @@ Route::post('/addShoe', [ShoeManager::class, 'addShoePost'])->middleware('auth')
 
 Route::get('/home', [ShoeManager::class, 'displayShoes'])->middleware('auth')->name('home');
 Route::get('/search', [ShoeManager::class, 'search'])->middleware('auth')->name('search');
+
+
+Route::get('/user', [UserManager::class, 'show'])->middleware('auth')->name('user');
 
 
 
