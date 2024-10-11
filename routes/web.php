@@ -22,16 +22,16 @@ Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
 
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 
-Route::get('/home', function(){
-    return view('home');
-})->name('home');
 
-Route::get('/addShoe', [ShoeManager::class, 'addShoe'])->name('addShoe');
-Route::post('/addShoe', [ShoeManager::class, 'addShoePost'])->name('addShoe.post');
+//Adicionar ->middleware('auth') impede acesso via url sem autenticação
+
+Route::get('/addShoe', [ShoeManager::class, 'addShoe'])->middleware('auth')->name('addShoe');
+Route::post('/addShoe', [ShoeManager::class, 'addShoePost'])->middleware('auth')->name('addShoe.post');
 
 
-Route::get('/home', [ShoeManager::class, 'displayShoes'])->name('home');
-Route::get('/search', [ShoeManager::class, 'search'])->name('search');
+Route::get('/home', [ShoeManager::class, 'displayShoes'])->middleware('auth')->name('home');
+Route::get('/search', [ShoeManager::class, 'search'])->middleware('auth')->name('search');
+
 
 
 
