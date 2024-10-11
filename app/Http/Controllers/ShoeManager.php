@@ -46,6 +46,19 @@ class ShoeManager extends Controller
         $shoes = Shoe::with('brand')->get(); // Obtém todos os tênis com suas marcas associadas
         return view('home', compact('shoes')); // Retorna a view com os dados
     }
+
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $shoes = Shoe::where('model', 'LIKE', "%{$query}%")
+                    ->orWhereHas('brand', function ($q) use ($query) {
+                        $q->where('name', 'LIKE', "%{$query}%");
+                    })->get();
+        
+        return view('home', compact('shoes'));
+    }
+
     
 }
 

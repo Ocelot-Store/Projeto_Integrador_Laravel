@@ -31,5 +31,7 @@ Route::post('/addShoe', [ShoeManager::class, 'addShoePost'])->name('addShoe.post
 
 
 Route::get('/home', [ShoeManager::class, 'displayShoes'])->name('home');
+Route::get('/search', [ShoeManager::class, 'search'])->name('search');
+
 
 
