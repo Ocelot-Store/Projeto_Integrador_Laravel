@@ -11,7 +11,7 @@ class ShoeManager extends Controller
 {
     function addShoe(){
         $brands = Brand::all(); // Pegando todas as brands cadastradas
-        return view('addShoe', compact('brands')); // Passando as brands para a view
+        return view('shoe.addShoe', compact('brands')); // Passando as brands para a view
     }
 
     function addShoePost(Request $request){
@@ -44,7 +44,7 @@ class ShoeManager extends Controller
     
     function displayShoes(){
         $shoes = Shoe::with('brand')->get(); // Obtém todos os tênis com suas marcas associadas
-        return view('home', compact('shoes')); // Retorna a view com os dados
+        return view('shoe.home', compact('shoes')); // Retorna a view com os dados
     }
 
 
@@ -56,7 +56,7 @@ class ShoeManager extends Controller
                         $q->where('name', 'LIKE', "%{$query}%");
                     })->get();
         
-        return view('home', compact('shoes'));
+        return view('shoe.home', compact('shoes'));
     }
 
     

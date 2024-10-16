@@ -34,7 +34,8 @@ Route::get('/home', [ShoeManager::class, 'displayShoes'])->middleware('auth')->n
 Route::get('/search', [ShoeManager::class, 'search'])->middleware('auth')->name('search');
 
 
-Route::get('/user', [UserManager::class, 'show'])->middleware('auth')->name('user');
+Route::get('/user', [UserManager::class, 'userMenu'])->middleware('auth')->name('user');
+Route::get('/users', [UserManager::class, 'usersMenu'])->middleware('auth')->name('users');
 
 
 

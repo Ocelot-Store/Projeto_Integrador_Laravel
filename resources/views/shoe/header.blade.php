@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
@@ -26,6 +26,12 @@
         <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
+        <li class="nav-item ms-1"> 
+          <a href="{{ route('users') }}">
+            <img src="{{ asset('assets/Users.png') }}" alt="Usuário" class="img-fluid" style="width: 40px; height: 40px;">
+          </a>
+        </li>
+        
         
       </ul>
 

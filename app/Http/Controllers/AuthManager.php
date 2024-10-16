@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Hash;
 class AuthManager extends Controller
 {
     function registration(){
-        return view('registration');
+        return view('authentication.registration');
     }
 
     function login(){
-        return view('login');
+        return view('authentication.login');
     }
     function loginPost(Request $request){
         $request->validate([

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('authentication.layout')   
 @section('title', 'Registration')
 @section('content')
     <div class="container">
