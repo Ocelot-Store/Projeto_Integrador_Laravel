@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('shoe.layout')
 @section('title', "Home page")
 @section('content')
 
