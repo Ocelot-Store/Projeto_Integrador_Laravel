@@ -1,8 +1,10 @@
 @extends('authentication.layout')
 @section('title', 'Login')
 @section('content')
-    <div class="container">
-        <div class="mt-5">
+
+    <div class="overlay"></div>
+        <a href="{{route('index')}}"><img class="homeImg" src="../Assets/Home.png" alt=""></a>
+        <div class="">
             @if($errors->any())
                 <div class="col-12">
                     @foreach($errors->all() as $error)
@@ -19,17 +21,31 @@
                 <div class="alert alert-success">{{session('success')}}</div>
             @endif
         </div>
-        <form action="{{route('login.post')}}" method="POST" class="ms-auto me-auto mt-3">
-            @csrf
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" name="email">
+        <div class="main">
+            <div class="window">
+            <div class="containerh1">
+                <img src="../Assets/BlackLogo.png" alt="">
+                <h1>OCELOT</h1>
             </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password">
+            <h2>ALWAYS FORWARD</h2>
+            
+<div class="form-container">
+                    <form action="{{route('login.post')}}" method="POST" class="ms-auto me-auto mt-3">
+                        @csrf
+                        <div class="input-box">
+                            <img src="../Assets/Email.png" alt="">
+                            <input type="email" class="form-control" name="email" placeholder="Email">
+                        </div>
+                        <div class="input-box">
+                            <img src="../Assets/Password.png" alt="">
+                            <input type="password" class="form-control" name="password" placeholder="Senha">
+                        </div>
+                        <div class="divsubmit">
+                            <input type="submit" value="Submit">
+                        </div>  
+                    </form>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        </div>
     </div>
 @endsection
