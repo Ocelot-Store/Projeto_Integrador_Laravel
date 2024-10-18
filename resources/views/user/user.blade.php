@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('user.userLayout')
 
 @section('title', 'Informações do Usuário')
 
