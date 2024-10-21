@@ -1,4 +1,4 @@
-@extends('shoe.layout')
+@extends('shoe.addShoeLayout')
 @section('title', 'Add a Shoe')
 @section('content')
     <div class="container">
