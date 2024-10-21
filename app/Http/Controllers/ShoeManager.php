@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Shoe;
 use App\Models\Brand;
+use App\Models\Favorite;
+
 
 class ShoeManager extends Controller
 {
@@ -59,6 +61,32 @@ class ShoeManager extends Controller
         return view('shoe.home', compact('shoes'));
     }
 
+    public function addFavorite(Request $request)
+    {
+        $userId = auth()->id();
+        $shoeId = $request->input('shoe_id');
     
+        $favorite = Favorite::where('user_id', $userId)->where('shoe_id', $shoeId)->first();
+    
+        if (!$favorite) {
+            Favorite::create([
+                'user_id' => $userId,
+                'shoe_id' => $shoeId,
+            ]);
+        } else {
+            // Se já estiver nos favoritos, você pode remover aqui se desejar
+            $favorite->delete();
+        }
+    
+        return redirect()->back(); 
+    }
+
+    public function show($id)
+    {
+        $shoe = Shoe::with('brand')->findOrFail($id); // Obtém o tênis pelo ID
+        return view('shoe.viewShoe', compact('shoe')); // Retorna a view com o tênis
+    }
+
+      
 }
 

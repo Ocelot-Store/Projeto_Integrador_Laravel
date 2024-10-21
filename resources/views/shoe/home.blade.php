@@ -1,54 +1,47 @@
-@extends('shoe.layout')
-@section('title', "Home page")
+@extends('shoe.homeLayout')
+@section('title', 'Visualizar Calçados')
+
 @section('content')
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tênis Disponíveis</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- Inclua seu CSS aqui -->
-</head>
-<body>
-    <div class="container mt-4">
-        <h1>Tênis Disponíveis</h1>
+<div class="container mt-4">
+    <h1>Tênis Disponíveis</h1>
 
+    <div class="shoe-container">
         @if ($shoes->isEmpty())
             <p>Nenhum tênis disponível.</p>
         @else
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Modelo</th>
-                        <th>Marca</th>
-                        <th>Tamanho</th>
-                        <th>Cor</th>
-                        <th>Preço</th>
-                        <th>Descrição</th>
-                        <th>Imagem</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($shoes as $shoe)
-                        <tr>
-                            <td>{{ $shoe->model }}</td>
-                            <td>{{ $shoe->brand->name }}</td>
-                            <td>{{ $shoe->size }}</td>
-                            <td>{{ $shoe->color }}</td>
-                            <td>R$ {{ number_format($shoe->price, 2, ',', '.') }}</td>
-                            <td>{{ $shoe->description }}</td>
-                            <td>
-                                <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" style="width: 100px;">
-                            </td>
-
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            @foreach ($shoes as $shoe)
+                <div class="shoe-item">
+                    <a href="{{ route('viewShoe', $shoe->id) }}">
+                        <form method="POST" action="{{ route('favorites.add') }}">
+                            @csrf
+                            <input type="hidden" name="shoe_id" value="{{ $shoe->id }}">
+                            <button type="submit" name="like_button">
+                                @php
+                                    $favorites = auth()->user()->favorites->pluck('shoe_id');
+                                    $isFavorite = $favorites->contains($shoe->id);
+                                    $favoriteImage = $isFavorite ? 'Favorites.png' : 'FavoriteUnchecked.png';
+                                @endphp
+                                <img src="{{ asset('Assets/' . $favoriteImage) }}" alt="{{ $isFavorite ? 'Remover dos Favoritos' : 'Adicionar aos Favoritos' }}" style="width: 50px; height: 50px;">
+                            </button>
+                        </form>
+                        <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" height="150">
+                        <div class="shoe-info">
+                            <div>
+                                <div class="shoe-info-name">
+                                    <span class="model">{{ $shoe->model }}</span><br>
+                                </div>
+                                <div class="shoe-info-otherinfo">
+                                    <span class="brand">{{ $shoe->brand->name }}</span> • 
+                                    <span class="price">R$ {{ number_format($shoe->price, 2, ',', '.') }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
         @endif
     </div>
-</body>
-</html>
+</div>
 
 @endsection

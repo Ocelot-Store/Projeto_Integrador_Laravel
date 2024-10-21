@@ -26,17 +26,16 @@ Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 
 //Adicionar ->middleware('auth') impede acesso via url sem autenticação
 
-Route::get('/addShoe', [ShoeManager::class, 'addShoe'])->middleware('auth')->name('addShoe');
-Route::post('/addShoe', [ShoeManager::class, 'addShoePost'])->middleware('auth')->name('addShoe.post');
-
-
-Route::get('/home', [ShoeManager::class, 'displayShoes'])->middleware('auth')->name('home');
-Route::get('/search', [ShoeManager::class, 'search'])->middleware('auth')->name('search');
-
-
 Route::get('/user', [UserManager::class, 'userMenu'])->middleware('auth')->name('user');
 Route::get('/users', [UserManager::class, 'usersMenu'])->middleware('auth')->name('users');
 
 
+//Shoe
+Route::get('/addShoe', [ShoeManager::class, 'addShoe'])->middleware('auth')->name('addShoe');
+Route::post('/addShoe', [ShoeManager::class, 'addShoePost'])->middleware('auth')->name('addShoe.post');
 
+Route::get('/home', [ShoeManager::class, 'displayShoes'])->middleware('auth')->name('home');
+Route::get('/search', [ShoeManager::class, 'search'])->middleware('auth')->name('search');
+Route::post('/favorites/add', [ShoeManager::class, 'addFavorite'])->middleware('auth')->name('favorites.add');
 
+Route::get('/shoe/{id}', [ShoeManager::class, 'show'])->name('viewShoe');
