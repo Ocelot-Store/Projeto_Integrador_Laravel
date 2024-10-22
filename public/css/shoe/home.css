@@ -3,24 +3,32 @@ body {
 }
 
 a {
-text-decoration: none !important;
+    text-decoration: none !important;
     color: white;
 }
+
 
 .shoe-container {
     display: flex;
     flex-wrap: wrap;
 }
+
+.title{  
+    display: flex;  
+    flex-direction: row;    
+}
+
+.title > :nth-child(2) {  
+    color: grey;
+    padding: 0px 10px;
+}
+
 @media (max-width: 900px) {
-    .shoe-container{
+    .shoe-container {
         justify-content: space-evenly;
     }
 }
-@media (min-width: 900px) {
-    .shoe-container{
-        justify-content: center;
-    }
-}
+
 .shoe-container .shoe-item {
     background-color: white;
     display: flex;
@@ -29,31 +37,28 @@ text-decoration: none !important;
     box-sizing: border-box;
     border-radius: 20px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
 }
+
 @media (min-width: 900px) {
     .shoe-container .shoe-item {
         padding-block: 20px;
-        width: 300px;    
-        margin: 20px 20px;
+        width: 300px;
+        margin: 20px;
     }
 }
+
 @media (max-width: 900px) {
     .shoe-container .shoe-item {
         padding: 10px;
-        width: fit-content;    
+        width: fit-content;
         margin: 20px 5px;
     }
 }
+
 .shoe-container .shoe-item:hover {
     transform: scale(1.01);
-    transition: transform 0.2s ease;
 }
-  
-.shoe-container .shoe-item:not(:hover){
-    transition: transform 0.2s ease;
-    transform: scale(1);
-}
-
 
 .shoe-container .shoe-item img {
     margin-bottom: 10px;
@@ -61,41 +66,88 @@ text-decoration: none !important;
     height: auto;
     transition: transform 0.3s ease;
     border-radius: 5%;
-    width: 230px; 
+    width: 230px;
     height: 230px;
-    overflow: hidden;
     object-fit: cover;
 }
 
-.shoe-info{
+.shoe-info {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin: 5% 0;
 }
-.shoe-info-name{
+
+.shoe-info-name {
     font-size: large;
     color: black;
 }
-.shoe-info-otherinfo{
+
+.shoe-info-otherinfo {
     font-size: medium;
     color: black;
 }
 
-.shoe-info form{
-
-}
-
-.shoe-item form button{
+.shoe-item form button {
     background: none; /* Remove o fundo padrão do botão */
     border: none; /* Remove a borda padrão do botão */
     padding: 0; /* Remove o preenchimento do botão */
     width: 60px;
-    width: 60px;
+    height: 60px;
+    cursor: pointer; /* Adiciona o cursor de ponteiro */
 }
 
-.favorite-button-img{
+.favorite-button-img {
     width: 60px; 
     height: 60px;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Garante que os itens não transbordem */
+}
+
+.carousel-items {
+    display: flex; /* Exibe os itens em uma linha */
+    transition: transform 0.3s ease-in-out; /* Animação ao mover */
+    width: max-content; /* Ajusta a largura da div para acomodar todos os itens horizontalmente */
+}
+
+.shoe-item {
+    min-width: 300px; /* Ajuste a largura mínima conforme necessário */
+    margin: 0 10px; /* Margem lateral */
+    background-color: #f0f0f0; /* Fundo do item */
+    padding: 20px; /* Padding para espaçamento interno */
+    text-align: center; /* Centraliza o texto dentro do item */
+    box-sizing: border-box; /* Garante que padding e margin sejam considerados na largura total */
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%; /* Posiciona verticalmente ao meio */
+    transform: translateY(-50%); /* Ajusta para o centro verticalmente */
+    background-color: rgb(0, 0, 0); /* Fundo semi-transparente */
+    color: white;
+    border: none;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.3; /* Começa invisível */
+    transition: opacity 0.3s; /* Animação de transição */
+}
+
+.prev:hover,.next:hover  {
+    opacity: 0.8; /* Torna visíveis ao passar o mouse */
+}
+
+.prev {
+    left: 10px; /* Lado esquerdo */
+}
+
+.next {
+    right: 10px; /* Lado direito */
 }

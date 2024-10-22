@@ -39,15 +39,24 @@ class ShoeManager extends Controller
         $shoe = Shoe::create($data);
 
         if(!$shoe){
-            return redirect(route('addShoe'))->with("error", "Unable to add shoe, try again.");
+            return redirect(route('addShoe'))->with(" error", "Unable to add shoe, try again.");
         }
         return redirect(route('addShoe'))->with("success", "Shoe successfully added.");
+        
+        
     }
     
-    function displayShoes(){
-        $shoes = Shoe::with('brand')->get(); // Obtém todos os tênis com suas marcas associadas
-        return view('shoe.home', compact('shoes')); // Retorna a view com os dados
+    public function displayShoes()
+    {
+        $shoes = Shoe::with('brand')->get(); // Obtém todos os tênis
+        $cheapestShoes = Shoe::with('brand')
+            ->orderBy('price', 'asc')
+            ->take(20)
+            ->get(); // Obtém os 20 tênis mais baratos
+    
+        return view('shoe.home', compact('shoes', 'cheapestShoes')); // Passa os dois conjuntos de dados
     }
+    
 
 
     public function search(Request $request)
