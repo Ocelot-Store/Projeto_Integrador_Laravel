@@ -1,6 +1,9 @@
 Every time the setup is to be performed, execute the following commands:
 
 php artisan migrate
+
+Criar em storage, as pastas: App\public\images\shoes
+
 php artisan storage:link
 
 Caso precise inserir imagens aleatórias:
