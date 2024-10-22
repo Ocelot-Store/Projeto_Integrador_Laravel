@@ -6,9 +6,10 @@ php artisan storage:link
 Caso precise inserir imagens aleatórias:
 
 Não aleatório:
+
 UPDATE shoe
 SET image = CASE
-    WHEN id % 4 = 0 THEN 'images/shoes/tenisNike1.jpg'
+    WHEN id % 4 = 0 THEN 'images/shoes/tenisNike1.png'
     WHEN id % 4 = 1 THEN 'images/shoes/tenisNike2.png'
     WHEN id % 4 = 2 THEN 'images/shoes/tenisNike3.png'
     WHEN id % 4 = 3 THEN 'images/shoes/tenisNike4.png'
@@ -16,14 +17,18 @@ SET image = CASE
 END
 
 Aleatório:
+
 UPDATE shoe
 SET image = CASE 
-    WHEN RAND() < 0.25 THEN 'images/shoes/tenisNike1.jpg'
-    WHEN RAND() < 0.5 THEN 'images/shoes/tenisNike2.png'
-    WHEN RAND() < 0.75 THEN 'images/shoes/tenisNike3.png'
-    ELSE 'images/shoes/tenisNike4.png'
-END
-WHERE id >= 5;
+    WHEN RAND() < 0.125 THEN 'images/shoes/tenisNike1.png'
+	WHEN RAND() < 0.250 THEN 'images/shoes/tenisNike2.png'
+    WHEN RAND() < 0.375 THEN 'images/shoes/tenisNike3.png'
+	WHEN RAND() < 0.500 THEN 'images/shoes/tenisNike4.png'
+	WHEN RAND() < 0.625 THEN 'images/shoes/tenisNike5.png'
+	WHEN RAND() < 0.750 THEN 'images/shoes/tenisNike6.png'
+	WHEN RAND() < 0.875 THEN 'images/shoes/tenisNike7.png'
+    ELSE 'images/shoes/tenisNike8.png'
+END;
 
 
 Inserts:
