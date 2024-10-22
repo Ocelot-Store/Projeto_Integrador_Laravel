@@ -17,7 +17,7 @@ class UserManager extends Controller
         // O compact cria um array associativo a partir de variáveis
         return view('user.user', compact('user'));
     }
-    
+
     public function usersMenu()
     {
         // Obtém todos os usuários
@@ -26,5 +26,11 @@ class UserManager extends Controller
         // Retorna a view com a lista de todos os usuários
         return view('user.users', compact('users'));
     }
-}
 
+
+    public function showUser($id)
+    {
+        $user = User::findOrFail($id);
+        return view('user.user', compact('user'));
+    }
+}

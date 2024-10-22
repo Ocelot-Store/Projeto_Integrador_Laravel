@@ -27,10 +27,14 @@ div{
 }
 
 .Users{
-    width: 80%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.Users a{
+    width: 100%;
 }
 
 .Users-User{
