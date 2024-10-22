@@ -78,7 +78,7 @@
                 offset -= itemWidth * 2; // Ajuste para a quantidade de itens que você deseja mover
                 items.style.transform = `translateX(${offset}px)`;
                 hasMoved = true; // Atualiza a flag
-                prevButton.style.opacity = 1; // Torna o botão Prev visível
+                prevButton.style.opacity = 0.7; // Torna o botão Prev visível
             }
         });
 
