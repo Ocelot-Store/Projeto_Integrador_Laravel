@@ -1,18 +1,23 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Custom Auth Laravel')</title>
     <link rel="icon" href="{{ asset('assets/Ocelot.ico') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ asset('css/shoe/home.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/shoe/highlights.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" >
-  </head>
-  <body>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{ asset('css/shoe/viewShoe.css') }}">
+</head>
+<body>
+
     @include('shoe.header')
-    @include('shoe.highlights')
-    @yield('content')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" ></script>
-  </body>
+
+    <main class="container my-5">
+        @yield('content')
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
