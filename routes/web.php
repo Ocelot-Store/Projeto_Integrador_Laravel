@@ -27,7 +27,8 @@ Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 //Adicionar ->middleware('auth') impede acesso via url sem autenticação
 
 Route::get('/user', [UserManager::class, 'userMenu'])->middleware('auth')->name('user');
-Route::get('/user/{id}', [UserManager::class, 'showUser'])->name('user.show');
+Route::get('/user/{id}', [UserManager::class, 'showUser'])->name('user.show'); 
+Route::put('/user/{id}', [UserManager::class, 'update'])->name('user.update'); 
 
 Route::get('/users', [UserManager::class, 'usersMenu'])->middleware('auth')->name('users');
 

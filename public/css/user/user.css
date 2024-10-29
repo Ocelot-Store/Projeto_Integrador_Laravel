@@ -1,0 +1,326 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0d0d0d;
+    color: #ffffff;
+    margin: 0;
+}
+
+/* Container */
+.container {
+    display: flex;
+    flex-direction: row;    /* Alinha os elementos em uma linha horizontal */
+    gap: 20px;              /* Espaço entre os cartões */
+    justify-content: flex-start; /* Alinha os cartões à esquerda */
+    flex-wrap: nowrap;      /* Impede a quebra de linha */
+    margin-top: 30px; /* Reduza conforme necessário */
+    padding-top: -10px; /* Reduza conforme necessário */
+}
+
+.product-card {
+    display: flex;
+    align-items: center;         /* Centraliza verticalmente */
+    gap: 20px;                   /* Espaço entre a imagem e a descrição */
+    padding: 20px;
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    min-width: 250px;
+    gap: 10px;
+    max-height: 450px;     
+    left: 50%;
+}
+
+.product-image {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
+}
+
+.product-image img {
+    width: auto;                /* Permite que a largura se ajuste automaticamente */
+    min-width: 200px;           /* Define uma largura mínima */
+    max-height: 150px;          /* Define uma altura máxima */
+    height: auto;               /* Mantém a proporção da imagem */
+    object-fit: cover;          /* Faz a imagem preencher o espaço */
+    border-radius: 5px;
+}
+
+.product-details {
+    padding: 10px; /* Reduz o espaçamento interno */
+    background: #000000;
+    border-radius: 5px;
+    max-width: 400px; /* Limita a largura da caixa */
+    max-height: 450px;     
+    font-size: 0.9em; /* Diminui o tamanho do texto */
+    overflow: hidden; /* Esconde o conteúdo que ultrapassar o limite */
+    text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
+    flex: 2;                  /* Ocupa o restante do espaço */
+    color: #fff;
+}
+
+.new-label {
+    background-color: #00ff40; /* Cor de fundo vermelha */
+    color: #000000; /* Cor do texto branca */
+    font-weight: bold; /* Texto em negrito */
+    padding: 5px 10px; /* Espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    font-size: 14px; /* Tamanho da fonte */
+    text-transform: uppercase; /* Texto em letras maiúsculas */
+    display: inline-block; /* Para que o padding e a cor de fundo funcionem corretamente */
+    margin-left: 90px; /* Espaço à esquerda do rótulo */
+}
+
+
+.price {
+    font-size: 1.5em;
+    color: #ffffff;
+}
+
+.color-options .color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.size-options .size-btn {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px; /* Bordas arredondadas */ 
+}
+
+.buy-btn {
+    background-color: #ff4500;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 5px; /* Bordas arredondadas */
+    right: 20px;
+}
+
+/* Main Container for User Profile */
+.main-container {
+    width: 100%;
+    padding: 0;
+    background-color: #2b2b2b;
+    border-radius: 0;
+}
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Profile Cover */
+.profile-cover {
+    width: 100vw;
+    min-height: 275px;
+    height: auto;
+    margin-bottom: 400px;
+    position: relative;
+    background-image: url('assets/fundo_index.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 5px solid #fffefe;
+    overflow: hidden;
+    z-index: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Overlay Image */
+.overlay-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 400px;
+    z-index: 5;
+    object-fit: cover;
+}
+
+/* Profile Picture */
+.profile-picture {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 250px; 
+    height: 250px; 
+    border-radius: 50%; 
+    background-color: #f0f0f0; 
+    border: 5px solid #ffffff; 
+    overflow: hidden; 
+}
+
+.profile-picture img {
+    width: 100%; 
+    height: 100%;
+    border-radius: 50%; 
+    object-fit: cover; 
+}
+
+/* User Description */
+.user-description {
+    position: relative;
+    top: -200px;
+    color: #ffffff; 
+    padding: 10px; 
+    background-color: #2b2b2b; 
+    border-radius: 8px; 
+    text-align: center; 
+    margin-top: -80px; 
+    margin-left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 2; 
+  
+}
+
+.user-description h1 {
+    font-size: 24px; 
+    color: #ffffff; 
+    margin: 0; 
+    font-weight: bold;
+}
+
+/* Edit Form */
+.user-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 10px;
+    background-color: #f3f3f3; 
+    border-radius: 15px; 
+    padding: 20px; 
+    margin-top: -20px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    position: relative; 
+}
+
+label {
+    font-weight: bold;
+}
+
+/* Buttons */
+.edit-button {
+    position: relative; 
+    top: -100px; 
+    right: -1190px; 
+    padding: 10px 15px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-weight: bold;
+    background-color: #5c5c5d; 
+    color: white; 
+    transition: background-color 0.3s ease; 
+}
+
+.edit-button:hover {
+    background-color: #a445da;
+    transform: scale(1.0); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+}
+
+
+/* Add Product Button */
+.button {
+    position: absolute;
+    top: 400px;
+    right: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 10px 10px;
+    background-color: #999999;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    border: none;
+    z-index: 1000; 
+}
+
+.button:hover {
+    background-color: #1b935b;
+    transform: scale(1.0); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+}
+
+/* Secondary Button */
+.button-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #222;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    border: none;
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 1000; 
+}
+
+.button-secondary:hover {
+    background-color: #db0303;
+    transform: scale(1.0); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+}
+
+/* Products Section */
+.products {
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Textarea Styles */
+.textarea {
+    width: 90%; 
+    max-width: 270px;
+    resize: none; 
+    overflow-y: hidden; 
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 10px;
+}
+
+button {
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+button[type="reset"] {
+    background-color: #f44336;
+}
+
+button:hover {
+    opacity: 0.9;
+}
