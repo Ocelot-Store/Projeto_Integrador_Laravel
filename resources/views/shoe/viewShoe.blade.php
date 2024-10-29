@@ -15,15 +15,33 @@
                 <span> ({{ $shoe->reviews_count }} avaliações)</span>
             </div>
 
+            <!-- Novas Informações de Categoria -->
+            <div class="category-info mt-4">
+                <p><strong>Indicado para:</strong> Caminhada</p>
+                <p><strong>Material:</strong> Sintético</p>
+                <p><strong>Categoria:</strong> Esporte Casual</p>
+                <p><strong>Peso do Produto:</strong> 250g</p>
+                <p><strong>Tecnologia:</strong> Air Max</p>
+                <p><strong>Garantia do Fabricante:</strong> 3 meses</p>
+            </div>
+
             <div class="color-selection my-3">
                 <label class="form-label">Selecione a Cor:</label>
                 <div class="color-options">
-                    <span class="color-circle" style="background-color: #000;"></span>
-                    <span class="color-circle" style="background-color: #fff; border: 1px solid #ccc;"></span>
-                    <span class="color-circle" style="background-color: #007bff;"></span>
-                    <span class="color-circle" style="background-color: #ff0000;"></span>
+                    <input type="radio" id="color-black" name="color" value="black" class="color-circle-input">
+                    <label for="color-black" class="color-circle" style="background-color: #000;"></label>
+
+                    <input type="radio" id="color-white" name="color" value="white" class="color-circle-input">
+                    <label for="color-white" class="color-circle" style="background-color: #fff; border: 1px solid #ccc;"></label>
+
+                    <input type="radio" id="color-blue" name="color" value="blue" class="color-circle-input">
+                    <label for="color-blue" class="color-circle" style="background-color: #007bff;"></label>
+
+                    <input type="radio" id="color-red" name="color" value="red" class="color-circle-input">
+                    <label for="color-red" class="color-circle" style="background-color: #ff0000;"></label>
                 </div>
             </div>
+
 
             <div class="share-link my-3">
                 <button type="button" class="btn btn-outline-primary btn-sm" onclick="shareLink()">Compartilhar Link</button>
@@ -40,7 +58,7 @@
             <div class="shoe-info">
                 <p class="price">Preço: <strong>R$ {{ number_format($shoe->price, 2, ',', '.') }}</strong></p>
 
-                <div class="size-selection my-3">
+                <div class="size-selection my-4"> 
                     <label class="form-label">Selecione o Tamanho:</label>
                     <div class="size-options">
                         <span class="size-circle">36</span>
@@ -52,22 +70,11 @@
                     </div>
                 </div>
 
-                <div class="description-container">
-                    <h3>Descrição</h3>
-                    <div class="description">
-                        {{ Str::limit($shoe->description, 100) }}
-                        @if (strlen($shoe->description) > 100)
-                            <span id="more" style="display:none;">{{ substr($shoe->description, 100) }}</span>
-                            <button type="button" class="btn btn-link" onclick="toggleDescription()">Ver mais</button>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="seller mt-4">
-                    <span>Vendedor(a): {{ $shoe->user->name ?? 'Desconhecido(a)' }}</span>
+                <div class="seller mt-4 text-center">
                     <div class="seller-image-container">
                         <img src="{{ $shoe->user->path ?? asset('Assets/DarkUser.png') }}" alt="Imagem do Vendedor" class="user-image">
                     </div>
+                    <span>Vendedor(a): <strong>{{ $shoe->user->name ?? 'Desconhecido(a)' }}</strong></span>
                 </div>
 
                 <div class="text-center mt-4">
@@ -76,6 +83,19 @@
                         <button type="button" class="btn btn-outline-secondary rounded-button" onclick="alertFunction()">Adicionar aos Favoritos</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12 description-container">
+            <h3 class="description-title" style="font-size: 1.5rem;">Descrição</h3>
+            <div class="description">
+                {{ Str::limit($shoe->description, 100) }}
+                @if (strlen($shoe->description) > 100)
+                    <span id="more" style="display:none;">{{ substr($shoe->description, 100) }}</span>
+                    <button type="button" class="btn btn-link" onclick="toggleDescription()">Ver mais</button>
+                @endif
             </div>
         </div>
     </div>

@@ -13,16 +13,7 @@ body {
 
 .rating {
     font-size: 1.5rem;
-    color: #3430D3;
-}
-
-.stars {
-    display: flex;
-    align-items: center;
-}
-
-.color-selection, .size-selection {
-    margin-top: 10px;
+    color: #aaaaaa;
 }
 
 .color-options {
@@ -35,11 +26,30 @@ body {
     height: 30px;
     border-radius: 50%;
     cursor: pointer;
+    display: inline-block;
+    border: 1px solid transparent;
+}
+
+.color-circle-input {
+    display: none;
+}
+
+.color-circle-input:checked + .color-circle {
+    border: 2px solid #3430D3; /* Destaque para o círculo selecionado */
 }
 
 .size-options {
     display: flex;
-    gap: 10px;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.color-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .size-circle {
@@ -53,12 +63,29 @@ body {
     cursor: pointer;
 }
 
-.share-link {
-    text-align: left;
+.seller {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.seller-image-container {
+    margin-bottom: 5px;
+}
+
+.user-image {
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%; 
+    border: 2px solid #e0e0e0;
+}
+
+.button-group {
+    margin-top: 30px; 
 }
 
 .rounded-button {
-    background-color: #3430D3;
+    background-color: #000000;
     border: none;
     border-radius: 30px;
     padding: 10px 20px;
@@ -74,72 +101,58 @@ body {
     color: white;
 }
 
-.mb-2 {
-    margin-bottom: 10px;
-}
-
-.button-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .btn-primary {
-    background-color: #000 !important;
+    background-color: #222222 !important;
     color: #fff !important;
-    border: none;
+    border-color: #000 !important;
+}
+
+.btn-primary:hover {
+    background-color: #000000 !important;
+    color: #fff !important;
+}
+
+.btn-outline-primary {
+    color: #000000 !important;
+    border-color: #000 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #f0eeee !important;
+    color: #000000 !important;
 }
 
 .btn-outline-secondary {
-    color: #000 !important;
+    color: #000000 !important;
     border-color: #000 !important;
 }
 
 .btn-outline-secondary:hover {
-    background-color: #000 !important;
-    color: #fff !important;
+    background-color: #f0eeee !important;
+    color: #000000 !important;
 }
 
-.shoe-details {
+.category-info p {
+    margin-bottom: 5px;
+}
+
+.description-container {
     padding: 20px;
+    margin-top: 20px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.shoe-title {
+.description-title {
+    font-size: 1.5rem;
+}
+
+.shoe-title, .price {
     font-weight: bold;
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    color: black;
 }
 
 .price {
-    font-size: 2rem;
-    color: black;
+    font-size: 1.8rem;
     margin-top: 15px;
-}
-
-.description-container {
-    margin-top: 20px; 
-}
-
-.description {
-    margin-top: 10px;
-    color: black;
-}
-
-.seller {
-    margin-top: 20px;
-}
-
-.seller-image-container {
-    margin-top: 10px; 
-}
-
-.user-image {
-    width: 50px; 
-    height: 50px;
-    border-radius: 50%; 
-    border: 2px solid #e0e0e0;
 }
