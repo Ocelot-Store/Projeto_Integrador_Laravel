@@ -2,3 +2,22 @@
 /.vscode
 /storage/app/public/images/shoes/*
 /public/storage/images/shoes/*
+
+# Exceções (não ignorar essas imagens específicas)
+!/storage/app/public/images/shoes/image1.jpg
+!/storage/app/public/images/shoes/image2.jpg
+!/storage/app/public/images/shoes/image3.jpg
+!/storage/app/public/images/shoes/image4.jpg
+!/storage/app/public/images/shoes/image5.jpg
+!/storage/app/public/images/shoes/image6.jpg
+!/storage/app/public/images/shoes/image7.jpg
+!/storage/app/public/images/shoes/image8.jpg
+
+!/public/storage/images/shoes/image1.jpg
+!/public/storage/images/shoes/image2.jpg
+!/public/storage/images/shoes/image3.jpg
+!/public/storage/images/shoes/image4.jpg
+!/public/storage/images/shoes/image5.jpg
+!/public/storage/images/shoes/image6.jpg
+!/public/storage/images/shoes/image7.jpg
+!/public/storage/images/shoes/image8.jpg
