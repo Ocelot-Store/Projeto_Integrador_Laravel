@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class InsertShoesData extends Migration
 {
@@ -12,13 +13,25 @@ class InsertShoesData extends Migration
      */
     public function up()
     {
+        DB::table('user')->insert([
+            'id' => '1',
+            'name' => '123',
+            'address' => '123',
+            'email' => '123@gmail.com',
+            'password' => Hash::make('123'), // Faz o hash da senha
+            'PasswordConfirmation' => Hash::make('123'), // Novamente, não é comum armazenar essa informação
+            'file_name' => null,
+            'path' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         // Inserir dados na tabela 'shoe'
         DB::table('shoe')->insert([
             ['model' => 'Modelo A', 'brand_id' => 1, 'user_id' => 1, 'price' => 100.00, 'size' => '1', 'description' => 'Descrição do Tênis', 'color' => 'Preto', 'image' => 'ainda_n_setado', 'data_upload' => now(), 'created_at' => now(), 'updated_at' => now()],
             ['model' => 'Modelo B', 'brand_id' => 1, 'user_id' => 1, 'price' => 120.00, 'size' => '2', 'description' => 'Descrição do Tênis', 'color' => 'Preto', 'image' => 'ainda_n_setado', 'data_upload' => now(), 'created_at' => now(), 'updated_at' => now()],
             ['model' => 'Modelo C', 'brand_id' => 1, 'user_id' => 1, 'price' => 150.00, 'size' => '3', 'description' => 'Descrição do Tênis', 'color' => 'Preto', 'image' => 'ainda_n_setado', 'data_upload' => now(), 'created_at' => now(), 'updated_at' => now()],
             ['model' => 'Modelo D', 'brand_id' => 1, 'user_id' => 1, 'price' => 180.00, 'size' => '4', 'description' => 'Descrição do Tênis', 'color' => 'Preto', 'image' => 'ainda_n_setado', 'data_upload' => now(), 'created_at' => now(), 'updated_at' => now()],
-            
+
             ['model' => 'Modelo A', 'brand_id' => 1, 'user_id' => 1, 'price' => 100.00, 'size' => '1', 'description' => 'Descrição do Tênis', 'color' => 'Preto', 'image' => 'ainda_n_setado', 'data_upload' => now(), 'created_at' => now(), 'updated_at' => now()],
             ['model' => 'Modelo B', 'brand_id' => 1, 'user_id' => 1, 'price' => 120.00, 'size' => '2', 'description' => 'Descrição do Tênis', 'color' => 'Preto', 'image' => 'ainda_n_setado', 'data_upload' => now(), 'created_at' => now(), 'updated_at' => now()],
             ['model' => 'Modelo C', 'brand_id' => 1, 'user_id' => 1, 'price' => 150.00, 'size' => '3', 'description' => 'Descrição do Tênis', 'color' => 'Preto', 'image' => 'ainda_n_setado', 'data_upload' => now(), 'created_at' => now(), 'updated_at' => now()],
