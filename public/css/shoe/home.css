@@ -102,7 +102,6 @@ a {
     width: 60px; 
     height: 60px;
 }
-
 .carousel {
     position: relative;
     width: 100%;
@@ -112,36 +111,33 @@ a {
 .carousel-items {
     display: flex; /* Exibe os itens em uma linha */
     transition: transform 0.3s ease-in-out; /* Animação ao mover */
-    width: max-content; /* Ajusta a largura da div para acomodar todos os itens horizontalmente */
+    width: fit-content; /* Ajusta a largura da div para acomodar todos os itens horizontalmente */
 }
 
 .shoe-item {
-    min-width: 300px; /* Ajuste a largura mínima conforme necessário */
+    min-width: 300px; /* Largura mínima dos itens */
     margin: 0 10px; /* Margem lateral */
-    background-color: #f0f0f0; /* Fundo do item */
-    padding: 20px; /* Padding para espaçamento interno */
-    text-align: center; /* Centraliza o texto dentro do item */
-    box-sizing: border-box; /* Garante que padding e margin sejam considerados na largura total */
 }
 
+/* Ajustes para botões */
 .prev, .next {
     position: absolute;
     top: 50%; /* Posiciona verticalmente ao meio */
     transform: translateY(-50%); /* Ajusta para o centro verticalmente */
-    background-color: rgb(0, 0, 0); /* Fundo semi-transparente */
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
     color: white;
     border: none;
-    border-radius: 100%;
-    width: 80px;
-    height: 80px;
-    font-size: 20px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
     cursor: pointer;
-    opacity: 0.3; /* Começa invisível */
+    opacity: 0; /* Inicia invisível */
     transition: opacity 0.3s; /* Animação de transição */
 }
 
-.prev:hover,.next:hover  {
-    opacity: 0.8; /* Torna visíveis ao passar o mouse */
+.carousel:hover .prev, .carousel:hover .next {
+    opacity: 1; /* Torna visíveis ao passar o mouse */
 }
 
 .prev {

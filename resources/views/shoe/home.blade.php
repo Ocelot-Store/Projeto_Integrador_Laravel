@@ -61,46 +61,56 @@
 </div>
 
 <script>
-    function setupCarousel(carousel) {
-        const items = carousel.querySelector('.carousel-items');
-        const itemWidth = 300;
-        const totalItems = items.querySelectorAll('.shoe-item').length;
-        const carouselWidth = carousel.offsetWidth;
-        let maxOffset = -(itemWidth * totalItems); // Ajuste no cálculo do deslocamento máximo
-        let offset = 0;
-        let hasMoved = false; // Flag para verificar se já foi movido para a direita
+    document.addEventListener('DOMContentLoaded', () => {
+        function setupCarousel(carousel) {
+            const items = carousel.querySelector('.carousel-items');
+            if (!items) return; // Verifica se o elemento existe
 
-        const prevButton = carousel.querySelector('.prev');
-        const nextButton = carousel.querySelector('.next');
+            const totalItems = items.querySelectorAll('.shoe-item').length;
+            if (totalItems === 0) return; // Verifica se há itens
 
-        nextButton.addEventListener('click', () => {
-            if (offset > maxOffset) { // Limita o deslocamento para não passar do final
-                offset -= itemWidth * 2; // Ajuste para a quantidade de itens que você deseja mover
-                items.style.transform = `translateX(${offset}px)`;
-                hasMoved = true; // Atualiza a flag
-                prevButton.style.opacity = 0.7; // Torna o botão Prev visível
-            }
-        });
+            const itemWidth = 320; // Ajuste de acordo com a largura total do item
+            const maxOffset = -(itemWidth * (totalItems - 1));
+            let offset = 0;
 
-        prevButton.addEventListener('click', () => {
-            if (offset < 0) { // Limita o deslocamento para não voltar além do início
-                offset += itemWidth * 2; // Ajuste para a quantidade de itens que você deseja mover
-                items.style.transform = `translateX(${offset}px)`;
+            const prevButton = carousel.querySelector('.prev');
+            const nextButton = carousel.querySelector('.next');
 
-                if (offset >= 0) { // Verifica se voltou ao início
-                    prevButton.style.opacity = 0; // Torna o botão Prev invisível
-                    hasMoved = false; // Reseta a flag
+            nextButton.addEventListener('click', () => {
+                if (offset > maxOffset) {
+                    offset -= itemWidth;
+                    items.style.transform = `translateX(${offset}px)`;
+                    prevButton.style.opacity = 1; // Exibe o botão Prev
                 }
-            }
-        });
+                if (offset <= maxOffset) {
+                    nextButton.style.opacity = 0; // Esconde o botão Next
+                }
+            });
 
-        // Inicializa o estado do botão Prev
-        if (!hasMoved) {
+            prevButton.addEventListener('click', () => {
+                if (offset < 0) {
+                    offset += itemWidth;
+                    items.style.transform = `translateX(${offset}px)`;
+                    nextButton.style.opacity = 1; // Exibe o botão Next
+                }
+                if (offset >= 0) {
+                    prevButton.style.opacity = 0; // Esconde o botão Prev
+                }
+            });
+
+            // Inicializa a opacidade dos botões
             prevButton.style.opacity = 0; // Inicialmente invisível
         }
-    }
 
-    document.querySelectorAll('.carousel').forEach(carousel => setupCarousel(carousel));
+        const carousels = document.querySelectorAll('.carousel');
+        if (carousels.length === 0) {
+            console.warn('Nenhum carrossel encontrado.'); // Log opcional para debugging
+        } else {
+            carousels.forEach(carousel => setupCarousel(carousel));
+        }
+    });
 </script>
+
+
 
 @endsection
