@@ -32,7 +32,7 @@ body {
 }
 
 .highlight-section {
-    background: linear-gradient(45deg, #dbf6f9, #198eb5);
+    background: linear-gradient(45deg, #dbf6f9, #1fa9d7);
 }
 
 .promotion-section {
@@ -40,7 +40,7 @@ body {
 }
 
 .new-arrival-section {
-    background: linear-gradient(45deg, #c6eae8, #1ae754);
+    background: linear-gradient(45deg, #fef9ff, #8e08c4);
 }
 
 .content {
