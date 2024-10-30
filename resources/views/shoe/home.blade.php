@@ -12,18 +12,19 @@
     <div class="carousel">
         <div class="carousel-items">
             @foreach($shoes as $shoe)
-            <div class="shoe-item">
-                <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
-                <div class="shoe-info-name">
-                    <span class="model">{{ $shoe->model }}</span> <br>
+            <a href="{{ route('viewShoe', $shoe->id) }}">
+                <div class="shoe-item">
+                    <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
+                    <div class="shoe-info-name">
+                        <span class="model">{{ $shoe->model }}</span> <br>
+                    </div>
+                    <div class="shoe-info-otherinfo">
+                        <span class="brand">{{ $shoe->brand->name }}</span>
+                        •
+                        <span class="price">$ {{ $shoe->price }}</span>
+                    </div>
                 </div>
-                <div class="shoe-info-otherinfo">
-                    <span class="brand">{{ $shoe->brand->name }}</span>
-                    •
-                    <span class="price">$ {{ $shoe->price }}</span>
-                </div>
-                <a href="{{ route('viewShoe', $shoe->id) }}">View Details</a>
-            </div>
+            </a>
             @endforeach
         </div>
         <button class="prev">&lt</button>
@@ -40,18 +41,19 @@
     <div class="carousel">
         <div class="carousel-items">
             @foreach($cheapestShoes as $shoe)
-            <div class="shoe-item">
-                <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
-                <div class="shoe-info-name">
-                    <span class="model">{{ $shoe->model }}</span> <br>
+            <a href="{{ route('viewShoe', $shoe->id) }}">
+                <div class="shoe-item">
+                    <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
+                    <div class="shoe-info-name">
+                        <span class="model">{{ $shoe->model }}</span> <br>
+                    </div>
+                    <div class="shoe-info-otherinfo">
+                        <span class="brand">{{ $shoe->brand->name }}</span>
+                        •
+                        <span class="price">$ {{ $shoe->price }}</span>
+                    </div>
                 </div>
-                <div class="shoe-info-otherinfo">
-                    <span class="brand">{{ $shoe->brand->name }}</span>
-                    •
-                    <span class="price">$ {{ $shoe->price }}</span>
-                </div>
-                <a href="{{ route('viewShoe', $shoe->id) }}">View Details</a>
-            </div>
+            </a>
             @endforeach
         </div>
         <button class="prev">&lt</button>
