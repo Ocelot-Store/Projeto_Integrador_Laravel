@@ -21,6 +21,7 @@ body {
     box-sizing: border-box;
 }
 
+
 .highlight-section, .promotion-section, .new-arrival-section {
     display: flex;
     justify-content: space-between;
@@ -32,15 +33,21 @@ body {
 }
 
 .highlight-section {
-    background: linear-gradient(45deg, #dbf6f9, #1fa9d7);
+    background: linear-gradient(45deg, #ffc234 , #8e08c4 );
 }
 
 .promotion-section {
-    background: linear-gradient(45deg, #fadede, #ff5050);
+    background: linear-gradient(45deg, #ff2727, #8e08c4);
 }
 
 .new-arrival-section {
-    background: linear-gradient(45deg, #fef9ff, #8e08c4);
+    background: linear-gradient(45deg, #38ff4c, #8e08c4);
+}
+
+.carousel-inner a {
+    color: #ffff;
+    font-size: 1.5em;
+    text-decoration: underline;
 }
 
 .content {
@@ -65,6 +72,7 @@ body {
 .image-container img {
     max-width: 85%;
     border-radius: 15px;
+    filter: drop-shadow(0px 0px 5px white);
 }
 
 @keyframes bounce {
@@ -92,7 +100,6 @@ body {
     right: 50px;
 }
 
-/* Indicadores do carrossel */
 .carousel-indicators [data-bs-target] {
     background-color: black;
 }
