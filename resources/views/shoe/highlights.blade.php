@@ -13,6 +13,7 @@
                 <div class="content">
                     <h1>Destaque do dia:</h1>
                     <h2> Dunk Low - Verde</h2>
+                    <a href="{{ route('viewShoe', $shoe->id) }}">Confira mais Informações</a>
                 </div>
                 <a href="{{ route('viewShoe', ['id' => 1]) }}" class="sneaker-link"></a>
                 <div class="image-container">
@@ -27,6 +28,7 @@
                 <div class="content">
                     <h1>Promoção:</h1>
                     <h2>All Strar - Preto</h2>
+                    <a href="{{ route('viewShoe', $shoe->id) }}">Confira mais Informações</a>
                 </div>
                 <a href="{{ route('viewShoe', ['id' => 2]) }}" class="sneaker-link"></a>
                 <div class="image-container">
@@ -41,6 +43,7 @@
                 <div class="content">
                     <h1>Novidades:</h1>
                     <h2>Chuteira Mizuno</h2>
+                    <a href="{{ route('viewShoe', $shoe->id) }}">Confira mais Informações</a>
                 </div>
                 <a href="{{ route('viewShoe', ['id' => 3]) }}" class="sneaker-link"></a>
                 <div class="image-container">
@@ -61,8 +64,8 @@
 </div>
 <script>
     var carousel = new bootstrap.Carousel(document.getElementById('carouselIndicators'), {
-        interval: 5000, // 5 segundos
-        ride: 'carousel' // Inicia o carrossel automaticamente
+        interval: 5000, 
+        ride: 'carousel' 
     });
 </script>
 
