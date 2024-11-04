@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth; // Para acessar informações do usuário autenticado
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Shoe;
 
 class UserManager extends Controller
 {
@@ -12,11 +13,14 @@ class UserManager extends Controller
     {
         // Obtém o usuário autenticado
         $user = Auth::user();
-
-        // Retorna a view com as informações do usuário
-        // O compact cria um array associativo a partir de variáveis
-        return view('user.user', compact('user'));
+    
+        // Obtém todos os sapatos do usuário
+        $shoes = $user->shoes;
+    
+        // Retorna a view com as informações do usuário e seus sapatos
+        return view('user.user', compact('user', 'shoes'));
     }
+    
 
     public function usersMenu()
     {
@@ -33,4 +37,6 @@ class UserManager extends Controller
         $user = User::findOrFail($id);
         return view('user.user', compact('user'));
     }
+
+
 }

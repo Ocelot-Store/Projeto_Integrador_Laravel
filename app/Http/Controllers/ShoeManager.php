@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Shoe;
 use App\Models\Brand;
 use App\Models\Favorite;
+use App\Models\User;
 
 
 class ShoeManager extends Controller
@@ -94,6 +95,14 @@ class ShoeManager extends Controller
     {
         $shoe = Shoe::with('brand')->findOrFail($id); // Obtém o tênis pelo ID
         return view('shoe.viewShoe', compact('shoe')); // Retorna a view com o tênis
+    }
+
+    public function displayUserShoes($userId)
+    {
+        $user = User::findOrFail($userId);
+        $shoes = Shoe::where('user_id', $userId)->get();
+    
+        return view('user.user', compact('shoes', 'user'));
     }
 
       

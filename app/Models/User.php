@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,11 +12,6 @@ class User extends Authenticatable
 
     protected $table = "user";
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name', 
         'address', 
@@ -26,31 +20,23 @@ class User extends Authenticatable
         'PasswordConfirmation',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Define o relacionamento com os favoritos.
-     */
+    // Adicione este método
+    public function shoes()
+    {
+        return $this->hasMany(Shoe::class);
+    }
+
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
     }
-    
 }

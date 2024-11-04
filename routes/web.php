@@ -5,9 +5,6 @@ use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ShoeManager;
 use App\Http\Controllers\UserManager;
 
-
-
-
 Route::get('/', function () {
     return view('index');
 });
@@ -23,17 +20,17 @@ Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
 
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 
-
-//Adicionar ->middleware('auth') impede acesso via url sem autenticação
-
+// Adicionar ->middleware('auth') impede acesso via URL sem autenticação
 Route::get('/user', [UserManager::class, 'userMenu'])->middleware('auth')->name('user');
-Route::get('/user/{id}', [UserManager::class, 'showUser'])->name('user.show'); 
-Route::put('/user/{id}', [UserManager::class, 'update'])->name('user.update'); 
+Route::get('/user/{id}', [UserManager::class, 'showUser'])->name('user.show');
+Route::put('/user/{id}', [UserManager::class, 'update'])->name('user.update');
+
+// Rota para exibir os sapatos de um usuário específico
+Route::get('/user/{id}/shoes', [UserManager::class, 'displayUserShoes'])->name('user.shoes');
 
 Route::get('/users', [UserManager::class, 'usersMenu'])->middleware('auth')->name('users');
 
-
-//Shoe
+// Shoe
 Route::get('/addShoe', [ShoeManager::class, 'addShoe'])->middleware('auth')->name('addShoe');
 Route::post('/addShoe', [ShoeManager::class, 'addShoePost'])->middleware('auth')->name('addShoe.post');
 

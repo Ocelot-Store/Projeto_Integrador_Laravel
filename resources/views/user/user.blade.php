@@ -3,175 +3,135 @@
 @section('title', 'Informações do Usuário')
 
 @section('content')
-    <div class="main-container">
-        
-        <!-- Cabeçalho do Perfil -->
-        <header class="profile-header">
+<div class="main-container">
 
-            <!-- Imagem de Capa do Perfil -->
-            <div class="profile-cover">
-                <img src="{{ asset('assets/fundo_index.jpg') }}" alt="Imagem sobreposta" class="overlay-image">
-            </div>
+    <!-- Cabeçalho do Perfil -->
+    <header class="profile-header">
 
-            <!-- Imagem do Usuário -->
-             <div class="profile-picture">
-                <img src="{{ asset($user->profile_image ? 'images/' . $user->profile_image : 'assets/AddImage.png') }}" alt="Imagem do Usuário" class="profile-pic">
-            </div>
-
-          
-
-            <div class="action-button">
-                <a href="{{ route('addShoe') }}" class="button">+ ADICIONAR CALÇADOS</a>
-            </div>
-
-            <div class="user-description" id="user-display">
-                <h1><strong>{{ $user->name }}</strong></h1>
-                <p>{{ $user->description }}</p>
-                <button onclick="toggleEditMode()" class="edit-button">EDITAR</button>
-           
-            
-                <!-- Formulário de Edição (oculto inicialmente) -->
-                <form id="user-form" action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data" style="display: none;">
-                    @csrf
-                    @method('PUT')
-
-                    <!-- Campo de Nome Editável -->
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" required>
-
-                    <!-- Campo de Descrição Editável -->
-                    <label for="description">Descrição:</label>
-                    <textarea id="description" name="description" rows="4" cols="50"></textarea>
-
-                    <!-- Campo para Imagem de Perfil -->
-                    <label for="profile_image">Imagem de Perfil:</label>
-                    <input type="file" id="profile_image" name="profile_image" accept="image/*">
-
-                    <!-- Campo para Imagem de Capa -->
-                    <label for="cover_image">Imagem de Capa:</label>
-                    <input type="file" id="cover_image" name="cover_image" accept="image/*">
-
-                    <button type="submit" class="save-button">Salvar Alterações</button>
-                    <button type="button" onclick="toggleEditMode()" class="cancel-button">Cancelar</button>
-                </form>
-          </div>
-
-            <!-- Descrição do Usuário e Botão de Editar -->
-            
-            
-        </header>
-        
-        <!-- Botão Voltar -->
-        <div class="back-buttons">
-            <a href="{{ route('home') }}" class="button-secondary">VOLTAR</a>
+        <!-- Imagem de Capa do Perfil -->
+        <div class="profile-cover">
+            <img src="{{ asset('assets/fundo_index.jpg') }}" alt="Imagem sobreposta" class="overlay-image">
         </div>
 
-        <!-- Seção de Produtos à Venda -->
-        <section class="products">
-            <h2>PRODUTOS A VENDA:</h2>
-            <div class="container">
-                    <div class="product-card">
-                         <div class="product-image">
-                                <img src="{{ asset('assets/tenis1.png') }}" alt="Imagem tenis" class="img-fluid">
-                         </div>
-                        <div class="product-details">
-                            <h2>Nike Dunk Low <span class="new-label">NEW</span></h2>
-                            <p class="category">Nike Dunk Low</p>
-                            <p class="description">é um modelo de tênis bastante popular e icônico, lançado inicialmente nos anos 80. Ele foi projetado para ser um tênis unissex, atraindo tanto homens quanto mulheres.</p>
-                            <p class="price">R$2000.99</p>
+        <!-- Imagem do Usuário -->
+        <div class="profile-picture">
+            <img src="{{ asset($user->profile_image ? 'images/' . $user->profile_image : 'assets/AddImage.png') }}" alt="Imagem do Usuário" class="profile-pic">
+        </div>
 
-                            <div class="color-options">
-                                <span class="color" style="background-color: #ff0000;" title="Rojo"></span>
-                                <span class="color" style="background-color: #0000ff;" title="Azul"></span>
-                                <span class="color" style="background-color: #00ff00;" title="Verde"></span>
-                            </div>
 
-                            <div class="size-options">
-                                <button class="size-btn">36</button>
-                                <button class="size-btn">37</button>
-                                <button class="size-btn">38</button>
-                                <button class="size-btn">40</button>
-                                <button class="size-btn">42</button>
-                            </div>
 
-                            <button class="buy-btn">COMPRAR</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="product-card">
-                         <div class="product-image">
-                                <img src="{{ asset('assets/tenis1.png') }}" alt="Imagem tenis" class="img-fluid">
-                         </div>
-                        <div class="product-details">
-                            <h2>Nike Dunk Low <span class="new-label">NEW</span></h2>
-                            <p class="category">Nike Dunk Low</p>
-                            <p class="description">é um modelo de tênis bastante popular e icônico, lançado inicialmente nos anos 80. Ele foi projetado para ser um tênis unissex, atraindo tanto homens quanto mulheres.</p>
-                            <p class="price">R$2000.99</p>
+        <div class="action-button">
+            <a href="{{ route('addShoe') }}" class="button">+ ADICIONAR CALÇADOS</a>
+        </div>
 
-                            <div class="color-options">
-                                <span class="color" style="background-color: #ff0000;" title="Rojo"></span>
-                                <span class="color" style="background-color: #0000ff;" title="Azul"></span>
-                                <span class="color" style="background-color: #00ff00;" title="Verde"></span>
-                            </div>
+        <div class="user-description" id="user-display">
+            <h1><strong>{{ $user->name }}</strong></h1>
+            <p>{{ $user->description }}</p>
+            <button onclick="toggleEditMode()" class="edit-button">EDITAR</button>
 
-                            <div class="size-options">
-                                <button class="size-btn">36</button>
-                                <button class="size-btn">37</button>
-                                <button class="size-btn">38</button>
-                                <button class="size-btn">40</button>
-                                <button class="size-btn">42</button>
-                            </div>
 
-                            <button class="buy-btn">COMPRAR</button>
-                        </div>
-                    </div>
-                </div>
-                    <script>
-                        function changeColor(imagePath) {
-                            const shoeImage = document.getElementById('shoe-image');
-                            shoeImage.src = imagePath;
-                        }
-                    </script>
-                                
-        
+            <!-- Formulário de Edição (oculto inicialmente) -->
+            <form id="user-form" action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data" style="display: none;">
+                @csrf
+                @method('PUT')
 
-            <div class="shoe-container">
-                @if(isset($shoes) && $shoes->isNotEmpty())
-                    @foreach($shoes as $shoe)
-                        <div class="product-card">
-                            <img src="{{ asset($shoe->image_path) }}" alt="{{ $shoe->name }}" class="product-img">
-                            <div class="shoe-info">
-                                <h3>{{ $shoe->name }}</h3>
-                                <p>{{ $shoe->description }}</p>
-                                <p><strong>Preço: ${{ $shoe->price }}</strong></p>
-                                <a href="{{ route('viewShoe', $shoe->id) }}" class="button">Ver Detalhes</a>
-                            </div>
-                        </div>
-                    @endforeach
-                @else
-                   
-                @endif
-            </div>
-        </section>
+                <!-- Campo de Nome Editável -->
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" required>
 
+                <!-- Campo de Descrição Editável -->
+                <label for="description">Descrição:</label>
+                <textarea id="description" name="description" rows="4" cols="50"></textarea>
+
+                <!-- Campo para Imagem de Perfil -->
+                <label for="profile_image">Imagem de Perfil:</label>
+                <input type="file" id="profile_image" name="profile_image" accept="image/*">
+
+                <!-- Campo para Imagem de Capa -->
+                <label for="cover_image">Imagem de Capa:</label>
+                <input type="file" id="cover_image" name="cover_image" accept="image/*">
+
+                <button type="submit" class="save-button">Salvar Alterações</button>
+                <button type="button" onclick="toggleEditMode()" class="cancel-button">Cancelar</button>
+            </form>
+        </div>
+
+        <!-- Descrição do Usuário e Botão de Editar -->
+
+
+    </header>
+
+    <!-- Botão Voltar -->
+    <div class="back-buttons">
+        <a href="{{ route('home') }}" class="button-secondary">VOLTAR</a>
     </div>
 
-    <!-- JavaScript para Alternar Modo de Edição e Compartilhar Perfil -->
-    <script>
-        function toggleEditMode() {
-            const form = document.getElementById('user-form');
-            const display = document.getElementById('user-display');
-            
-            if (form.style.display === 'none') {
-                form.style.display = 'block';
-                display.style.display = 'none';
-            } else {
-                form.style.display = 'none';
-                display.style.display = 'block';
-            }
-        }
+    <!-- Seção de Produtos à Venda -->
+    <section class="products">
+        <h2>PRODUTOS A VENDA:</h2>
+        @foreach ($shoes as $shoe)
+        <div class="container">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="{{ asset('storage/' . $shoe->image) }}" alt="Imagem tenis" class="img-fluid">
+                </div>
+                <div class="product-details">
+                    <h2>{{ $shoe->model }} <span class="new-label">NEW</span></h2>
+                    <p class="category">Nike Dunk Low</p>
+                    <p class="description">{{ $shoe->description }}</p>
+                    <p class="price">{{ $shoe->price }}</p>
 
-        
+                    <div class="color-options">
+                        <span class="color" style="background-color: #ff0000;" title="Rojo"></span>
+                        <span class="color" style="background-color: #0000ff;" title="Azul"></span>
+                        <span class="color" style="background-color: #00ff00;" title="Verde"></span>
+                    </div>
+
+                    <div class="size-options">
+                        <button class="size-btn">36</button>
+                        <button class="size-btn">37</button>
+                        <button class="size-btn">38</button>
+                        <button class="size-btn">40</button>
+                        <button class="size-btn">42</button>
+                    </div>
+
+                    <button class="buy-btn">COMPRAR</button>
+                </div>
+            </div>
+        </div>
+        @endforeach
+
+        <script>
+            function changeColor(imagePath) {
+                const shoeImage = document.getElementById('shoe-image');
+                shoeImage.src = imagePath;
+            }
+        </script>
+
+
+
+
+
+
+    </section>
+
+</div>
+
+<!-- JavaScript para Alternar Modo de Edição e Compartilhar Perfil -->
+<script>
+    function toggleEditMode() {
+        const form = document.getElementById('user-form');
+        const display = document.getElementById('user-display');
+
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+            display.style.display = 'none';
+        } else {
+            form.style.display = 'none';
+            display.style.display = 'block';
+        }
+    }
+</script>
+
 
 @endsection
