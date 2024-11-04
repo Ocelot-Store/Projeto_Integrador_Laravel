@@ -36,4 +36,11 @@ class Shoe extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function getCheapestShoe()
+    {
+        // Busca o tênis com o menor preço
+        $cheapestShoe = Shoe::orderBy('price', 'asc')->first(); // Supondo que o campo de preço seja 'price'
+
+        return view('sua_view', compact('cheapestShoe')); // Substitua 'sua_view' pelo nome da sua view
+    }
 }

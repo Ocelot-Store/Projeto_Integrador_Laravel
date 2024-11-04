@@ -12,12 +12,14 @@ use App\Models\User;
 
 class ShoeManager extends Controller
 {
-    function addShoe(){
+    function addShoe()
+    {
         $brands = Brand::all(); // Pegando todas as brands cadastradas
         return view('shoe.addShoe', compact('brands')); // Passando as brands para a view
     }
 
-    function addShoePost(Request $request){
+    function addShoePost(Request $request)
+    {
         $request->validate([
             'model' => 'required',
             'size' => 'required',
@@ -26,7 +28,7 @@ class ShoeManager extends Controller
             'price' => 'required|numeric|min:0', // Validação para o preço
             'description' => 'required|string|max:500', // Validação para a descrição
             'image' => 'required|image|mimes:jpg,jpeg,png|max:2048', // Validação da imagem
-            
+
         ]);
 
         $data = $request->only('model', 'size', 'color', 'brand_id', 'price', 'description'); // Incluindo brand_id
@@ -39,24 +41,25 @@ class ShoeManager extends Controller
 
         $shoe = Shoe::create($data);
 
-        if(!$shoe){
+        if (!$shoe) {
             return redirect(route('addShoe'))->with(" error", "Unable to add shoe, try again.");
         }
         return redirect(route('addShoe'))->with("success", "Shoe successfully added.");
-        
-        
     }
-    
+
     public function displayShoes()
     {
-        $shoes = Shoe::with('brand')->get(); // Obtém todos os tênis
+        $shoes = Shoe::with('brand')->get();
         $cheapestShoes = Shoe::with('brand')
             ->orderBy('price', 'asc')
             ->take(20)
-            ->get(); // Obtém os 20 tênis mais baratos
+            ->get();
     
-        return view('shoe.home', compact('shoes', 'cheapestShoes')); // Passa os dois conjuntos de dados
+        $latestShoe = Shoe::orderBy('created_at', 'desc')->first(); // Obtém o tênis mais recente
+    
+        return view('shoe.home', compact('shoes', 'cheapestShoes', 'latestShoe'));
     }
+    
     
 
 
@@ -64,10 +67,10 @@ class ShoeManager extends Controller
     {
         $query = $request->input('query');
         $shoes = Shoe::where('model', 'LIKE', "%{$query}%")
-                    ->orWhereHas('brand', function ($q) use ($query) {
-                        $q->where('name', 'LIKE', "%{$query}%");
-                    })->get();
-        
+            ->orWhereHas('brand', function ($q) use ($query) {
+                $q->where('name', 'LIKE', "%{$query}%");
+            })->get();
+
         return view('shoe.home', compact('shoes'));
     }
 
@@ -75,9 +78,9 @@ class ShoeManager extends Controller
     {
         $userId = auth()->id();
         $shoeId = $request->input('shoe_id');
-    
+
         $favorite = Favorite::where('user_id', $userId)->where('shoe_id', $shoeId)->first();
-    
+
         if (!$favorite) {
             Favorite::create([
                 'user_id' => $userId,
@@ -87,8 +90,8 @@ class ShoeManager extends Controller
             // Se já estiver nos favoritos, você pode remover aqui se desejar
             $favorite->delete();
         }
-    
-        return redirect()->back(); 
+
+        return redirect()->back();
     }
 
     public function show($id)
@@ -101,10 +104,16 @@ class ShoeManager extends Controller
     {
         $user = User::findOrFail($userId);
         $shoes = Shoe::where('user_id', $userId)->get();
-    
+
         return view('user.user', compact('shoes', 'user'));
     }
 
-      
-}
+    public function CheapestShoeHighlight()
+    {
+        // Obtém o tênis com o menor preço
+        $cheapestShoe = Shoe::orderBy('price', 'asc')->first();
 
+        // Retorna a view com o tênis mais barato
+        return view('shoe.highlights', compact('cheapestShoe'));
+    }
+}

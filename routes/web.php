@@ -37,5 +37,8 @@ Route::post('/addShoe', [ShoeManager::class, 'addShoePost'])->middleware('auth')
 Route::get('/home', [ShoeManager::class, 'displayShoes'])->middleware('auth')->name('home');
 Route::get('/search', [ShoeManager::class, 'search'])->middleware('auth')->name('search');
 Route::post('/favorites/add', [ShoeManager::class, 'addFavorite'])->middleware('auth')->name('favorites.add');
+Route::get('/cheapest-shoe', [ShoeManager::class, 'CheapestShoeHighlight'])->name('cheapest.shoe.highlight');
+
+
 
 Route::get('/shoe/{id}', [ShoeManager::class, 'show'])->name('viewShoe');
