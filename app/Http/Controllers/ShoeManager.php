@@ -54,13 +54,13 @@ class ShoeManager extends Controller
             ->orderBy('price', 'asc')
             ->take(20)
             ->get();
-    
+
         $latestShoe = Shoe::orderBy('created_at', 'desc')->first(); // Obtém o tênis mais recente
-    
+
         return view('shoe.home', compact('shoes', 'cheapestShoes', 'latestShoe'));
     }
-    
-    
+
+
 
 
     public function search(Request $request)
@@ -79,27 +79,36 @@ class ShoeManager extends Controller
         $userId = auth()->id();
         $shoeId = $request->input('shoe_id');
 
+        // Verifica se o item já está nos favoritos
         $favorite = Favorite::where('user_id', $userId)->where('shoe_id', $shoeId)->first();
 
         if (!$favorite) {
+            // Adiciona aos favoritos se ainda não estiver
             Favorite::create([
                 'user_id' => $userId,
                 'shoe_id' => $shoeId,
             ]);
+            return redirect()->back()->with('success', 'Item adicionado aos favoritos.');
         } else {
-            // Se já estiver nos favoritos, você pode remover aqui se desejar
+            // Remove dos favoritos caso já esteja
             $favorite->delete();
+            return redirect()->back()->with('success', 'Item removido dos favoritos.');
         }
-
-        return redirect()->back();
     }
+
 
     public function show($id)
     {
-        $shoe = Shoe::with('brand')->findOrFail($id); // Obtém o tênis pelo ID
-        return view('shoe.viewShoe', compact('shoe')); // Retorna a view com o tênis
+        $shoe = Shoe::with('brand')->findOrFail($id);
+    
+        // Verifica se o tênis está nos favoritos do usuário autenticado
+        $isFavorite = Favorite::where('user_id', auth()->id())
+            ->where('shoe_id', $shoe->id)
+            ->exists();
+    
+        return view('shoe.viewShoe', compact('shoe', 'isFavorite'));
     }
-
+    
     public function displayUserShoes($userId)
     {
         $user = User::findOrFail($userId);

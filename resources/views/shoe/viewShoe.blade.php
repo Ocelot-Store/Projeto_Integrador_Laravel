@@ -1,4 +1,4 @@
-@extends('shoe.viewShoeLayout') 
+@extends('shoe.viewShoeLayout')
 @section('title', 'Detalhes do Tênis')
 
 @section('content')
@@ -10,7 +10,7 @@
                 <span class="stars">
                     @for ($i = 0; $i < 5; $i++)
                         <i class="bi bi-star{{ $i < $shoe->rating ? '' : '-fill' }}"></i>
-                    @endfor
+                        @endfor
                 </span>
                 <span> ({{ $shoe->reviews_count }} avaliações)</span>
             </div>
@@ -58,7 +58,7 @@
             <div class="shoe-info">
                 <p class="price">Preço: <strong>R$ {{ number_format($shoe->price, 2, ',', '.') }}</strong></p>
 
-                <div class="size-selection my-4"> 
+                <div class="size-selection my-4">
                     <label class="form-label">Selecione o Tamanho:</label>
                     <div class="size-options">
                         <span class="size-circle">36</span>
@@ -80,8 +80,16 @@
                 <div class="text-center mt-4">
                     <div class="button-group">
                         <button type="button" class="btn btn-primary rounded-button mb-2" onclick="alertFunction()">Adicionar ao Carrinho</button>
-                        <button type="button" class="btn btn-outline-secondary rounded-button" onclick="alertFunction()">Adicionar aos Favoritos</button>
+
+                        <form action="{{ route('addFavorite') }}" method="POST" class="d-inline">
+                            @csrf
+                            <input type="hidden" name="shoe_id" value="{{ $shoe->id }}">
+                            <button type="submit" class="btn btn-outline-secondary rounded-button">
+                                {{ $isFavorite ? 'Remover dos Favoritos' : 'Adicionar aos Favoritos' }}
+                            </button>
+                        </form>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -93,8 +101,8 @@
             <div class="description">
                 {{ Str::limit($shoe->description, 100) }}
                 @if (strlen($shoe->description) > 100)
-                    <span id="more" style="display:none;">{{ substr($shoe->description, 100) }}</span>
-                    <button type="button" class="btn btn-link" onclick="toggleDescription()">Ver mais</button>
+                <span id="more" style="display:none;">{{ substr($shoe->description, 100) }}</span>
+                <button type="button" class="btn btn-link" onclick="toggleDescription()">Ver mais</button>
                 @endif
             </div>
         </div>

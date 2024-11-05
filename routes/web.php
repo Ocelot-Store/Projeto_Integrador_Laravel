@@ -42,3 +42,5 @@ Route::get('/cheapest-shoe', [ShoeManager::class, 'CheapestShoeHighlight'])->nam
 
 
 Route::get('/shoe/{id}', [ShoeManager::class, 'show'])->name('viewShoe');
+Route::post('/add-favorite', [ShoeManager::class, 'addFavorite'])->name('addFavorite');
+
