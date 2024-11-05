@@ -17,7 +17,7 @@
                     <a href="{{ route('viewShoe', 1) }}">Confira mais Informações</a> <!-- Substitua o ID com um ID válido se necessário -->
                 </div>
                 <div class="image-container">
-                    <img src="{{ asset('storage/images/shoes/tenis8.png') }}" alt="Tênis Nike Verde" class="d-block w-100">
+                    <img src="{{ asset('storage/images/shoes/tenis11.png') }}" alt="Tênis Nike Verde" class="d-block w-100">
                 </div>
             </section>
         </div>
