@@ -15,7 +15,7 @@ class CreateShoeTable extends Migration
     {
         Schema::create('shoe', function (Blueprint $table) {
             $table->id(); // Isso cria um campo 'id' auto-incremental
-            $table->string('model', 20);
+            $table->string('model', 100);
             $table->foreignId('brand_id')->constrained('brand')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('user')->onDelete('cascade');
             $table->decimal('price', 10, 2);
