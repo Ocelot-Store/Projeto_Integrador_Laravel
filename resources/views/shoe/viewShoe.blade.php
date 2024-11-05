@@ -1,5 +1,9 @@
-@extends('shoe.viewShoeLayout')
+@extends('shoe.layout')
 @section('title', 'Detalhes do Tênis')
+
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/shoe/viewShoe.css') }}">
+@endsection
 
 @section('content')
 <div class="container mt-5">

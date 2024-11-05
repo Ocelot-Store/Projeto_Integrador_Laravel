@@ -1,5 +1,11 @@
-@extends('shoe.addShoeLayout')
-@section('title', 'Add a Shoe')
+@extends('shoe.layout')
+@section('title', 'Adicionar calçado')
+
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/shoe/addShoe.css') }}"> 
+    <!-- Esse arquivo acima ainda não foi criado -->
+@endsection
+
 @section('content')
     <div class="container">
         <div class="mt-5">

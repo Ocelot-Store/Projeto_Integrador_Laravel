@@ -1,7 +1,14 @@
-@extends('shoe.homeLayout')
+@extends('shoe.layout')
 @section('title', 'Visualizar Calçados')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/shoe/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/shoe/highlights.css') }}">
+@endsection
+
+
 @section('content')
+@include('shoe.highlights', ['cheapestShoes' => $cheapestShoes])
 
 <div class="container mt-4 shoe-container">
     <div class="title">

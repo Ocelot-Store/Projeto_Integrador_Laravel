@@ -54,11 +54,15 @@ class ShoeManager extends Controller
             ->orderBy('price', 'asc')
             ->take(20)
             ->get();
-
+        
         $latestShoe = Shoe::orderBy('created_at', 'desc')->first(); // Obtém o tênis mais recente
-
-        return view('shoe.home', compact('shoes', 'cheapestShoes', 'latestShoe'));
+        
+        // Adicionando um tênis específico para ser passado como `$shoe`
+        $shoe = Shoe::orderBy('price', 'asc')->first(); // Obtém o tênis com o menor preço
+    
+        return view('shoe.home', compact('shoes', 'cheapestShoes', 'latestShoe', 'shoe'));
     }
+    
 
 
 
