@@ -50,21 +50,8 @@
                             <h2>{{ $shoe->model }} <span class="new-label">NEW</span></h2>
                             <p class="category">Nike Dunk Low</p>
                             <p class="description">{{ $shoe->description }}</p>
-                            <p class="price">{{ $shoe->price }}</p>
+                            <p class="price">$ {{ $shoe->price }}</p>
 
-                            <div class="color-options">
-                                <span class="color" style="background-color: #ff0000;" title="Rojo"></span>
-                                <span class="color" style="background-color: #0000ff;" title="Azul"></span>
-                                <span class="color" style="background-color: #00ff00;" title="Verde"></span>
-                            </div>
-
-                            <div class="size-options">
-                                @foreach([36, 37, 38, 40, 42] as $size)
-                                <button class="size-btn">{{ $size }}</button>
-                                @endforeach
-                            </div>
-
-                            <button class="buy-btn">COMPRAR</button>
                         </div>
                     </div>
                 </div>
