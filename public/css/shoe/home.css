@@ -29,6 +29,13 @@ a {
     }
 }
 
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
 .shoe-container .shoe-item {
     background-color: white;
     display: flex;

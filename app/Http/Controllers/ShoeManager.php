@@ -54,30 +54,41 @@ class ShoeManager extends Controller
             ->orderBy('price', 'asc')
             ->take(20)
             ->get();
-        
-        $latestShoe = Shoe::orderBy('created_at', 'desc')->first(); // Obtém o tênis mais recente
-        
-        // Adicionando um tênis específico para ser passado como `$shoe`
-        $shoe = Shoe::orderBy('price', 'asc')->first(); // Obtém o tênis com o menor preço
     
-        return view('shoe.home', compact('shoes', 'cheapestShoes', 'latestShoe', 'shoe'));
+        $latestShoe = Shoe::orderBy('created_at', 'desc')->first(); // Obtém o tênis mais recente
+    
+        // Definindo $isSearch como false para a exibição padrão
+        $isSearch = false;
+    
+        return view('shoe.home', compact('shoes', 'cheapestShoes', 'latestShoe', 'isSearch'));
     }
     
-
-
-
+    
 
     public function search(Request $request)
     {
         $query = $request->input('query');
+    
+        // Valida se o termo de busca está presente
+        if (!$query) {
+            return redirect()->route('home')->with('error', 'Digite um termo para buscar.');
+        }
+    
+        // Realiza a busca nos modelos e nas marcas
         $shoes = Shoe::where('model', 'LIKE', "%{$query}%")
             ->orWhereHas('brand', function ($q) use ($query) {
                 $q->where('name', 'LIKE', "%{$query}%");
-            })->get();
-
-        return view('shoe.home', compact('shoes'));
+            })
+            ->get();
+    
+        // Indica que a página está em modo de busca
+        $isSearch = true;
+    
+        return view('shoe.home', compact('shoes', 'isSearch', 'query'));
     }
-
+    
+    
+    
     public function addFavorite(Request $request)
     {
         $userId = auth()->id();

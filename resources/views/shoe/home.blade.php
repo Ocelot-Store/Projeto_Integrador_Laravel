@@ -1,73 +1,110 @@
 @extends('shoe.layout')
-@section('title', 'Visualizar Calçados')
+@section('title', $isSearch ? 'Resultados da Busca' : 'Visualizar Calçados')
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/shoe/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/shoe/highlights.css') }}">
 @endsection
 
-
 @section('content')
-@include('shoe.highlights', ['cheapestShoes' => $cheapestShoes])
 
-<div class="container mt-4 shoe-container">
-    <div class="title">
-        <h1>Tênis Disponíveis.</h1>
-        <h1>Infinidade ao alcance do seu dedo</h1>
-    </div>
+@if(session('error'))
+    <div class="alert alert-warning">{{ session('error') }}</div>
+@endif
 
-    <div class="carousel">
-        <div class="carousel-items">
-            @foreach($shoes as $shoe)
-            <a href="{{ route('viewShoe', $shoe->id) }}">
-                <div class="shoe-item">
-                    <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
-                    <div class="shoe-info-name">
-                        <span class="model">{{ $shoe->model }}</span> <br>
-                    </div>
-                    <div class="shoe-info-otherinfo">
-                        <span class="brand">{{ $shoe->brand->name }}</span>
-                        •
-                        <span class="price">$ {{ $shoe->price }}</span>
-                    </div>
-                </div>
-            </a>
-            @endforeach
+@if($isSearch)
+    <!-- Conteúdo para exibir apenas os resultados da busca -->
+    <div class="container mt-4 shoe-container">
+        <div class="title">
+            <h1>Resultados da Busca para "{{ $query }}"</h1>
         </div>
-        <button class="prev">&lt</button>
-        <button class="next">&gt</button>
-    </div>
-</div>
 
-<div class="container mt-4 shoe-container">
-    <div class="title">
-        <h1>Melhores Preços.</h1>
-        <h1>Solução em conta pra você</h1>
+        @if($shoes->isEmpty())
+            <p>Nenhum resultado encontrado para a busca.</p>
+        @else
+            <div class="row">
+                @foreach($shoes as $shoe)
+                    <div class="col-md-4">
+                        <a href="{{ route('viewShoe', $shoe->id) }}">
+                            <div class="shoe-item">
+                                <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
+                                <div class="shoe-info-name">
+                                    <span class="model">{{ $shoe->model }}</span> <br>
+                                </div>
+                                <div class="shoe-info-otherinfo">
+                                    <span class="brand">{{ $shoe->brand->name }}</span>
+                                    •
+                                    <span class="price">$ {{ $shoe->price }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        @endif
     </div>
+@else
+    <!-- Conteúdo padrão da página inicial -->
+    @include('shoe.highlights', ['cheapestShoes' => $cheapestShoes, 'latestShoe' => $latestShoe])
 
-    <div class="carousel">
-        <div class="carousel-items">
-            @foreach($cheapestShoes as $shoe)
-            <a href="{{ route('viewShoe', $shoe->id) }}">
-                <div class="shoe-item">
-                    <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
-                    <div class="shoe-info-name">
-                        <span class="model">{{ $shoe->model }}</span> <br>
-                    </div>
-                    <div class="shoe-info-otherinfo">
-                        <span class="brand">{{ $shoe->brand->name }}</span>
-                        •
-                        <span class="price">$ {{ $shoe->price }}</span>
-                    </div>
-                </div>
-            </a>
-            @endforeach
+    <div class="container mt-4 shoe-container">
+        <div class="title">
+            <h1>Tênis Disponíveis.</h1>
+            <h1>Infinidade ao alcance do seu dedo</h1>
         </div>
-        <button class="prev">&lt</button>
-        <button class="next">&gt</button>
 
+        <div class="carousel">
+            <div class="carousel-items">
+                @foreach($shoes as $shoe)
+                <a href="{{ route('viewShoe', $shoe->id) }}">
+                    <div class="shoe-item">
+                        <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
+                        <div class="shoe-info-name">
+                            <span class="model">{{ $shoe->model }}</span> <br>
+                        </div>
+                        <div class="shoe-info-otherinfo">
+                            <span class="brand">{{ $shoe->brand->name }}</span>
+                            •
+                            <span class="price">$ {{ $shoe->price }}</span>
+                        </div>
+                    </div>
+                </a>
+                @endforeach
+            </div>
+            <button class="prev">&lt</button>
+            <button class="next">&gt</button>
+        </div>
     </div>
-</div>
+
+    <div class="container mt-4 shoe-container">
+        <div class="title">
+            <h1>Melhores Preços.</h1>
+            <h1>Solução em conta pra você</h1>
+        </div>
+
+        <div class="carousel">
+            <div class="carousel-items">
+                @foreach($cheapestShoes as $shoe)
+                <a href="{{ route('viewShoe', $shoe->id) }}">
+                    <div class="shoe-item">
+                        <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
+                        <div class="shoe-info-name">
+                            <span class="model">{{ $shoe->model }}</span> <br>
+                        </div>
+                        <div class="shoe-info-otherinfo">
+                            <span class="brand">{{ $shoe->brand->name }}</span>
+                            •
+                            <span class="price">$ {{ $shoe->price }}</span>
+                        </div>
+                    </div>
+                </a>
+                @endforeach
+            </div>
+            <button class="prev">&lt</button>
+            <button class="next">&gt</button>
+        </div>
+    </div>
+@endif
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -119,7 +156,4 @@
         }
     });
 </script>
-
-
-
 @endsection

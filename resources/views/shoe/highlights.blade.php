@@ -1,4 +1,3 @@
-
 <!-- Tela de Destaque - Highlights -->
 <div id="carouselIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -14,7 +13,8 @@
                 <div class="content">
                     <h1>Destaque do dia:</h1>
                     <h2>Dunk Low - Verde</h2>
-                    <a href="{{ route('viewShoe', $shoe->id) }}">Confira mais Informações</a>
+                    <!-- Link estático ou variável dependendo dos requisitos -->
+                    <a href="{{ route('viewShoe', 1) }}">Confira mais Informações</a> <!-- Substitua o ID com um ID válido se necessário -->
                 </div>
                 <div class="image-container">
                     <img src="{{ asset('storage/images/shoes/tenis8.png') }}" alt="Tênis Nike Verde" class="d-block w-100">
@@ -22,46 +22,45 @@
             </section>
         </div>
 
-        <!-- Promotions Section -->
+        <!-- Promotions Section (Cheapest Shoes) -->
         <div class="carousel-item">
             <section id="promotions" class="promotion-section">
                 <div class="content">
                     <h1>Promoção:</h1>
-                    @if($cheapestShoes->isNotEmpty()) <!-- Verifica se há tênis na coleção -->
-                    <h2>{{ $cheapestShoes->first()->model }}</h2> <!-- Exibe o modelo do primeiro tênis -->
-                    <a href="{{ route('viewShoe', $cheapestShoes->first()->id) }}">Confira mais Informações</a>
+                    @if($cheapestShoes->isNotEmpty())
+                        <h2>{{ $cheapestShoes->first()->model }}</h2>
+                        <a href="{{ route('viewShoe', $cheapestShoes->first()->id) }}">Confira mais Informações</a>
                     @else
-                    <h2>Nenhum produto disponível.</h2>
+                        <h2>Nenhum produto disponível.</h2>
                     @endif
                 </div>
                 <div class="image-container">
-                    @if($cheapestShoes->isNotEmpty()) <!-- Verifica se há tênis na coleção -->
-                    <img src="{{ asset('storage/' . $cheapestShoes->first()->image) }}" alt="{{ $cheapestShoes->first()->model }}" class="d-block w-100">
+                    @if($cheapestShoes->isNotEmpty())
+                        <img src="{{ asset('storage/' . $cheapestShoes->first()->image) }}" alt="{{ $cheapestShoes->first()->model }}" class="d-block w-100">
                     @else
-                    <img src="{{ asset('path/to/default/image.png') }}" alt="Imagem padrão" class="d-block w-100">
+                        <img src="{{ asset('path/to/default/image.png') }}" alt="Imagem padrão" class="d-block w-100">
                     @endif
                 </div>
             </section>
         </div>
 
-        <!-- New Arrivals Section -->
-        <!-- New Arrivals Section -->
+        <!-- New Arrivals Section (Latest Shoe) -->
         <div class="carousel-item">
             <section id="new-arrivals" class="new-arrival-section">
                 <div class="content">
                     <h1>Novidades:</h1>
-                    @if($latestShoe) <!-- Verifica se há um tênis mais recente -->
-                    <h2>{{ $latestShoe->model }}</h2>
-                    <a href="{{ route('viewShoe', $latestShoe->id) }}">Confira mais Informações</a>
+                    @if($latestShoe)
+                        <h2>{{ $latestShoe->model }}</h2>
+                        <a href="{{ route('viewShoe', $latestShoe->id) }}">Confira mais Informações</a>
                     @else
-                    <h2>Nenhum novo produto disponível.</h2>
+                        <h2>Nenhum novo produto disponível.</h2>
                     @endif
                 </div>
                 <div class="image-container">
-                    @if($latestShoe && $latestShoe->image) <!-- Verifica se há um tênis mais recente e se ele possui uma imagem -->
-                    <img src="{{ asset('storage/' . $latestShoe->image) }}" alt="{{ $latestShoe->model }}" class="d-block w-100">
+                    @if($latestShoe && $latestShoe->image)
+                        <img src="{{ asset('storage/' . $latestShoe->image) }}" alt="{{ $latestShoe->model }}" class="d-block w-100">
                     @else
-                    <img src="{{ asset('path/to/default/image.png') }}" alt="Imagem padrão" class="d-block w-100">
+                        <img src="{{ asset('path/to/default/image.png') }}" alt="Imagem padrão" class="d-block w-100">
                     @endif
                 </div>
             </section>
@@ -78,9 +77,3 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-<script>
-    var carousel = new bootstrap.Carousel(document.getElementById('carouselIndicators'), {
-        interval: 5000,
-        ride: 'carousel'
-    });
-</script>
