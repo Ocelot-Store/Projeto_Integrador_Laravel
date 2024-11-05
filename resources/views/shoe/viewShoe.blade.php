@@ -2,7 +2,7 @@
 @section('title', 'Detalhes do Tênis')
 
 @section('style')
-    <link rel="stylesheet" href="{{ asset('css/shoe/viewShoe.css') }}">
+<link rel="stylesheet" href="{{ asset('css/shoe/viewShoe.css') }}">
 @endsection
 
 @section('content')
@@ -83,7 +83,13 @@
 
                 <div class="text-center mt-4">
                     <div class="button-group">
-                        <button type="button" class="btn btn-primary rounded-button mb-2" onclick="alertFunction()">Adicionar ao Carrinho</button>
+                        <form action="{{ route('cart.add', ['shoeId' => $shoe->id]) }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-primary rounded-button mb-2">
+                                Adicionar ao Carrinho
+                            </button>
+                        </form>
+
 
                         <form action="{{ route('addFavorite') }}" method="POST" class="d-inline">
                             @csrf

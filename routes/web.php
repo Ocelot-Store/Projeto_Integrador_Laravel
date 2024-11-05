@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ShoeManager;
 use App\Http\Controllers\UserManager;
+use App\Http\Controllers\CartController;
+
+
 
 Route::get('/', function () {
     return view('index');
@@ -43,4 +46,11 @@ Route::get('/cheapest-shoe', [ShoeManager::class, 'CheapestShoeHighlight'])->nam
 
 Route::get('/shoe/{id}', [ShoeManager::class, 'show'])->name('viewShoe');
 Route::post('/add-favorite', [ShoeManager::class, 'addFavorite'])->name('addFavorite');
+
+//Cart
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{shoeId}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/update/{cartId}', [CartController::class, 'updateCart'])->name('cart.update');
+Route::delete('/cart/remove/{cartId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
 

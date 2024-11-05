@@ -1,7 +1,7 @@
 @extends('user.layout')
 
 @section('title', 'Informações do Usuário')
-    <link rel="stylesheet" href="{{ asset('css/user/user.css') }}">
+<link rel="stylesheet" href="{{ asset('css/user/user.css') }}">
 @section('style')
 
 @endsection
@@ -21,9 +21,11 @@
             <img src="{{ asset($user->profile_image ? 'images/' . $user->profile_image : 'assets/AddImage.png') }}" alt="Imagem do Usuário" class="profile-pic">
         </div>
 
-        <div class="action-button">
+        <div class="user-options">
             <a href="{{ route('addShoe') }}" class="button">+ ADICIONAR CALÇADOS</a>
+            <a href="{{ route('cart.index') }}" class="button">Ver Carrinho</a>
         </div>
+
 
     </header>
 
