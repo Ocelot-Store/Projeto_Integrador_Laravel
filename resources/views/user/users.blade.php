@@ -1,6 +1,9 @@
-@extends('user.usersLayout')
+@extends('user.layout')
 
 @section('title', 'Lista de Usuários')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/user/users.css') }}">
+@endsection
 
 @section('content')
 <div class="Main">
