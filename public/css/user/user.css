@@ -9,23 +9,24 @@ body {
 /* Container */
 .container {
     display: flex;
-    flex-direction: row;    /* Alinha os elementos em uma linha horizontal */
-    gap: 20px;              /* Espaço entre os cartões */
-    justify-content: flex-start; /* Alinha os cartões à esquerda */
-    flex-wrap: nowrap;      /* Impede a quebra de linha */
-    margin-top: 30px; /* Reduza conforme necessário */
-    padding-top: -10px; /* Reduza conforme necessário */
+    flex-direction: row;    
+    gap: 20px;           
+    justify-content: flex-start; 
+    flex-wrap: nowrap;      
+    margin-top: 30px; 
+    padding-top: -10px; 
+    min-width: 450px;
 }
 
 .product-card {
     display: flex;
-    align-items: center;         /* Centraliza verticalmente */
-    gap: 20px;                   /* Espaço entre a imagem e a descrição */
-    padding: 20px;
-    background-color: #333;
+    align-items: center;        
+    gap: 20px;                   
+    padding: -30px;
+    background-color: #858585;
     border-radius: 10px;
     overflow: hidden;
-    min-width: 250px;
+    min-width: 150px;
     gap: 10px;
     max-height: 450px;     
     left: 50%;
@@ -33,37 +34,41 @@ body {
 
 .product-image {
     display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center;     /* Centraliza verticalmente */
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Necessário para posicionar o texto corretamente */
+    /* transition: transform 0.3s ease;  Removendo a transição */
 }
 
+
 .product-image img {
-    width: auto;                /* Permite que a largura se ajuste automaticamente */
-    min-width: 200px;           /* Define uma largura mínima */
-    max-height: 150px;          /* Define uma altura máxima */
-    height: auto;               /* Mantém a proporção da imagem */
-    object-fit: cover;          /* Faz a imagem preencher o espaço */
-    border-radius: 5px;
+    width: 100%;             /* Ajusta a largura para ocupar 100% do contêiner */
+    max-width: 300px;        /* Define uma largura máxima, se necessário */
+    max-height: 150px;       /* Define a altura máxima da imagem */
+    height: auto;            /* Mantém a proporção da altura */
+    object-fit: cover;       /* Cobre todo o espaço do contêiner mantendo a proporção */
+    border-radius: 5px;      /* Adiciona cantos arredondados */
+    display: block;          /* Remove espaços em branco abaixo da imagem */
 }
 
 .product-details {
-    padding: 10px; /* Reduz o espaçamento interno */
+    padding: 10px; 
     background: #000000;
-    border-radius: 5px;
-    max-width: 400px; /* Limita a largura da caixa */
-    max-height: 450px;     
-    font-size: 0.9em; /* Diminui o tamanho do texto */
-    overflow: hidden; /* Esconde o conteúdo que ultrapassar o limite */
-    text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
-    flex: 2;                  /* Ocupa o restante do espaço */
+    border-radius: 12px;
+    max-width: 400px; 
+    max-height: 400px;     
+    font-size: 0.9em; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    flex: 4;                  
     color: #fff;
 }
 
 .new-label {
-    background-color: #00ff40; /* Cor de fundo vermelha */
-    color: #000000; /* Cor do texto branca */
-    font-weight: bold; /* Texto em negrito */
-    padding: 5px 10px; /* Espaçamento interno */
+    background-color: #00ff40; 
+    color: #000000; 
+    font-weight: bold; 
+    padding: 5px 10px; 
     border-radius: 5px; /* Bordas arredondadas */
     font-size: 14px; /* Tamanho da fonte */
     text-transform: uppercase; /* Texto em letras maiúsculas */
@@ -101,14 +106,14 @@ body {
     cursor: pointer;
     font-size: 1em;
     border-radius: 5px; /* Bordas arredondadas */
-    right: 20px;
-}
+    margin: 10px;
+ }
 
 /* Main Container for User Profile */
 .main-container {
     width: 100%;
     padding: 0;
-    background-color: #2b2b2b;
+    background-color: #ffffff;
     border-radius: 0;
 }
 
@@ -151,7 +156,7 @@ body {
 /* Profile Picture */
 .profile-picture {
     position: absolute;
-    top: 200px;
+    top: 250px;
     left: 50%;
     transform: translateX(-50%);
     display: flex; 
@@ -176,9 +181,9 @@ body {
 .user-description {
     position: relative;
     top: -200px;
-    color: #ffffff; 
+    color: #000000; 
     padding: 10px; 
-    background-color: #2b2b2b; 
+    background-color: #ffffff; 
     border-radius: 8px; 
     text-align: center; 
     margin-top: -80px; 
@@ -190,7 +195,7 @@ body {
 
 .user-description h1 {
     font-size: 24px; 
-    color: #ffffff; 
+    color: #000000; 
     margin: 0; 
     font-weight: bold;
 }
@@ -323,4 +328,42 @@ button[type="reset"] {
 
 button:hover {
     opacity: 0.9;
+}
+
+.tabs-container {
+    text-align: center;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #656565;
+    margin-bottom: 20px;
+}
+
+.tab {
+    color: #505050;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.tab.active, .tab:hover {
+    color: #000000;
+    font-weight: bold;
+}
+
+.tab i {
+    margin-right: 5px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
 }
