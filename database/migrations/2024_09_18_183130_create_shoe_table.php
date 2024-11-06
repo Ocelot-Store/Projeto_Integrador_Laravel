@@ -24,6 +24,7 @@ class CreateShoeTable extends Migration
             $table->string('color', 100);
             $table->string('image', 100);
             $table->timestamp('data_upload')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('category', 100)->nullable();  // Adicionando o campo 'category' à tabela
             $table->timestamps(); // Adiciona created_at e updated_at se necessário
         });
     }

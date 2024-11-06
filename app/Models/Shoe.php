@@ -23,7 +23,7 @@ class Shoe extends Model
         'color',
         'image',
         'data_upload',
-        
+        'category',  // Adicionado o campo 'category'
     ];
 
     // Define os relacionamentos
@@ -36,6 +36,7 @@ class Shoe extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function getCheapestShoe()
     {
         // Busca o tênis com o menor preço
