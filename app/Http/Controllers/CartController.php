@@ -9,27 +9,24 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function index()
-    {
-        // Obtém o carrinho do usuário autenticado com os detalhes do tênis
-        $cartItems = Cart::with('shoe')->where('user_id', Auth::id())->get();
-        
-        return view('cart.index', compact('cartItems'));
+    public function index() {
+        $cartItems = Cart::with('shoe')->get(); 
+        $cartTotal = $cartItems->sum(function($item) {
+            return $item->shoe->price * $item->quantity;
+        });
+        return view('cart.index', compact('cartItems', 'cartTotal'));
     }
-
+    
     public function addToCart(Request $request, $shoeId)
     {
-        // Verifica se o item já está no carrinho
         $cartItem = Cart::where('user_id', Auth::id())
                         ->where('shoe_id', $shoeId)
                         ->first();
 
         if ($cartItem) {
-            // Se o item já estiver no carrinho, incrementa a quantidade
             $cartItem->quantity += $request->input('quantity', 1);
             $cartItem->save();
         } else {
-            // Caso contrário, adiciona um novo item ao carrinho
             Cart::create([
                 'user_id' => Auth::id(),
                 'shoe_id' => $shoeId,
