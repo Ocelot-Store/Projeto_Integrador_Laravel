@@ -26,38 +26,36 @@
         <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
+
+        <!-- Link para a lista de usuários -->
         <li class="nav-item ms-1"> 
           <a href="{{ route('users') }}">
             <img src="{{ asset('assets/Users.png') }}" alt="Usuário" class="img-fluid" style="width: 40px; height: 40px;">
           </a>
         </li>
-        
-        
       </ul>
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <!-- Formulário de busca -->
         <li class="nav-item mb-2">
           <form class="d-flex" role="search" action="{{ route('search') }}" method="GET">
             <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
         </li>
-        
+
+        <!-- Link para o perfil do usuário -->
         <li class="nav-item ms-1"> 
           <a href="{{ route('user') }}">
             <img src="{{ asset('assets/DarkUser.png') }}" alt="Usuário" class="img-fluid" style="width: 40px; height: 40px;">
           </a>
         </li>
 
-        
+        <!-- Link para logout -->
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}">Logout</a>
         </li>
       </ul>
-
-
-
-      
     </div>
   </div>
 </nav>
