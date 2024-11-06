@@ -20,8 +20,8 @@ class CreateFollowersTable extends Migration
             $table->timestamps();
 
             // Define as chaves estrangeiras para manter a integridade referencial
-            $table->foreign('follower_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('following_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('follower_id')->references('id')->on('user')->onDelete('cascade');
+            $table->foreign('following_id')->references('id')->on('user')->onDelete('cascade');
 
             // Garante que um usuário não possa seguir o mesmo usuário mais de uma vez
             $table->unique(['follower_id', 'following_id']);
