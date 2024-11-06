@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = "user";
+    protected $table = "user"; // Nome da tabela de usuários
 
     protected $fillable = [
         'name', 
@@ -29,14 +29,37 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Adicione este método
+    /**
+     * Relacionamento com o modelo de sapatos.
+     */
     public function shoes()
     {
         return $this->hasMany(Shoe::class);
     }
 
+    /**
+     * Relacionamento com o modelo de favoritos.
+     */
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
     }
+
+    /**
+     * Relacionamento: Usuários que este usuário está seguindo.
+     */
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'following_id');
+    }
+
+    /**
+     * Relacionamento: Usuários que estão seguindo este usuário.
+     */
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'following_id', 'follower_id');
+    }
 }
+
+
