@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,9 +14,9 @@ class User extends Authenticatable
     protected $table = "user"; // Nome da tabela de usuários
 
     protected $fillable = [
-        'name', 
-        'address', 
-        'email', 
+        'name',
+        'address',
+        'email',
         'password',
         'PasswordConfirmation',
     ];
@@ -45,21 +46,13 @@ class User extends Authenticatable
         return $this->hasMany(Favorite::class);
     }
 
-    /**
-     * Relacionamento: Usuários que este usuário está seguindo.
-     */
-    public function following()
-    {
-        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'following_id');
-    }
-
-    /**
-     * Relacionamento: Usuários que estão seguindo este usuário.
-     */
     public function followers()
     {
         return $this->belongsToMany(User::class, 'followers', 'following_id', 'follower_id');
     }
+
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'following_id');
+    }
 }
-
-

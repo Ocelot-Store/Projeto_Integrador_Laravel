@@ -34,6 +34,10 @@ Route::get('/user/{id}/shoes', [UserManager::class, 'displayUserShoes'])->name('
 
 // Rotas relacionadas à listagem de todos os usuários
 Route::get('/users', [UserController::class, 'index'])->middleware('auth')->name('users');
+Route::middleware('auth')->group(function () {
+    Route::post('/user/{user}/follow', [UserManager::class, 'follow'])->name('user.follow');
+    Route::post('/user/{user}/unfollow', [UserManager::class, 'unfollow'])->name('user.unfollow');
+});
 
 // Rotas relacionadas a tenis
 Route::get('/addShoe', [ShoeManager::class, 'addShoe'])->middleware('auth')->name('addShoe');
