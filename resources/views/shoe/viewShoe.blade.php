@@ -109,11 +109,7 @@
         <div class="col-12 description-container">
             <h3 class="description-title" style="font-size: 1.5rem;">Descrição</h3>
             <div class="description">
-                {{ Str::limit($shoe->description, 100) }}
-                @if (strlen($shoe->description) > 100)
-                <span id="more" style="display:none;">{{ substr($shoe->description, 100) }}</span>
-                <button type="button" class="btn btn-link" onclick="toggleDescription()">Ver mais</button>
-                @endif
+                {{ $shoe->description }}
             </div>
         </div>
     </div>
