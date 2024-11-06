@@ -12,7 +12,7 @@ body {
 .main-container {
     width: 100%;
     margin: 0 auto;
-    padding: 20px;
+    
     box-sizing: border-box;
 }
 
@@ -31,7 +31,6 @@ body {
     background-image: url('assets/fundo_index.jpg');
     background-size: cover;
     background-position: center;
-    border-radius: 12px;
     overflow: hidden;
     position: relative;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -105,6 +104,7 @@ body {
 .tabs-container {
     text-align: center;
     margin-top: 30px;
+    padding: 20px;
 }
 
 .tabs {
