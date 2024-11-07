@@ -1,36 +1,27 @@
 body {
-    background-color: white;
-    color: black;
-}
-
-div {
-    color: black;
+    background-color: #fafafa;
+    color: #333;
+    font-family: Arial, sans-serif;
 }
 
 .Main {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.Main a {
-    margin: 10px;
-    text-decoration: none;
-    color: black;
+    margin-top: 20px;
 }
 
 .Main h1 {
-    margin: 20px 0 10px;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bold;
-    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
 }
 
 .profile-stats {
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
 .stats-btn {
@@ -48,34 +39,35 @@ div {
 }
 
 .Users {
-    width: 80%;
+    width: 90%;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 }
 
 .Users-User {
+    position: relative; /* Necessário para posicionar o botão absolutamente dentro do container */
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    box-sizing: border-box;
     background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 10px 15px;
-    width: 70%;
-    margin-left: 15%;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
     transition: box-shadow 0.3s ease;
+    width: 90%; /* Aumentando a largura para ocupar mais espaço horizontal */
+    max-width: 600px;
+    margin: 10px auto;
 }
 
 .Users-User:hover {
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.Users-User img {
+.user-profile-img {
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     object-fit: cover;
     margin-right: 10px;
 }
@@ -83,38 +75,48 @@ div {
 .user-info {
     display: flex;
     flex-direction: column;
-    font-size: 13px;
-}
-
-.user-info h2 {
+    gap: 2px;
     font-size: 14px;
-    font-weight: bold;
-    margin: 0;
-    color: #333;
 }
 
-.profile-stats {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.stats-btn {
-    background: none;
-    border: none;
+.user-info strong {
     font-size: 16px;
-    font-weight: bold;
     color: #333;
+}
+
+.user-info p {
+    margin: 0;
+}
+
+/* Estilo do botão "Seguir" */
+.follow-btn {
+    position: absolute; /* Posicionamento absoluto para alinhar o botão à direita */
+    right: 10px; /* Distância da borda direita do container */
+    top: 50%; /* Posiciona o botão verticalmente no meio */
+    transform: translateY(-50%); /* Centraliza o botão verticalmente */
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    padding: 5px 15px;
     cursor: pointer;
-    transition: color 0.3s ease;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
 }
 
-.stats-btn:hover {
-    color: #007bff;
+.follow-btn:hover {
+    background-color: #333; /* Cor mais escura ao passar o mouse */
+}   
+
+.unfollow {
+    background-color: #ff5555;
 }
 
-/* Modal CSS */
+.unfollow:hover {
+    background-color: #e04444;
+}
+
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -122,7 +124,7 @@ div {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 1000;
 }
 
@@ -130,8 +132,8 @@ div {
     background-color: #fff;
     margin: 10% auto;
     padding: 20px;
-    width: 80%;
-    max-width: 500px;
+    width: 90%;
+    max-width: 400px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     text-align: center;
@@ -139,15 +141,12 @@ div {
 
 .close-btn {
     color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 24px;
     cursor: pointer;
 }
 
 .close-btn:hover {
     color: #000;
 }
-
 
 
