@@ -1,60 +1,67 @@
 @extends('shoe.layout')
-@section('title', 'Meu Carrinho')
+@section('title', 'Cart')
 
 @section('style')
-<link rel="stylesheet" href="{{ asset('css/cart.css') }}">
+<link rel="stylesheet" href="{{ asset('css/shoe/cart.css') }}">
 @endsection
 
 @section('content')
 <div class="container mt-4">
-    <div class="left-panel">
-        <h2>Vendas:</h2>
-        
-        @foreach($cartItems as $item)
-            <div class="product-card">
-                <img src="{{ asset('storage/' . $item->shoe->image) }}" alt="{{ $item->shoe->model }}">
-                <div class="product-details">
-                    <p class="product-title">{{ $item->shoe->model }}</p>
-                    <p class="product-price">R$ {{ number_format($item->shoe->price, 2, ',', '.') }}</p>
-                    <p>Tamanho: {{ $item->size }}</p>
-                    <p>Cor: 
-                        @foreach($item->shoe->colors as $color)
-                            <span style="background-color: {{ $color }}; width: 10px; height: 10px; display: inline-block; border-radius: 50%;"></span>
-                        @endforeach
-                    </p>
+    <h1>Meu Carrinho</h1>
+
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if($cartItems->isEmpty())
+        <p>Seu carrinho está vazio.</p>
+    @else
+        <div class="cart-item">
+            @foreach($cartItems as $item)
+                <div class="cart-product">
+                    <div class="product-info">
+                        <img src="{{ asset('storage/' . $item->shoe->image) }}" alt="{{ $item->shoe->model }}" class="product-image">
+                        <div class="details">
+                            <h2>{{ $item->shoe->model }}</h2>
+                            <span>R$ {{ number_format($item->shoe->price, 2, ',', '.') }}</span>
+                        </div>
+                    </div>
+                    <div class="quantity">
+                        <form action="{{ route('cart.update', $item->id) }}" method="POST">
+                            @csrf
+                            <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" class="quantity-input">
+                            <button type="submit" class="btn-update">Atualizar</button>
+                        </form>
+                    </div>
+                    <div class="price">
+                        <span>R$ {{ number_format($item->shoe->price * $item->quantity, 2, ',', '.') }}</span>
+                    </div>
+                    <div class="actions">
+                        <form action="{{ route('cart.remove', $item->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn-remove">Remover</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="quantity-control">
-                    <form action="{{ route('cart.update', $item->id) }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="quantity" value="{{ $item->quantity - 1 }}">
-                        <button type="submit" class="quantity-button">−</button>
-                    </form>
-                    <span>{{ $item->quantity }}</span>
-                    <form action="{{ route('cart.update', $item->id) }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="quantity" value="{{ $item->quantity + 1 }}">
-                        <button type="submit" class="quantity-button">+</button>
-                    </form>
-                </div>
+            @endforeach
+        </div>
+
+        <div class="cart-summary">
+            <div class="subtotal">
+                <span>Subtotal</span>
+                <span>R$ {{ number_format($cartItems->sum(fn($item) => $item->shoe->price * $item->quantity), 2, ',', '.') }}</span>
             </div>
-        @endforeach
-    </div>
-
-    <div class="right-panel">
-        <h3>Resumo do Pedido</h3>
-        <p class="order-summary">Sub Total: R$ {{ number_format($subtotal, 2, ',', '.') }}</p>
-        <p class="order-summary">Frete: R$ {{ number_format($frete, 2, ',', '.') }}</p>
-        <p class="order-summary">Quantidade: {{ $totalQuantity }} Unidades</p>
-        <p class="order-summary">Desconto: R$ {{ number_format($discount, 2, ',', '.') }}</p>
-        <p class="total-price">TOTAL: R$ {{ number_format($total, 2, ',', '.') }}</p>
-
-        <form action="{{ route('order.submit') }}" method="POST">
-            @csrf
-            <button type="submit" class="submit-button">
-                <i class="fas fa-shopping-cart"></i> Enviar Pedido
-            </button>
-        </form>
-    </div>
+            <div class="shipping">
+                <span>Envio</span>
+                <span>GRÁTIS</span>
+            </div>
+            <div class="total">
+                <strong>Total</strong>
+                <strong>R$ {{ number_format($cartItems->sum(fn($item) => $item->shoe->price * $item->quantity), 2, ',', '.') }}</strong>
+            </div>
+            <button class="btn-pay">Enviar Pedido</button>
+        </div>
+    @endif
 </div>
 @endsection
-
