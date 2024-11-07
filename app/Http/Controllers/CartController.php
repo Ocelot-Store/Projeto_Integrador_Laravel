@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     public function index() {
-        $cartItems = Cart::with('shoe')->get(); 
+        $cartItems = Cart::with('shoe')->get();
         $cartTotal = $cartItems->sum(function($item) {
             return $item->shoe->price * $item->quantity;
         });
