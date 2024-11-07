@@ -9,43 +9,43 @@
 <div class="Main">
     <h1>Lista de Usuários</h1>
 
+    @if(isset($seguindo) && isset($seguidores))
+    <div class="profile-stats">
+        <button class="stats-btn" onclick="showFollowing()">{{ $seguindo }} Seguindo</button>
+        <button class="stats-btn" onclick="showFollowers()">{{ $seguidores }} Seguidores</button>
+    </div>
+    @else
+    <p>Erro: Não foi possível carregar os números de seguidores e seguidos.</p>
+    @endif
+
     @if (isset($users) && $users->isEmpty())
     <p>Nenhum usuário encontrado.</p>
     @elseif(isset($users))
     <div class="Users">
-        @if(isset($seguindo) && isset($seguidores))
-        <div class="profile-stats">
-            <!-- Botões com números reais de Seguidores e Seguindo -->
-            <button class="stats-btn" onclick="showFollowing()">{{ $seguindo }} Seguindo</button>
-            <button class="stats-btn" onclick="showFollowers()">{{ $seguidores }} Seguidores</button>
-        </div>
-        @else
-        <p>Erro: Não foi possível carregar os números de seguidores e seguidos.</p>
-        @endif
-
         @foreach ($users as $user)
         @if($user->id !== Auth::id())
         <div class="Users-User">
+            <img src="{{ $user->profile_image_url }}" alt="Imagem de perfil de {{ $user->name }}" class="user-profile-img">
+            
             <div class="user-info">
-                <p><strong>Nome:</strong> {{ $user->name }}</p>
-                <p><strong>Email:</strong> {{ $user->email }}</p>
+                <p><strong>{{ $user->name }}</strong></p>
+                <p>{{ $user->email }}</p>
 
                 @if(Auth::user()->following->contains($user->id))
                 <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
                     @csrf
-                    <button type="submit">Deixar de Seguir</button>
+                    <button type="submit" class="follow-btn unfollow">Deixar de Seguir</button>
                 </form>
                 @else
                 <form action="{{ route('user.follow', $user->id) }}" method="POST">
                     @csrf
-                    <button type="submit">Seguir</button>
+                    <button type="submit" class="follow-btn">Seguir</button>
                 </form>
                 @endif
             </div>
         </div>
         @endif
         @endforeach
-
     </div>
     @else
     <p>Erro: A variável de usuários não foi definida.</p>
@@ -65,5 +65,15 @@
 @endsection
 
 @section('script')
-
+<script>
+    function showFollowing() {
+        // Função para mostrar a lista de usuários seguidos
+    }
+    function showFollowers() {
+        // Função para mostrar a lista de seguidores
+    }
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+    }
+</script>
 @endsection
