@@ -11,8 +11,8 @@
 
     @if(isset($seguindo) && isset($seguidores))
     <div class="profile-stats">
-        <button class="stats-btn" onclick="showFollowing()">{{ $seguindo }} Seguindo</button>
-        <button class="stats-btn" onclick="showFollowers()">{{ $seguidores }} Seguidores</button>
+        <button class="stats-btn">{{ $seguindo }} Seguindo</button>
+        <button class="stats-btn"> {{ $seguidores }} Seguidores</button>
     </div>
     @else
     <p>Erro: Não foi possível carregar os números de seguidores e seguidos.</p>
@@ -25,7 +25,7 @@
         @foreach ($users as $user)
         @if($user->id !== Auth::id())
         <div class="Users-User">
-            <img src="{{ $user->profile_image_url }}" alt="Imagem de perfil de {{ $user->name }}" class="user-profile-img">
+            <img src="{{ asset('storage/' . $user->profileImage) }}" alt="Imagem de perfil de {{ $user->name }}" class="user-profile-img">
             
             <div class="user-info">
                 <p><strong>{{ $user->name }}</strong></p>

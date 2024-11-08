@@ -10,6 +10,7 @@ php artisan migrate
 
 Criar em storage, as pastas: 
 App\public\images\shoes
+App\public\images\users
 
 php artisan storage:link
 

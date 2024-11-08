@@ -7,6 +7,67 @@ body {
     padding: 0;
     line-height: 1.6;
 }
+/* Popup Message */
+.popup-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    animation: fadeIn 0.5s ease, fadeOut 0.5s ease 5s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.popup-message p {
+    margin: 0;
+}
+
+.popup-message.success {
+    background-color: #28a745; /* Cor verde para sucesso */
+}
+
+.popup-message.error {
+    background-color: #dc3545; /* Cor vermelha para erros */
+}
+
+.popup-message .close-popup {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
 
 /* Main Container */
 .main-container {

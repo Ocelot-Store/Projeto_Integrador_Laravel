@@ -7,6 +7,31 @@
 @endsection
 
 @section('content')
+@if (session('success'))
+    <div class="popup-message success" id="popup-success">
+        <p>{{ session('success') }}</p>
+        <button class="close-popup" onclick="closePopup('popup-success')">&times;</button>
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="popup-message error" id="popup-error">
+        <p>{{ session('error') }}</p>
+        <button class="close-popup" onclick="closePopup('popup-error')">&times;</button>
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="popup-message error" id="popup-errors">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        <button class="close-popup" onclick="closePopup('popup-errors')">&times;</button>
+    </div>
+@endif
+
 <div class="main-container">
 
     <!-- Cabeçalho do Perfil -->
@@ -16,8 +41,14 @@
         </div>
 
         <div class="profile-picture">
-            <img src="{{ asset($user->profile_image ? 'images/' . $user->profile_image : 'assets/AddImage.png') }}" alt="Imagem do Usuário" class="profile-pic">
+            <form id="update-profile-picture-form" action="{{ route('user.updateProfilePicture') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" id="profile-picture-input" name="profile_image" accept="image/*" style="display: none;" onchange="submitProfilePictureForm()">
+                <img src="{{ $user->profile_image_url }}" alt="Imagem do Usuário" class="profile-pic" onclick="document.getElementById('profile-picture-input').click();">
+            </form>
         </div>
+
+
 
         <div class="user-options">
             <a href="{{ route('addShoe') }}" class="button">+ ADICIONAR CALÇADOS</a>
@@ -88,6 +119,27 @@
             document.querySelector(tab.getAttribute('href')).classList.add('active');
         });
     });
+
+    //Armazenar imagem de perfil
+    function submitProfilePictureForm() {
+        const form = document.getElementById('update-profile-picture-form');
+        form.submit();
+    }
+
+    function closePopup(id) {
+        const popup = document.getElementById(id);
+        if (popup) {
+            popup.style.display = 'none';
+        }
+    }
+
+    // Remove popups automaticamente após 5 segundos
+    setTimeout(() => {
+        document.querySelectorAll('.popup-message').forEach(popup => {
+            popup.style.display = 'none';
+        });
+    }, 5000); // 5000 ms = 5 segundos
+    
 </script>
 
 <!-- Integração com o VLibras -->
@@ -102,4 +154,6 @@
 <script>
     new window.VLibras.Widget('https://vlibras.gov.br/app');
 </script>
+
+
 @endsection

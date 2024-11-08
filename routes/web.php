@@ -31,6 +31,7 @@ Route::get('/user', [UserManager::class, 'userMenu'])->middleware('auth')->name(
 Route::get('/user/{id}', [UserManager::class, 'showUser'])->name('user.show');
 Route::put('/user/{id}', [UserManager::class, 'update'])->name('user.update');
 Route::get('/user/{id}/shoes', [UserManager::class, 'displayUserShoes'])->name('user.shoes');
+Route::post('/user/update-profile-picture', [UserManager::class, 'updateProfilePicture'])->middleware('auth')->name('user.updateProfilePicture');
 
 // Rotas relacionadas à listagem de todos os usuários
 Route::get('/users', [UserController::class, 'index'])->middleware('auth')->name('users');
@@ -57,8 +58,3 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{shoeId}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/update/{cartId}', [CartController::class, 'updateCart'])->name('cart.update');
 Route::delete('/cart/remove/{cartId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-
-
-
-
-

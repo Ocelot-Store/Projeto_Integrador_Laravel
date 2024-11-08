@@ -19,8 +19,8 @@ class CreateUserTable extends Migration
             $table->string('email', 100); // Cria uma coluna 'email' com tipo varchar(100)
             $table->string('password', 255); // Cria uma coluna 'password' com tipo varchar(255)
             $table->string('PasswordConfirmation', 255); // Cria uma coluna 'PasswordConfirmation' com tipo varchar(255)
-            $table->string('file_name', 100)->nullable(); // Cria uma coluna 'file_name' com tipo varchar(100) e permite valor nulo
-            $table->string('path', 100)->nullable(); // Cria uma coluna 'path' com tipo varchar(100) e permite valor nulo
+            $table->string('profileImage', 100)->nullable(); // Cria uma coluna 'image' com tipo varchar(100)
+            $table->string('profileCover', 100)->nullable(); 
             $table->timestamps(); // Cria as colunas 'created_at' e 'updated_at'
         });
     }

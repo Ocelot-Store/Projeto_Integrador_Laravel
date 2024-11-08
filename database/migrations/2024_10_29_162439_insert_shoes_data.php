@@ -20,11 +20,12 @@ class InsertShoesData extends Migration
             'email' => '123@gmail.com',
             'password' => Hash::make('123'), // Faz o hash da senha
             'PasswordConfirmation' => Hash::make('123'), // Novamente, não é comum armazenar essa informação
-            'file_name' => null,
-            'path' => null,
+            'profileImage' => null,
+            'profileCover' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
         // Inserir dados na tabela 'shoe'
         DB::table('shoe')->insert([
             ['model' => 'Nike Dunk Low', 'brand_id' => 1, 'user_id' => 1, 'price' => 100.00, 'size' => '1', 'description' => 'O Nike Dunk Low combina estilo atemporal com funcionalidade. Sua construção robusta, estética minimalista e o logotipo da Nike fazem dele uma escolha versátil para qualquer ocasião, seja para compor um look casual ou para uma sessão de skate.', 'color' => 'Preto', 'image' => 'images/shoes/tenis1.png', 'data_upload' => now(), 'created_at' => now(), 'updated_at' => now()],
