@@ -25,8 +25,11 @@
         @foreach ($users as $user)
         @if($user->id !== Auth::id())
         <div class="Users-User">
-            <img src="{{ asset('storage/' . $user->profileImage) }}" alt="Imagem de perfil de {{ $user->name }}" class="user-profile-img">
-            
+            <img src="{{ $user->profileImage ? asset('storage/' . $user->profileImage) : asset('assets/DarkUser.png') }}"
+                alt="Imagem de perfil de {{ $user->name }}"
+                class="user-profile-img">
+
+
             <div class="user-info">
                 <p><strong>{{ $user->name }}</strong></p>
                 <p>{{ $user->email }}</p>
@@ -69,9 +72,11 @@
     function showFollowing() {
         // Função para mostrar a lista de usuários seguidos
     }
+
     function showFollowers() {
         // Função para mostrar a lista de seguidores
     }
+
     function closeModal() {
         document.getElementById("modal").style.display = "none";
     }

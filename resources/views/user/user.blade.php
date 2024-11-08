@@ -43,7 +43,7 @@
                 <input type="file" id="profile-cover-input" name="profile_cover" accept="image/*" style="display: none;" onchange="submitProfileCoverForm()">
                 <img src="{{ $user->profileCoverUrl }}" alt="Imagem da Capa" class="overlay-image">
                 <button type="button" class="upload-cover-button" onclick="document.getElementById('profile-cover-input').click();">
-                    <img src="{{ asset('assets/upload_icon.png') }}" alt="Upload Icon" class="upload-icon">
+                    <img src="{{ asset('assets/AddProfileCover.png') }}" alt="Upload Icon" class="upload-icon">
                 </button>
             </form>
         </div>
