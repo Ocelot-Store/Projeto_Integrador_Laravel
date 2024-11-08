@@ -118,7 +118,9 @@ class UserManager extends Controller
         if ($request->hasFile('profile_cover')) {
             $file = $request->file('profile_cover');
             $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
-            $filePath = $file->storeAs('public/images/users/covers', $fileName);
+
+            // Salva a imagem em 'public/images/users'
+            $filePath = $file->storeAs('public/images/users', $fileName);
 
             // Remover a imagem de capa antiga, se existir
             if ($user->profileCover && Storage::exists('public/' . $user->profileCover)) {
@@ -126,7 +128,7 @@ class UserManager extends Controller
             }
 
             // Atualiza o caminho da imagem no banco de dados
-            $user->profileCover = 'images/users/covers/' . $fileName;
+            $user->profileCover = 'images/users/' . $fileName;
             $user->save();
 
             return redirect()->back()->with('success', 'Capa do perfil atualizada com sucesso!');
