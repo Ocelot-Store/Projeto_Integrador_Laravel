@@ -8,37 +8,46 @@
 
 @section('content')
 @if (session('success'))
-    <div class="popup-message success" id="popup-success">
-        <p>{{ session('success') }}</p>
-        <button class="close-popup" onclick="closePopup('popup-success')">&times;</button>
-    </div>
+<div class="popup-message success" id="popup-success">
+    <p>{{ session('success') }}</p>
+    <button class="close-popup" onclick="closePopup('popup-success')">&times;</button>
+</div>
 @endif
 
 @if (session('error'))
-    <div class="popup-message error" id="popup-error">
-        <p>{{ session('error') }}</p>
-        <button class="close-popup" onclick="closePopup('popup-error')">&times;</button>
-    </div>
+<div class="popup-message error" id="popup-error">
+    <p>{{ session('error') }}</p>
+    <button class="close-popup" onclick="closePopup('popup-error')">&times;</button>
+</div>
 @endif
 
 @if ($errors->any())
-    <div class="popup-message error" id="popup-errors">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-        <button class="close-popup" onclick="closePopup('popup-errors')">&times;</button>
-    </div>
+<div class="popup-message error" id="popup-errors">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+    <button class="close-popup" onclick="closePopup('popup-errors')">&times;</button>
+</div>
 @endif
 
 <div class="main-container">
 
     <!-- Cabeçalho do Perfil -->
     <header class="profile-header">
+
         <div class="profile-cover">
-            <img src="{{ asset('assets/fundo_index.jpg') }}" alt="Imagem sobreposta" class="overlay-image">
+            <form id="update-profile-cover-form" action="{{ route('user.updateProfileCover') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" id="profile-cover-input" name="profile_cover" accept="image/*" style="display: none;" onchange="submitProfileCoverForm()">
+                <img src="{{ $user->profileCoverUrl }}" alt="Imagem da Capa" class="overlay-image">
+                <button type="button" class="upload-cover-button" onclick="document.getElementById('profile-cover-input').click();">
+                    <img src="{{ asset('assets/upload_icon.png') }}" alt="Upload Icon" class="upload-icon">
+                </button>
+            </form>
         </div>
+
 
         <div class="profile-picture">
             <form id="update-profile-picture-form" action="{{ route('user.updateProfilePicture') }}" method="POST" enctype="multipart/form-data">
@@ -120,12 +129,19 @@
         });
     });
 
-    //Armazenar imagem de perfil
+    // Envia formulário de atualização da imagem do perfil
     function submitProfilePictureForm() {
         const form = document.getElementById('update-profile-picture-form');
         form.submit();
     }
 
+    // Envia formulário de atualização da capa do perfil
+    function submitProfileCoverForm() {
+        const form = document.getElementById('update-profile-cover-form');
+        form.submit();
+    }
+
+    // Fecha popup com base no id recebido como parâmetro
     function closePopup(id) {
         const popup = document.getElementById(id);
         if (popup) {
@@ -139,7 +155,6 @@
             popup.style.display = 'none';
         });
     }, 5000); // 5000 ms = 5 segundos
-    
 </script>
 
 <!-- Integração com o VLibras -->

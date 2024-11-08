@@ -87,20 +87,40 @@ body {
 
 /* Profile Cover */
 .profile-cover {
-    width: 100%;
-    height: 300px;
-    background-image: url('assets/fundo_index.jpg');
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
     position: relative;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
 }
 
 .overlay-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.upload-cover-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-icon {
+    width: 20px;
+    height: 20px;
+    filter: invert(1);
+}
+
+.upload-cover-button:hover {
+    background: rgba(0, 0, 0, 0.7);
 }
 
 /* Profile Picture */
@@ -119,7 +139,18 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0.95;
 }
+.profile-picture img:hover {
+    opacity: 1;
+    transition-duration: 0.1s;
+}
+
+.profile-picture img:not(:hover) {
+    opacity: 0.95;
+    transition-duration: 0.1s;
+}
+
 
 /* User Options */
 .user-options {

@@ -86,6 +86,7 @@ class User extends Authenticatable
      */
     public function getProfileCoverUrlAttribute()
     {
-        return $this->profileCover ? asset('storage/' . $this->profileCover) : asset('assets/defaultCover.png');
+        return $this->profileCover ? asset('storage/' . $this->profileCover) : asset('assets/fundo_index.jpg');
     }
+    
 }

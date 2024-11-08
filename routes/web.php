@@ -32,6 +32,8 @@ Route::get('/user/{id}', [UserManager::class, 'showUser'])->name('user.show');
 Route::put('/user/{id}', [UserManager::class, 'update'])->name('user.update');
 Route::get('/user/{id}/shoes', [UserManager::class, 'displayUserShoes'])->name('user.shoes');
 Route::post('/user/update-profile-picture', [UserManager::class, 'updateProfilePicture'])->middleware('auth')->name('user.updateProfilePicture');
+Route::post('/user/update-profile-cover', [UserManager::class, 'updateProfileCover'])->middleware('auth')->name('user.updateProfileCover');
+
 
 // Rotas relacionadas à listagem de todos os usuários
 Route::get('/users', [UserController::class, 'index'])->middleware('auth')->name('users');

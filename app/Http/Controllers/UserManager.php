@@ -85,23 +85,52 @@ class UserManager extends Controller
         if ($request->hasFile('profile_image')) {
             $file = $request->file('profile_image');
             $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
-        
+
             // Altere o caminho para 'images/users'
             $filePath = $file->storeAs('public/images/users', $fileName);
-        
+
             // Remover imagem antiga, se existir
             if ($user->profileImage && Storage::exists('public/' . $user->profileImage)) {
                 Storage::delete('public/' . $user->profileImage);
             }
-        
+
             // Atualiza o caminho da imagem no banco de dados
             $user->profileImage = 'images/users/' . $fileName;
             $user->save();
-        
+
             return redirect()->back()->with('success', 'Imagem de perfil atualizada com sucesso!');
         }
-        
 
+
+
+        return redirect()->back()->with('error', 'Falha ao fazer o upload da imagem.');
+    }
+    public function updateProfileCover(Request $request)
+    {
+        $user = Auth::user();
+
+        // Validação do arquivo
+        $request->validate([
+            'profile_cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Processa o upload da imagem
+        if ($request->hasFile('profile_cover')) {
+            $file = $request->file('profile_cover');
+            $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+            $filePath = $file->storeAs('public/images/users/covers', $fileName);
+
+            // Remover a imagem de capa antiga, se existir
+            if ($user->profileCover && Storage::exists('public/' . $user->profileCover)) {
+                Storage::delete('public/' . $user->profileCover);
+            }
+
+            // Atualiza o caminho da imagem no banco de dados
+            $user->profileCover = 'images/users/covers/' . $fileName;
+            $user->save();
+
+            return redirect()->back()->with('success', 'Capa do perfil atualizada com sucesso!');
+        }
 
         return redirect()->back()->with('error', 'Falha ao fazer o upload da imagem.');
     }
