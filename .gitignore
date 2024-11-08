@@ -2,6 +2,8 @@
 /.vscode
 /storage/app/public/images/shoes/*
 /public/storage/images/shoes/*
+/storage/app/public/images/users/*
+/public/storage/images/users/*
 
 # Exceções (não ignorar essas imagens específicas)
 !/storage/app/public/images/shoes/image1.jpg
