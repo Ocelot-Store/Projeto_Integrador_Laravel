@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Shoe;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class CartController extends Controller
 {
@@ -53,4 +54,17 @@ class CartController extends Controller
 
         return redirect()->route('cart.index')->with('success', 'Item removido do carrinho.');
     }
+
+    public function calcularFrete(Request $request)
+    {
+        $cepOrigem = '18013-280'; // CEP de origem fixo
+        $cepDestino = $request->input('cep');
+        $peso = $request->input('peso');
+
+        // API fictícia para calcular o frete
+        $tarifaBase = 10.00; // Valor fixo em reais
+    
+        return redirect()->back()->with('frete', $tarifaBase);
+    }
+
 }

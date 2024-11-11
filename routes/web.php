@@ -60,3 +60,10 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{shoeId}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/update/{cartId}', [CartController::class, 'updateCart'])->name('cart.update');
 Route::delete('/cart/remove/{cartId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+//Rotas do calculo do frete
+Route::get('/calculadora-frete', function () {
+    return view('calculadora-frete');
+})->name('calculadora-frete');
+
+Route::post('/calcular-frete', [CartController::class, 'calcularFrete'])->name('calcular-frete');
