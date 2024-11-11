@@ -93,6 +93,22 @@ h1 {
     font-size: 18px;
 }
 
+.form-frete{
+    padding: 5px 10px;
+    border: 2px solid #8e08c4;;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-frete{
+    background-color: #8e08c4;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 .total {
     font-size: 20px;
     font-weight: bold;

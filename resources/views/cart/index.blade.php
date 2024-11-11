@@ -52,10 +52,21 @@
                 <span>Subtotal</span>
                 <span>R$ {{ number_format($cartItems->sum(fn($item) => $item->shoe->price * $item->quantity), 2, ',', '.') }}</span>
             </div>
+
             <div class="shipping">
-                <span>Envio</span>
-                <span>GRÁTIS</span>
+                <form action="{{ route('calcular-frete') }}" method="POST">
+                    @csrf
+                    <label for="cep">Insira o CEP de destino:</label>
+                    <input type="text" id="cep" class="form-frete" name="cep" required>
+
+                    <button type="submit" class="btn-frete">Calcular Frete</button>
+                </form>
+
+                @if(session('frete'))
+                    <p>Valor do Frete: R$ {{ session('frete') }}</p>
+                @endif
             </div>
+
             <div class="total">
                 <strong>Total</strong>
                 <strong>R$ {{ number_format($cartItems->sum(fn($item) => $item->shoe->price * $item->quantity), 2, ',', '.') }}</strong>
