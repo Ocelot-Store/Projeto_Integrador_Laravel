@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding: 0;">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ route('index') }}"><img src="{{asset('assets/BlackLogo.png')}}" alt="" style="width: 45px; height: 45px;"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,29 +15,23 @@
 
       </ul>
 
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item mb-2">
-          <form class="d-flex"   role="search" action="{{ route('search') }}" method="GET">
-            <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit" style="border-color: black; color: black; transition: all 0.2s ease-in-out;" onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor='transparent'">Search</button>
+      <ul class="navbar-nav ms-auto" style="display: flex; margin-bottom: 0;">
+        <li style="margin-bottom: 0;">
+          <form class="d-flex" role="search" action="{{ route('search') }}" method="GET" style="margin-bottom: 0;">
+            <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search" style="margin-bottom: 0;">
+            <button class="btn btn-outline-success" type="submit" style="border-color: black; color: black; transition: all 0.2s ease-in-out; margin-bottom: 0;" onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor='transparent'">Search</button>
           </form>
         </li>
-        
-        <li class="nav-item ms-1"> 
+        <li class="ms-1" style="margin-bottom: 0;">
           <a href="{{ route('user') }}">
-            <img src="{{ asset('assets/DarkUser.png') }}" alt="Usuário" class="img-fluid" style="width: 40px; height: 40px;">
+            <img src="{{ asset('assets/DarkUser.png') }}" alt="Usuário" class="img-fluid" style="width: 40px; height: 40px; margin-bottom: 0;">
           </a>
         </li>
-
-        
-        <li class="nav-item">
+        <li style="margin-bottom: 0;">
           <a class="nav-link" href="{{ route('logout') }}">Logout</a>
         </li>
       </ul>
 
-
-
-      
     </div>
   </div>
 </nav>
