@@ -2,7 +2,9 @@
 @section('title', 'Cart')
 
 @section('style')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <link rel="stylesheet" href="{{ asset('css/shoe/cart.css') }}">
+
 @endsection
 
 @section('content')
@@ -13,8 +15,15 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+    
     @if($cartItems->isEmpty())
-        <p>Seu carrinho está vazio.</p>
+        <div class="empty-cart">
+            <h2>Seu carrinho está vazio.</h2>
+            <i class="fa-solid fa-cart-shopping"></i>
+            <p>Continue navegando até encontrar algo que você goste e adicione aqui</p>
+            <a href="{{ route('home') }}" class="btn-back">Voltar</a>
+        </div>
+        
     @else
         <div class="cart-item">
             @foreach($cartItems as $item)
@@ -56,7 +65,7 @@
             <div class="shipping">
                 <form action="{{ route('calcular-frete') }}" method="POST">
                     @csrf
-                    <label for="cep">Insira o CEP de destino:</label>
+                    <label for="cep">CEP de destino:</label>
                     <input type="text" id="cep" class="form-frete" name="cep" required>
 
                     <button type="submit" class="btn-frete">Calcular Frete</button>
