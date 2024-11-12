@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/Index.css') }}">
     <!-- Referência ao favicon -->
     <link rel="icon" href="{{ asset('assets/Ocelot.ico') }}" type="image/x-icon">
+    
 </head>
 <body>
     <div class="overlay"></div>
