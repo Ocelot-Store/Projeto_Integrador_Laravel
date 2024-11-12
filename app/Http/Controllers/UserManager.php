@@ -43,8 +43,13 @@ class UserManager extends Controller
     public function showUser($id)
     {
         $user = User::findOrFail($id);
-        return view('user.user', compact('user'));
+        $seguindo = $user->following()->count();
+        $seguidores = $user->followers()->count();
+        $shoes = $user->shoes; // Caso queira exibir os sapatos do usuário
+    
+        return view('user.otherUser', compact('user', 'seguindo', 'seguidores', 'shoes'));
     }
+    
 
     public function follow(User $user)
     {

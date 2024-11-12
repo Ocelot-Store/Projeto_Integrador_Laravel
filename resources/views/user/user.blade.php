@@ -57,6 +57,8 @@
             </form>
         </div>
 
+        <h1 style="font-size: 2.0rem; margin: 1rem;">{{$user->name}}</h1>
+
 
 
         <div class="user-options">

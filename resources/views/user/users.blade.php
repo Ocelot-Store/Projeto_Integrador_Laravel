@@ -24,15 +24,16 @@
     <div class="Users">
         @foreach ($users as $user)
         @if($user->id !== Auth::id())
-        <div class="Users-User">
-            <img src="{{ $user->profileImage ? asset('storage/' . $user->profileImage) : asset('assets/DarkUser.png') }}"
-                alt="Imagem de perfil de {{ $user->name }}"
-                class="user-profile-img">
-
-
-            <div class="user-info">
-                <p><strong>{{ $user->name }}</strong></p>
-                <p>{{ $user->email }}</p>
+        <a  href="{{ route('user.show', $user->id) }}">
+            <div class="Users-User">
+                <!-- Link para o perfil do usuário -->
+            
+                    <img src="{{ $user->profileImage ? asset('storage/' . $user->profileImage) : asset('assets/DarkUser.png') }}"
+                        alt="Imagem de perfil de {{ $user->name }}"
+                        class="user-profile-img">
+                    <div class="user-info">
+                        <p><strong>{{ $user->name }}</strong></p>
+                    </div>
 
                 @if(Auth::user()->following->contains($user->id))
                 <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
@@ -46,10 +47,12 @@
                 </form>
                 @endif
             </div>
-        </div>
+        </a>
         @endif
         @endforeach
     </div>
+
+
     @else
     <p>Erro: A variável de usuários não foi definida.</p>
     @endif
