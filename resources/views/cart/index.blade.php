@@ -9,22 +9,22 @@
 
 @section('content')
 <div class="container mt-4">
-    <h1>Meu Carrinho</h1>
-
+    
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-
+    
     
     @if($cartItems->isEmpty())
-        <div class="empty-cart">
-            <h2>Seu carrinho está vazio.</h2>
-            <i class="fa-solid fa-cart-shopping"></i>
-            <p>Continue navegando até encontrar algo que você goste e adicione aqui</p>
-            <a href="{{ route('home') }}" class="btn-back">Voltar</a>
-        </div>
-        
+    <div class="empty-cart">
+        <h2>Seu carrinho está vazio.</h2>
+        <p>Continue navegando até encontrar algo que você goste e adicione aqui</p>
+        <i class="fa-solid fa-cart-shopping"></i>
+        <a href="{{ route('home') }}" class="btn-back">Voltar</a>
+    </div>
+    
     @else
+    <h1>Meu Carrinho</h1>
         <div class="cart-item">
             @foreach($cartItems as $item)
                 <div class="cart-product">
@@ -32,6 +32,7 @@
                         <img src="{{ asset('storage/' . $item->shoe->image) }}" alt="{{ $item->shoe->model }}" class="product-image">
                         <div class="details">
                             <h2>{{ $item->shoe->model }}</h2>
+                            <h3>{{ \Illuminate\Support\Str::limit($item->shoe->description,100)}}</h3
                             <span>R$ {{ number_format($item->shoe->price, 2, ',', '.') }}</span>
                         </div>
                     </div>
