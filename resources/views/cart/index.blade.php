@@ -28,6 +28,12 @@
         <div class="cart-item">
             @foreach($cartItems as $item)
                 <div class="cart-product">
+                <label class="custom-checkbox">
+                <input type="checkbox" class="product-checkbox" data-price="{{ $item->shoe->price * $item->quantity }}" checked>
+                <span class="checkmark"></span>
+            </label>
+
+
                     <div class="product-info">
                         <img src="{{ asset('storage/' . $item->shoe->image) }}" alt="{{ $item->shoe->model }}" class="product-image">
                         <div class="details">
@@ -39,8 +45,11 @@
                     <div class="quantity">
                         <form action="{{ route('cart.update', $item->id) }}" method="POST">
                             @csrf
-                            <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" class="quantity-input">
-                            <button type="submit" class="btn-update">Atualizar</button>
+                            <div class="quantity-control">
+                                <button type="button" class="btn-decrement">-</button>
+                                <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" class="quantity-input" readonly>
+                                <button type="button" class="btn-increment">+</button>
+                            </div>
                         </form>
                     </div>
                     <div class="price">
@@ -60,8 +69,8 @@
         <div class="cart-summary">
             <div class="subtotal">
                 <span>Subtotal</span>
-                <span>R$ {{ number_format($cartItems->sum(fn($item) => $item->shoe->price * $item->quantity), 2, ',', '.') }}</span>
-            </div>
+                <span id="subtotal">{{ number_format($cartItems->sum(fn($item) => $item->shoe->price * $item->quantity), 2, ',', '.') }}</span>
+             </div>
 
             <div class="shipping">
                 <form action="{{ route('calcular-frete') }}" method="POST">
@@ -79,10 +88,53 @@
 
             <div class="total">
                 <strong>Total</strong>
-                <strong>R$ {{ number_format($cartItems->sum(fn($item) => $item->shoe->price * $item->quantity), 2, ',', '.') }}</strong>
+                <strong>R$ <span id="total">{{ number_format($cartItems->sum(fn($item) => $item->shoe->price * $item->quantity), 2, ',', '.') }}</span></strong>
             </div>
             <button class="btn-pay">Enviar Pedido</button>
         </div>
     @endif
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('.product-checkbox');
+    const subtotalElement = document.getElementById('subtotal');
+    const totalElement = document.getElementById('total');
+
+    function updateTotal() {
+        let subtotal = 0;
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                const price = parseFloat(checkbox.getAttribute('data-price'));
+                const quantity = parseInt(checkbox.closest('.cart-product').querySelector('.quantity-input').value);
+                subtotal += price * quantity;
+            }
+        });
+        subtotalElement.textContent = subtotal.toFixed(2).replace('.', ',');
+        totalElement.textContent = subtotal.toFixed(2).replace('.', ',');
+    }
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateTotal);
+    });
+
+    // Botões de incremento e decremento
+    document.querySelector('.btn-decrement').addEventListener('click', function() {
+        const quantityInput = document.querySelector('.quantity-input');
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) { 
+            quantityInput.value = currentValue - 1;
+        }
+    });
+
+    document.querySelector('.btn-increment').addEventListener('click', function() {
+        const quantityInput = document.querySelector('.quantity-input');
+        let currentValue = parseInt(quantityInput.value);
+        quantityInput.value = currentValue + 1;
+    });
+
+    updateTotal();
+});
+</script>
+
+
 @endsection

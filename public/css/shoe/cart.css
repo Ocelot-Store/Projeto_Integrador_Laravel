@@ -56,6 +56,25 @@ h1 {
     background-color: #363238;
 }
 
+/* Estilo do botão "Selecionar todos" */
+.btn-select-all {
+    display: inline-block;
+    margin-bottom: 1em;
+    padding: 0.5em;
+    font-size: 1em;
+    color: #007bff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.btn-select-all:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+
 .cart-item {
     display: flex;
     flex-direction: column;
@@ -71,6 +90,44 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 8px;
 }
+
+/* Serve para ocultar o checkbox original */
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+  }
+  
+  .custom-checkbox .checkmark {
+    width: 20px;
+    height: 20px;
+    background-color: #b7b7b7;
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .custom-checkbox input[type="checkbox"]:checked + .checkmark {
+    background-color: #4caf50; 
+  }
+  
+  .custom-checkbox .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 2.5px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  
+  .custom-checkbox input[type="checkbox"]:checked + .checkmark:after {
+    display: block;
+  }
+  
 
 .product-info {
     display: flex;
@@ -99,32 +156,51 @@ h1 {
     margin: 0;
 }
 
-.quantity {
+.quantity-control {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.quantity-input {
-    width: 50px;
-    padding: 5px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.btn-update {
-    background-color: black;
-    color: #fff;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
+.btn-decrement, .btn-increment {
+    width: 30px; 
+    height: 30px; 
+    border: none; 
+    border-radius: 50%; 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s ease-in-out; 
 }
 
-.btn-update:hover {
-    background-color: #06c92d;
+.btn-decrement {
+    background-color: #b7b7b7; 
+    color: #fff; 
 }
+
+.btn-increment {
+    background-color: #06c92d; 
+    color: #fff; 
+}
+
+.btn-decrement:hover {
+    background-color: #a0a0a0; 
+    transform: scale(1.1); 
+}
+
+.btn-increment:hover {
+    background-color: #04a123; 
+    transform: scale(1.1); 
+}
+
+.quantity-input {
+    width: 50px; 
+    height: 30px; 
+    text-align: center;
+    border: none;
+}
+
 
 .btn-remove {
     background-color: #dc3545;
