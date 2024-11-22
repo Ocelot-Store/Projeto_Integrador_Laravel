@@ -73,6 +73,7 @@ class UserManager extends Controller
         return redirect()->back()->with('success', 'Você deixou de seguir ' . $user->name);
     }
 
+
     public function updateProfilePicture(Request $request)
     {
         $user = Auth::user();
