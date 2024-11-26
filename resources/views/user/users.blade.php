@@ -19,7 +19,7 @@
     @endif
 
     <div class="Users">
-        <!-- Todos os usuários exibidos inicialmente -->
+        <!-- Lista de Todos os Usuários -->
         <div id="todos-os-usuarios-list" class="user-list">
             @foreach ($users as $user)
             @if($user->id !== Auth::id())
@@ -31,7 +31,6 @@
                     <div class="user-info">
                         <p><strong>{{ $user->name }}</strong></p>
                     </div>
-
                     @if(Auth::user()->following->contains($user->id))
                     <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
                         @csrf
@@ -49,6 +48,7 @@
             @endforeach
         </div>
 
+
         <!-- Lista de "Seguindo", que será alternada -->
         <div id="seguindo-list" class="user-list" style="display: none;">
             @foreach ($seguindoLista as $userFollowing)
@@ -60,6 +60,17 @@
                     <div class="user-info">
                         <p><strong>{{ $userFollowing->name }}</strong></p>
                     </div>
+                    @if(Auth::user()->following->contains($userFollowing->id))
+                    <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="follow-btn unfollow">Deixar de Seguir</button>
+                    </form>
+                    @else
+                    <form action="{{ route('user.follow', $user->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="follow-btn">Seguir</button>
+                    </form>
+                    @endif
                 </div>
             </a>
             @endforeach
@@ -67,18 +78,18 @@
 
         <!-- Lista de "Seguidores", que será alternada -->
         <div id="seguidores-list" class="user-list" style="display: none;">
-            @foreach ($seguidoresLista as $user)
-            @if($user->id !== Auth::id())
+            @foreach ($seguidoresLista as $follower)
+            @if($follower->id !== Auth::id())
             <a href="{{ route('user.show', $user->id) }}">
                 <div class="Users-User">
                     <img src="{{ $user->profileImage ? asset('storage/' . $user->profileImage) : asset('assets/DarkUser.png') }}"
                         alt="Imagem de perfil de {{ $user->name }}"
                         class="user-profile-img">
                     <div class="user-info">
-                        <p><strong>{{ $user->name }}</strong></p>
+                        <p><strong>{{ $follower->name }}</strong></p>
                     </div>
 
-                    @if(Auth::user()->following->contains($user->id))
+                    @if(Auth::user()->following->contains($follower->id))
                     <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
                         @csrf
                         <button type="submit" class="follow-btn unfollow">Deixar de Seguir</button>
@@ -107,44 +118,42 @@
         </div>
     </div>
 </div>
-@endsection
 
-@section('script')
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    // Alterna entre as abas "Seguindo" e "Seguidores"
-    document.getElementById('seguindo-tab').addEventListener('click', function() {
-        // Exibe a lista de "Seguindo" e oculta a lista de "Seguidores"
-        document.getElementById('seguindo-list').style.display = 'block';
+        // Alterna entre as abas "Seguindo", "Seguidores", e "Todos os Usuários"
+        document.getElementById('seguindo-tab').addEventListener('click', function() {
+            document.getElementById('seguindo-list').style.display = 'block';
+            document.getElementById('seguidores-list').style.display = 'none';
+            document.getElementById('todos-os-usuarios-list').style.display = 'none';
+            this.classList.add('active');
+            document.getElementById('seguidores-tab').classList.remove('active');
+        });
+
+        document.getElementById('seguidores-tab').addEventListener('click', function() {
+            document.getElementById('seguindo-list').style.display = 'none';
+            document.getElementById('seguidores-list').style.display = 'block';
+            document.getElementById('todos-os-usuarios-list').style.display = 'none';
+            this.classList.add('active');
+            document.getElementById('seguindo-tab').classList.remove('active');
+        });
+
+        // Exibe todos os usuários inicialmente
+        document.getElementById('seguindo-list').style.display = 'none';
         document.getElementById('seguidores-list').style.display = 'none';
-        document.getElementById('todos-os-usuarios-list').style.display = 'none'; // Esconde a lista de todos os usuários
-        this.classList.add('active');
+        document.getElementById('todos-os-usuarios-list').style.display = 'block';
+
+        // Remove a classe ativa das abas inicialmente
+        document.getElementById('seguindo-tab').classList.remove('active');
         document.getElementById('seguidores-tab').classList.remove('active');
     });
 
-    document.getElementById('seguidores-tab').addEventListener('click', function() {
-        // Exibe a lista de "Seguidores" e oculta a lista de "Seguindo"
-        document.getElementById('seguindo-list').style.display = 'none';
-        document.getElementById('seguidores-list').style.display = 'block';
-        document.getElementById('todos-os-usuarios-list').style.display = 'none'; // Esconde a lista de todos os usuários
-        this.classList.add('active');
-        document.getElementById('seguindo-tab').classList.remove('active');
-    });
-
-    // Inicializa a exibição da lista de "Seguindo" ao carregar a página
-    document.getElementById('seguindo-list').style.display = 'block';
-    document.getElementById('seguidores-list').style.display = 'none';
-    document.getElementById('todos-os-usuarios-list').style.display = 'none'; // Esconde a lista de todos os usuários
-
-    // Inicialmente, o botão "Seguindo" estará ativo
-    document.getElementById('seguindo-tab').classList.add('active');
-    document.getElementById('seguidores-tab').classList.remove('active');
-});
-
-// Função para fechar o modal
-function closeModal() {
-    document.getElementById("modal").style.display = "none";
-}
-
+    // Função para fechar o modal
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+    }
 </script>
+
 @endsection

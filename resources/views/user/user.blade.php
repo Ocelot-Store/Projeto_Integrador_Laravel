@@ -80,25 +80,7 @@
         </div>
 
         <div id="Produtos-de-Venda" class="tab-content active">
-            <!-- Seção de Produtos à Venda -->
-            <section class="products">
-                @foreach ($shoes as $shoe)
-                <div class="for-sale-container">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ asset('storage/' . $shoe->image) }}" alt="Imagem tenis" class="img-fluid">
-                        </div>
-                        <div class="product-details">
-                            <h2>{{ $shoe->model }} <span class="new-label">NEW</span></h2>
-                            <p class="category">Nike Dunk Low</p>
-                            <p class="description">{{ $shoe->description }}</p>
-                            <p class="price">$ {{ $shoe->price }}</p>
-
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </section>
+            Teste
         </div>
 
         <div id="Favoritos" class="tab-content">
@@ -110,6 +92,7 @@
 </div>
 
 <script>
+
     // Alternar modo de edição
     function toggleEditMode() {
         const form = document.getElementById('user-form');
@@ -122,6 +105,7 @@
     // Alternar abas
     document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', function(event) {
+            alert('clicou')
             event.preventDefault();
 
             document.querySelectorAll('.tab, .tab-content').forEach(element => element.classList.remove('active'));

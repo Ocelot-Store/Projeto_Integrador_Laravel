@@ -159,4 +159,47 @@ a {
     margin-left: 10px    !important;
 }
 
+/* Tabs Section */
+.tabs-container {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #e0e0e5;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    color: #888;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.tab.active, .tab:hover {
+    color: #333; /* Texto preto para a aba ativa e ao passar o mouse */
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
