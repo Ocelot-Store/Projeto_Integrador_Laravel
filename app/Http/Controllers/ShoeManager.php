@@ -124,13 +124,7 @@ class ShoeManager extends Controller
         return view('shoe.viewShoe', compact('shoe', 'isFavorite'));
     }
     
-    public function displayUserShoes($userId)
-    {
-        $user = User::findOrFail($userId);
-        $shoes = Shoe::where('user_id', $userId)->get();
 
-        return view('user.user', compact('shoes', 'user'));
-    }
 
     public function CheapestShoeHighlight()
     {

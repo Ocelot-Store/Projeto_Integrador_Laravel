@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Shoe;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Favorite;
 
 class UserManager extends Controller
 {
@@ -19,9 +20,12 @@ class UserManager extends Controller
         // Obtém todos os sapatos do usuário
         $shoes = $user->shoes;
 
+        $favorites = Favorite::all();
+
         // Retorna a view com as informações do usuário e seus sapatos
-        return view('user.user', compact('user', 'shoes'));
+        return view('user.user', compact('user', 'shoes', 'favorites'));
     }
+
 
 
     public function usersMenu()

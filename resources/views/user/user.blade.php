@@ -80,11 +80,53 @@
         </div>
 
         <div id="Produtos-de-Venda" class="tab-content active">
-            Teste
+            <!-- Seção de Produtos à Venda -->
+            <section class="products">
+                @if(isset($shoes) && $shoes->isNotEmpty())
+                    @foreach ($shoes as $shoe)
+                    <div class="for-sale-container">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="{{ asset('storage/' . $shoe->image) }}" alt="Imagem do Tênis" class="img-fluid">
+                            </div>
+                            <div class="product-details">
+                                <h2>{{ $shoe->model }} <span class="new-label">NEW</span></h2>
+                                <p class="category">Nike Dunk Low</p>
+                                <p class="description">{{ $shoe->description }}</p>
+                                <p class="price">$ {{ $shoe->price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                @else
+                <p>Nenhum produto à venda por este usuário.</p>
+                @endif
+            </section>
         </div>
 
         <div id="Favoritos" class="tab-content">
-            Favoritos
+            <!-- Seção de Produtos Favoritos -->
+            <section class="products">
+                @if(isset($favorites) && $favorites->isNotEmpty())
+                    @foreach ($favorites as $favorito)
+                    <div class="for-sale-container">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="{{ asset('storage/' . $favorito->shoe->image) }}" alt="Imagem do Tênis" class="img-fluid">
+                            </div>
+                            <div class="product-details">
+                                <h2>{{ $favorito->shoe->model }} <span class="new-label">NEW</span></h2>
+                                <p class="category">Nike Dunk Low</p>
+                                <p class="description">{{ $favorito->shoe->description }}</p>
+                                <p class="price">$ {{ $favorito->shoe->price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                @else
+                <p>Nenhum produto adicionado aos favoritos.</p>
+                @endif
+            </section>
         </div>
     </div>
 

@@ -1,5 +1,12 @@
 @extends('posts.layout')
 
+@section('title', 'Comunidade')
+
+@section('style')  
+<link rel="stylesheet" href="{{ asset('css/posts/posts.css') }}"> 
+@endsection
+
+
 @section('content')
 <div class="container">
     <div class="card">
@@ -13,7 +20,7 @@
     <h3>{{ $post->comments->count() }} Comentários</h3>
     
     <!-- Formulário de comentário -->
-    <form action="{{ route('posts.comment.store', $post->id) }}" method="POST">
+    <form action="{{ route('posts.comment.store', $post->id) }}" method="POST" class="comment-form">
         @csrf
         <textarea name="content" rows="3" placeholder="Adicionar um comentário..." required></textarea>
         <button type="submit">Comentar</button>
