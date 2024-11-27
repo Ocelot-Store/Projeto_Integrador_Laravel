@@ -105,7 +105,6 @@
     // Alternar abas
     document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', function(event) {
-            alert('clicou')
             event.preventDefault();
 
             document.querySelectorAll('.tab, .tab-content').forEach(element => element.classList.remove('active'));

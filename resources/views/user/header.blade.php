@@ -12,6 +12,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('users') }}">Users</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('posts.index') }}">Comunidade</a>
+        </li>
 
       </ul>
 

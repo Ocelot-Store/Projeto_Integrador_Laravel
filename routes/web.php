@@ -6,6 +6,7 @@ use App\Http\Controllers\ShoeManager;
 use App\Http\Controllers\UserManager;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController; // Importa o UserController para as rotas relacionadas a usuários
+use App\Http\Controllers\PostController;
 
 // Rota principal
 Route::get('/', function () {
@@ -67,3 +68,14 @@ Route::get('/calculadora-frete', function () {
 })->name('calculadora-frete');
 
 Route::post('/calcular-frete', [CartController::class, 'calcularFrete'])->name('calcular-frete');
+
+
+// Rotas relacionadas aos posts
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index'); // Exibir posts
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store'); // Criar post
+
+// Rota para exibir o post e seus comentários
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+// Rota para adicionar um comentário
+Route::post('/posts/{post}/comment', [PostController::class, 'storeComment'])->name('posts.comment.store');
+
