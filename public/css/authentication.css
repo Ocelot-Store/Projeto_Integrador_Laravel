@@ -1,6 +1,6 @@
 
 body{
-    background: url('../Assets/fundo_index.jpg') no-repeat;
+    background: url('../assets/fundo_index.jpg') no-repeat;
     background-size: cover;
     background-attachment: fixed;
     color: #ffffff;
@@ -16,7 +16,7 @@ body{
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../Assets/black_image.png');
+    background-image: url('../assets/black_image.png');
     background-size: cover;
     z-index: 1;
     opacity: 60%;

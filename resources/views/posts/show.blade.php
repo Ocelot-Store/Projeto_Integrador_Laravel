@@ -30,7 +30,7 @@
         @foreach ($post->comments as $comment)
             <div class="comment">
                 <p>{{ $comment->comment }}</p>
-                <p class="text-muted">- {{ $comment->user->name }} ({{ $comment->created_at->format('d/m/Y H:i') }})</p>
+                <p class="text-muted">- {{ $comment->user->name }} ({{ $comment->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y H:i') }})</p>
             </div>
         @endforeach
     </div>
