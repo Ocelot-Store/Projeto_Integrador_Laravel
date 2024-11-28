@@ -41,7 +41,7 @@
             <a href="{{ route('user.show', $user->id) }}">
                 <div class="user-card">
                     <div class="user-info">
-                        <img src="{{ $post->user->profileImage ? asset('storage/' . $post->user->profileImage) : asset('assets/DarkUser.png') }}" alt="Imagem de Perfil">
+                        <img src="{{ user->profileImage ? asset('storage/' . user->profileImage) : asset('assets/DarkUser.png') }}" alt="Imagem de Perfil">
                         <p class="user-card-text">{{ $user->name }}</p>
                     </div>
                     
