@@ -9,8 +9,8 @@ Cada vez que a configuração inicial for realizada, execute os seguintes comand
 php artisan migrate
 
 Criar em storage, as pastas: 
-App\public\images\shoes
-App\public\images\users
+app\public\images\shoes
+app\public\images\users
 
 php artisan storage:link
 

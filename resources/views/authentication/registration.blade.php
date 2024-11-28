@@ -2,11 +2,11 @@
 @section('title', 'Registration')
 @section('content')
 <div class="overlay"></div>
-<a href="{{route('index')}}"><img class="homeImg" src="{{asset('Assets/Home.png')}}" alt=""></a>
+<a href="{{route('index')}}"><img class="homeImg" src="{{asset('assets/Home.png')}}" alt=""></a>
 <div class="main">
     <div class="window">
         <div class="containerh1">
-            <img src="../Assets/BlackLogo.png" alt="">
+            <img src="../assets/BlackLogo.png" alt="">
             <h1>OCELOT</h1>
         </div>
         <h2>ALWAYS FORWARD</h2>
@@ -29,23 +29,23 @@
             <form action="{{route('registration.post')}}" method="POST" class="ms-auto me-auto mt-3">
                 @csrf
                 <div class="input-box">
-                    <img src="../Assets/DarkUser.png" alt="">
+                    <img src="../assets/DarkUser.png" alt="">
                     <input type="text" class="form-control" name="name" placeholder="Name">
                 </div>
                 <div class="input-box">
-                    <img src="../Assets/Email.png" alt="">
+                    <img src="../assets/Email.png" alt="">
                     <input type="email" class="form-control" name="email" placeholder="Email">
                 </div>
                 <div class="input-box">
-                    <img src="../Assets/Address.png" alt="">
+                    <img src="../assets/Address.png" alt="">
                     <input type="text" class="form-control" name="address" placeholder="Address">
                 </div>
                 <div class="input-box">
-                    <img src="../Assets/Password.png" alt="">
+                    <img src="../assets/Password.png" alt="">
                     <input type="password" class="form-control" name="password" placeholder="Password">
                 </div>
                 <div class="input-box">
-                    <img src="../Assets/Password.png" alt="">
+                    <img src="../assets/Password.png" alt="">
                     <input type="password" class="form-control" name="PasswordConfirmation" placeholder="Password Confirmation">
                 </div>
                 <div class="divsubmit">
