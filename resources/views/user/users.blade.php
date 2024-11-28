@@ -82,8 +82,8 @@
             @if($follower->id !== Auth::id())
             <a href="{{ route('user.show', $user->id) }}">
                 <div class="Users-User">
-                    <img src="{{ $user->profileImage ? asset('storage/' . $user->profileImage) : asset('assets/DarkUser.png') }}"
-                        alt="Imagem de perfil de {{ $user->name }}"
+                    <img src="{{ $follower->profileImage ? asset('storage/' . $follower->profileImage) : asset('assets/DarkUser.png') }}"
+                        alt="Imagem de perfil de {{ $follower->name }}"
                         class="user-profile-img">
                     <div class="user-info">
                         <p><strong>{{ $follower->name }}</strong></p>
