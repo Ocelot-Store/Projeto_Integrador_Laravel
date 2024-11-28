@@ -12,7 +12,7 @@
     <!-- Cabeçalho do Perfil -->
     <header class="profile-header">
         <div class="profile-cover">
-            <img src="{{ $user->profileCover ? asset('storage/' . $user->profileCover) : asset('assets/defaultCover.png') }}"
+            <img src="{{ $user->profileCover ? asset('storage/' . $user->profileCover) : asset('assets/ProfileCover.png') }}"
                  alt="Capa de {{ $user->name }}"
                  class="overlay-image">
         </div>
