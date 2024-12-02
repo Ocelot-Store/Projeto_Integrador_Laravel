@@ -21,7 +21,7 @@ class InsertShoesData extends Migration
             'password' => Hash::make('123'), // Faz o hash da senha
             'PasswordConfirmation' => Hash::make('123'), // Novamente, não é comum armazenar essa informação
             'profileImage' => null,
-            'profileCover' => null,
+            'profileCover' => 'images/users/ProfileCover.png',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
