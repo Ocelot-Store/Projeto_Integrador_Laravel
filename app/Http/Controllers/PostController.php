@@ -2,32 +2,40 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Shoe;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     // Exibe a lista de posts e o formulário para criar novos
-    public function index()
+    public function index(Request $request)
     {
+        $shoeId = $request->query('shoe_id', null); // Se não houver 'shoe_id' na URL, o valor será null
         $posts = Post::with('user')->orderBy('created_at', 'desc')->get(); // Recupera posts com os usuários associados
         $users = User::all();
+        $shoe = null;
 
-        return view('posts.index', compact('posts', 'users'));
+        if ($shoeId) {
+            $shoe = Shoe::find($shoeId); // Tenta encontrar o tênis pelo ID
+        }
+
+        return view('posts.index', compact('posts', 'users', 'shoeId', 'shoe'));
     }
 
     // Armazena um novo post
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'content' => 'required|string|max:1000', // Validação para o conteúdo do post
+            'content' => 'required|string|max:1000',
+            'shoe_id' => 'nullable|exists:shoe,id', // Valida se o ID do tênis existe
         ]);
+
         Post::create([
             'user_id' => auth()->id(), // ID do usuário autenticado
-            'shoe_id' => 1, // Substituir pelo ID do tênis, se necessário
+            'shoe_id' => $validated['shoe_id'] ?? null, // Se não for fornecido, o valor será null
             'content' => $validated['content'], // Envia o conteúdo validado
         ]);
 

@@ -3,7 +3,7 @@
 @section('title', 'Comunidade')
 
 @section('style')
-<link rel="stylesheet" href="{{ asset('css/posts/posts.css') }}">
+<link rel="stylesheet" href="{{ asset('css/posts/index.css') }}">
 @endsection
 
 @section('content')
@@ -13,29 +13,83 @@
     <!-- Formulário para Criar Post -->
     <form action="{{ route('posts.store') }}" method="POST">
         @csrf
+        @if (isset($shoeId))
+        <input type="hidden" name="shoe_id" value="{{ $shoeId }}">
+        @endif
         <textarea id="content" name="content" rows="3" placeholder="O que está acontecendo?" required></textarea>
-        <button type="submit">Postar</button>
+
+        @if (isset($shoe))
+        <div class="shoe-image-container">
+            <p>Você está postando sobre o seguinte tênis:</p>
+            <div class="shoe-item">
+                            <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
+                            <div class="shoe-info-name">
+                                <span class="model">{{ $shoe->model }}</span> <br>
+                            </div>
+                            <div class="shoe-info-otherinfo">
+                                <span class="brand">{{ $shoe->brand->name }}</span>
+                                •
+                                <span class="price">$ {{ $shoe->price }}</span>
+                            </div>
+                        </div>
+        </div>
+        @endif
+
+        <div class="button-container">
+            <button type="submit">Postar</button>
+
+            <!-- Exibe o botão de Cancelar apenas se houver um shoe_id setado -->
+            @if (isset($shoe))
+            <a href="{{ route('posts.index') }}" class="cancel-btn">
+                Cancelar
+            </a>
+            @endif
+        </div>
     </form>
 
     <div class="posts-container">
         <!-- Lista de Posts -->
-
         <div class="posts-list">
             @foreach ($posts as $post)
             <div class="card">
-                <p class="card-text">{{ $post->content }}</p>
-                <p class="text-muted">
-                    <strong>{{ $post->user->name }}</strong><br>
-                    {{ $post->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y H:i') }}
-                </p>
-                <a href="{{ route('posts.show', $post->id) }}">Ver Comentários ({{ $post->comments->count() }})</a>
-                <img src="{{ $post->user->profileImage ? asset('storage/' . $post->user->profileImage) : asset('assets/DarkUser.png') }}" alt="Imagem de Perfil">
+                <img class="user-image" src="{{ $post->user->profileImage ? asset('storage/' . $post->user->profileImage) : asset('assets/DarkUser.png') }}" alt="Imagem de Perfil">
+                <div class="card-info">
+                    <p class="text-muted">
+                        <strong>{{ $post->user->name }}</strong>
+                        {{ $post->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y H:i') }}
+                    </p>
+                    <p class="card-text">{{ $post->content }}</p>
+                    <!-- Verifica se o post tem um shoe_id associado e exibe o tênis -->
+                    @if ($post->shoe_id)
+                    @php
+                    $shoe = App\Models\Shoe::find($post->shoe_id);
+                    @endphp
+                    <a href="{{ route('viewShoe', $shoe->id) }}">
+                        <div class="shoe-item">
+                            <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
+                            <div class="shoe-info-name">
+                                <span class="model">{{ $shoe->model }}</span> <br>
+                            </div>
+                            <div class="shoe-info-otherinfo">
+                                <span class="brand">{{ $shoe->brand->name }}</span>
+                                •
+                                <span class="price">$ {{ $shoe->price }}</span>
+                            </div>
+                        </div>
+                    </a>
+                    @endif
+                    <div class="comments">
+                        <a href="{{ route('posts.show', $post->id) }}"><img src="{{ asset('assets/comments.png') }}" alt=""> ({{ $post->comments->count() }})</a>
+                    </div>
+
+                </div>
             </div>
             @endforeach
         </div>
+
         <!-- Lista de Usuários -->
         <div class="users-list">
-            <h2>Pessoas de relevância</h2>
+            <h2>Quem seguir</h2>
             @foreach ($users as $user)
             @if($user->id !== Auth::id())
             <a href="{{ route('user.show', $user->id) }}">
@@ -44,7 +98,7 @@
                         <img src="{{ $user->profileImage ? asset('storage/' . $user->profileImage) : asset('assets/DarkUser.png') }}" alt="Imagem de Perfil">
                         <p class="user-card-text">{{ $user->name }}</p>
                     </div>
-                    
+
                     <div class="follow-button">
                         @if(Auth::user()->following->contains($user->id))
                         <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
@@ -59,7 +113,7 @@
                         @endif
                     </div>
                 </div>
-            </a>   
+            </a>
             @endif
             @endforeach
         </div>

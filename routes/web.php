@@ -74,6 +74,7 @@ Route::post('/calcular-frete', [CartController::class, 'calcularFrete'])->name('
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index'); // Exibir posts
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store'); // Criar post
 
+
 // Rota para exibir o post e seus comentários
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 // Rota para adicionar um comentário

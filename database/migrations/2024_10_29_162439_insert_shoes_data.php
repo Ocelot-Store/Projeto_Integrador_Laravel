@@ -15,7 +15,7 @@ class InsertShoesData extends Migration
     {
         DB::table('user')->insert([
             'id' => '1',
-            'name' => '123',
+            'name' => 'Admin do sistema',
             'address' => '123',
             'email' => '123@gmail.com',
             'password' => Hash::make('123'), // Faz o hash da senha

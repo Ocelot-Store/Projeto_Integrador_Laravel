@@ -10,7 +10,8 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('user')->onDelete('cascade');
-            $table->foreignId('shoe_id')->constrained('shoe')->onDelete('cascade');
+            $table->foreignId('shoe_id')->nullable()
+            ->constrained('shoe')->onDelete('cascade');
             $table->text('content'); // Texto do post
             $table->timestamps();
         });
