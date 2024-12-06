@@ -75,7 +75,7 @@ Route::get('/posts', [PostController::class, 'index'])->name('posts.index'); // 
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store'); // Criar post
 Route::get('/posts/following', [PostController::class, 'following'])->name('posts.following');// Exibir os posts dos usuários que o usuário autenticado está seguindo
 Route::get('/posts/my-posts', [PostController::class, 'myPosts'])->name('posts.myPosts'); //Exibir posts do usuário autenticado
-
+Route::get('/posts/brands', [PostController::class, 'filterByBrand'])->name('posts.filterByBrand');
 
 
 // Rota para exibir o post e seus comentários

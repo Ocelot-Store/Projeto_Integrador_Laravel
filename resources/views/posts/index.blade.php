@@ -17,7 +17,19 @@
             <a href="{{ route('posts.index') }}"><button><img src="{{ asset('assets/postsHome.png') }}" alt=""> Home</button></a>
             <a href="{{ route('posts.following') }}"><button><img src="{{ asset('assets/postsFollowing.png') }}" alt=""> Following</button></a>
             <a href="{{ route('posts.myPosts') }}"><button><img src="{{ asset('assets/postsMyPosts.png') }}" alt=""> My posts</button></a>
+
+            <!-- Menu de Brands -->
+            <form action="{{ route('posts.filterByBrand') }}" method="GET">
+                <select name="brand_id" onchange="this.form.submit()">
+                    <option value="">Selecione uma Marca</option>
+                    @foreach($brands as $brand)
+                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                    @endforeach
+                </select>
+            </form>
+
         </div>
+
 
 
 

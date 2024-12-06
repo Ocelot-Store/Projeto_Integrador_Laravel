@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Shoe;
+use App\Models\Brand;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -21,13 +23,15 @@ class PostController extends Controller
         $posts = Post::with('user')->orderBy('created_at', 'desc')->get(); // Recupera posts com os usuários associados
         $users = User::all();
         $shoe = null;
-
+        $brands = Brand::all(); // Adicionado para garantir que as marcas sejam passadas
+    
         if ($shoeId) {
             $shoe = Shoe::find($shoeId); // Tenta encontrar o tênis pelo ID
         }
-
-        return view('posts.index', compact('posts', 'users', 'shoeId', 'shoe'));
+    
+        return view('posts.index', compact('posts', 'users', 'shoeId', 'shoe', 'brands')); // Passa as marcas
     }
+    
 
     // Armazena um novo post
     public function store(Request $request)
@@ -79,9 +83,10 @@ class PostController extends Controller
             ->get();
 
         $users = User::all();
+        $brands = Brand::all(); // Adicionado para garantir que as marcas sejam passadas
 
         // Passando a variável 'followingOnly' para a view
-        return view('posts.index', compact('posts', 'users'))->with('followingOnly', true);
+        return view('posts.index', compact('posts', 'users', 'brands'))->with('followingOnly', true);
     }
 
 
@@ -93,7 +98,32 @@ class PostController extends Controller
             ->latest()
             ->get();
         $users = User::all();
+        $brands = Brand::all(); // Adicionado para garantir que as marcas sejam passadas
 
-        return view('posts.index', compact('posts', 'users'));
+        return view('posts.index', compact('posts', 'users', 'brands'));
+    }
+    public function filterByBrand(Request $request)
+    {
+        // Obtém a marca escolhida pelo usuário
+        $brand = Brand::find($request->brand_id);
+
+        // Se a marca existir, filtra os posts com base nos tênis dessa marca
+        if ($brand) {
+            $posts = Post::with(['user', 'shoe'])
+                ->whereHas('shoe', function ($query) use ($brand) {
+                    $query->where('brand_id', $brand->id);
+                })
+                ->latest()
+                ->get();
+        } else {
+            // Caso contrário, exibe todos os posts
+            $posts = Post::with(['user', 'shoe'])->latest()->get();
+        }
+
+        // Passa a lista de marcas e posts para a view
+        $brands = Brand::all();
+        $users = User::all();
+
+        return view('posts.index', compact('posts', 'brands', 'users'));
     }
 }
