@@ -8,48 +8,56 @@
 
 @section('content')
 <div class="container">
-    <h1>Comunidade</h1>
 
     <!-- Formulário para Criar Post -->
-    <form action="{{ route('posts.store') }}" method="POST">
-        @csrf
-        @if (isset($shoeId))
-        <input type="hidden" name="shoe_id" value="{{ $shoeId }}">
-        @endif
-        <textarea id="content" name="content" rows="3" placeholder="O que está acontecendo?" required></textarea>
 
-        @if (isset($shoe))
-        <div class="shoe-image-container">
-            <p>Você está postando sobre o seguinte tênis:</p>
-            <div class="shoe-item">
-                            <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
-                            <div class="shoe-info-name">
-                                <span class="model">{{ $shoe->model }}</span> <br>
-                            </div>
-                            <div class="shoe-info-otherinfo">
-                                <span class="brand">{{ $shoe->brand->name }}</span>
-                                •
-                                <span class="price">$ {{ $shoe->price }}</span>
-                            </div>
-                        </div>
-        </div>
-        @endif
-
-        <div class="button-container">
-            <button type="submit">Postar</button>
-
-            <!-- Exibe o botão de Cancelar apenas se houver um shoe_id setado -->
-            @if (isset($shoe))
-            <a href="{{ route('posts.index') }}" class="cancel-btn">
-                Cancelar
-            </a>
-            @endif
-        </div>
-    </form>
 
     <div class="posts-container">
+        <div class="menu">
+            <button>Home</button>
+            <button><img src="{{ asset('assets/postsFollowing.png') }}" alt=""> Following</button>
+            <button><img src="{{ asset('assets/postsMyPosts.png') }}" alt=""> My posts</button>
+        </div>
         <!-- Lista de Posts -->
         <div class="posts-list">
+            <form action="{{ route('posts.store') }}" method="POST">
+                @csrf
+                @if (isset($shoeId))
+                <input type="hidden" name="shoe_id" value="{{ $shoeId }}">
+                @endif
+                <div style="display: flex; gap: 10px;">
+                    <img src="{{ Auth::user()->profileImage ? asset('storage/' . Auth::user()->profileImage) : asset('assets/DarkUser.png') }}" class="user-image" alt="">
+                    <textarea id="content" name="content" rows="3" placeholder="O que está acontecendo?" required></textarea>
+                </div>
+
+                @if (isset($shoe))
+                <div class="shoe-image-container">
+                    <p>Você está postando sobre o seguinte tênis:</p>
+                    <div class="shoe-item">
+                        <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
+                        <div class="shoe-info-name">
+                            <span class="model">{{ $shoe->model }}</span> <br>
+                        </div>
+                        <div class="shoe-info-otherinfo">
+                            <span class="brand">{{ $shoe->brand->name }}</span>
+                            •
+                            <span class="price">$ {{ $shoe->price }}</span>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+                <div class="button-container">
+                    <button type="submit">Postar</button>
+
+                    <!-- Exibe o botão de Cancelar apenas se houver um shoe_id setado -->
+                    @if (isset($shoe))
+                    <a href="{{ route('posts.index') }}" class="cancel-btn">
+                        Cancelar
+                    </a>
+                    @endif
+                </div>
+            </form>
             @foreach ($posts as $post)
             <div class="card">
                 <img class="user-image" src="{{ $post->user->profileImage ? asset('storage/' . $post->user->profileImage) : asset('assets/DarkUser.png') }}" alt="Imagem de Perfil">

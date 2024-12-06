@@ -1,7 +1,7 @@
 /* Geral */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f5f8fa;
+    font-family: "Arial", sans-serif;
+    background-color: rgb(253, 253, 253) !important;
     color: #14171a;
     margin: 0;
     padding: 0;
@@ -9,11 +9,17 @@ body {
 a {
     text-decoration: none !important;
 }
+
+:root {
+    --global-color: #3498db;
+}
+
 /* Container principal */
 .container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
+    padding-top: 20px;
+ 
 }
 
 /* Header */
@@ -21,11 +27,59 @@ h1 {
     font-size: 24px;
     color: #1da1f2;
     text-align: center;
-    margin-bottom: 20px;
+}
+
+.posts-container {
+    display: flex;
+    gap: 30px;
+}
+
+/* menu */
+
+.menu {
+    display: flex;
+    padding: 20px;
+    width: 33%;
+    flex-direction: column;
+    border: 1px solid #cfd2d3;
+    height: fit-content;
+    border-radius: 10px;
+    font-size: large
+}
+
+
+.menu button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+
+    background-color: #fff;
+    border-radius: 50px;
+    color: #333;
+    font-weight: 600;
+    padding: 10px 15px;
+    text-align: center;
+    border: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    outline: none;
+    margin-bottom: 10px;
+    width: fit-content;
+}
+.menu button:hover {
+    background-color: rgb(228, 228, 228);
+}
+
+.menu button img {
+    width: 20px;
+    height: 20px;
+    border-radius: 0% !important;
+    margin: 0;
 }
 
 /* Formulário de criação de posts */
-.comment form {   
+.comment form {
     background-color: #fff;
     border: 1px solid #e1e8ed;
     border-radius: 10px;
@@ -42,10 +96,12 @@ h1 {
     font-size: 14px;
     resize: none;
     background-color: #f5f8fa;
-    border: 1px solid #e1e8ed;
+    margin-top: 5px;
+    height: 50px;
 }
 
 .container form button {
+    margin-top: 10px;
     background-color: #1da1f2;
     color: white;
     border: none;
@@ -60,25 +116,35 @@ h1 {
     background-color: #0d8ddb;
 }
 
-.posts-container{
-    display: flex;
-}    
-
 /* Lista de posts */
 .posts-list {
-    width: 70%;
-    margin-top: 20px;
+    width: fit-content;
+    padding: 20px;
+    border: 1px solid #cfd2d3;
+    border-radius: 10px;
+}
+
+.posts-list form{
+    border-color: white !important;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border-radius: 20px !important;
+    box-shadow: 0px 2.5px 5px rgba(0, 0, 0, 0.1) !important;
     padding: 20px;
 }
 
-.card {
-    flex-direction: row !important;
-    padding: 10px;
-    border-radius: 0px !important;
-    border-color: #c6c6c6 !important;
+.user-image{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-.user-image{
+.posts-list form textarea{
+    background-color: white;
+}
+
+.user-image {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -86,7 +152,23 @@ h1 {
     object-fit: cover;
 }
 
-.card-info{
+.card {
+    flex-direction: row !important;
+    padding: 10px;
+    border-color: white !important;
+
+    margin-bottom: 15px;
+    background-color: #fff;
+
+    border-radius: 20px !important;
+    box-shadow: 0px 2.5px 5px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card img{
+    margin-right: 5px;
+}
+
+.card-info {
     margin-top: 12px;
     background-color: #fff;
     border-radius: 10px;
@@ -129,20 +211,19 @@ footer {
     margin-top: 20px;
 }
 
-
-
-
-.users-list{
+.users-list {
+    height: fit-content;
     padding: 20px;
     width: 30%;
+    border: 1px solid #cfd2d3;
+    border-radius: 10px;
 }
 
-.users-list a{
+.users-list a {
     color: black;
 }
 
-
-.user-card{
+.user-card {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -152,21 +233,20 @@ footer {
     padding: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     justify-content: space-between;
-
 }
 
-.user-info{
+.user-info {
     display: flex;
 }
 
-.user-card img{
+.user-card img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.user-card-text{
+.user-card-text {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -174,15 +254,14 @@ footer {
     margin-left: 5px;
 }
 
-.comments{
+.comments {
     display: flex;
 }
 
-.comments a{
-
+.comments a {
 }
 
-.comments img{
+.comments img {
     width: 20px;
     height: 20px;
     border-radius: 0% !important;
@@ -214,7 +293,7 @@ footer {
     align-items: center;
     box-sizing: border-box;
     border-radius: 20px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2.5px 5px rgba(0, 0, 0, 0.1) !important;
     transition: transform 0.2s ease;
 }
 
@@ -275,4 +354,3 @@ footer {
     height: 60px;
     cursor: pointer; /* Adiciona o cursor de ponteiro */
 }
-
