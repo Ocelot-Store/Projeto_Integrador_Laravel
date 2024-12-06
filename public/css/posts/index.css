@@ -32,6 +32,7 @@ h1 {
 .posts-container {
     display: flex;
     gap: 30px;
+    
 }
 
 /* menu */
@@ -118,10 +119,18 @@ h1 {
 
 /* Lista de posts */
 .posts-list {
-    width: fit-content;
+    width: 50%;
     padding: 20px;
     border: 1px solid #cfd2d3;
     border-radius: 10px;
+    flex-grow: 1;
+    height: calc(100vh - 40px); /* Ajusta para compensar os paddings/margens */
+    overflow-y: auto; /* Permite rolagem vertical apenas na lista */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.posts-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari e Edge */
 }
 
 .posts-list form{
@@ -282,7 +291,7 @@ footer {
 }
 
 .cancel-btn:hover {
-    background-color: #d32f2f;
+    background-color: #000000;
 }
 
 /* Shoe-item */
@@ -353,4 +362,8 @@ footer {
     width: 60px;
     height: 60px;
     cursor: pointer; /* Adiciona o cursor de ponteiro */
+}
+
+.follow-btn{
+    margin-top: 0 !important;
 }

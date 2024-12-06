@@ -73,6 +73,9 @@ Route::post('/calcular-frete', [CartController::class, 'calcularFrete'])->name('
 // Rotas relacionadas aos posts
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index'); // Exibir posts
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store'); // Criar post
+Route::get('/posts/following', [PostController::class, 'following'])->name('posts.following');// Exibir os posts dos usuários que o usuário autenticado está seguindo
+Route::get('/posts/my-posts', [PostController::class, 'myPosts'])->name('posts.myPosts'); //Exibir posts do usuário autenticado
+
 
 
 // Rota para exibir o post e seus comentários

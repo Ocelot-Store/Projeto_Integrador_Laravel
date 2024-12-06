@@ -7,6 +7,10 @@ use App\Models\User;
 use App\Models\Shoe;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+
+
 
 class PostController extends Controller
 {
@@ -64,5 +68,32 @@ class PostController extends Controller
         $post->load('comments.user'); // Carrega os comentários e os usuários associados
 
         return view('posts.show', compact('post'));
+    }
+
+    public function following()
+    {
+        // Posts dos usuários que o usuário autenticado segue
+        $posts = Post::with(['user', 'comments'])
+            ->whereIn('user_id', Auth::user()->following->pluck('id'))
+            ->latest()
+            ->get();
+
+        $users = User::all();
+
+        // Passando a variável 'followingOnly' para a view
+        return view('posts.index', compact('posts', 'users'))->with('followingOnly', true);
+    }
+
+
+    public function myPosts()
+    {
+        // Posts do usuário autenticado
+        $posts = Post::with(['user', 'comments'])
+            ->where('user_id', Auth::id())
+            ->latest()
+            ->get();
+        $users = User::all();
+
+        return view('posts.index', compact('posts', 'users'));
     }
 }

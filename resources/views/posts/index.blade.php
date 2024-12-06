@@ -14,12 +14,16 @@
 
     <div class="posts-container">
         <div class="menu">
-            <button>Home</button>
-            <button><img src="{{ asset('assets/postsFollowing.png') }}" alt=""> Following</button>
-            <button><img src="{{ asset('assets/postsMyPosts.png') }}" alt=""> My posts</button>
+            <a href="{{ route('posts.index') }}"><button><img src="{{ asset('assets/postsHome.png') }}" alt=""> Home</button></a>
+            <a href="{{ route('posts.following') }}"><button><img src="{{ asset('assets/postsFollowing.png') }}" alt=""> Following</button></a>
+            <a href="{{ route('posts.myPosts') }}"><button><img src="{{ asset('assets/postsMyPosts.png') }}" alt=""> My posts</button></a>
         </div>
+
+
+
         <!-- Lista de Posts -->
         <div class="posts-list">
+            @if (!isset($followingOnly))
             <form action="{{ route('posts.store') }}" method="POST">
                 @csrf
                 @if (isset($shoeId))
@@ -50,7 +54,6 @@
                 <div class="button-container">
                     <button type="submit">Postar</button>
 
-                    <!-- Exibe o botão de Cancelar apenas se houver um shoe_id setado -->
                     @if (isset($shoe))
                     <a href="{{ route('posts.index') }}" class="cancel-btn">
                         Cancelar
@@ -58,6 +61,8 @@
                     @endif
                 </div>
             </form>
+            @endif
+
             @foreach ($posts as $post)
             <div class="card">
                 <img class="user-image" src="{{ $post->user->profileImage ? asset('storage/' . $post->user->profileImage) : asset('assets/DarkUser.png') }}" alt="Imagem de Perfil">
