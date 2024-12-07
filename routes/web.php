@@ -7,6 +7,7 @@ use App\Http\Controllers\UserManager;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController; // Importa o UserController para as rotas relacionadas a usuários
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ShoeController;
 
 // Rota principal
 Route::get('/', function () {
@@ -83,4 +84,10 @@ Route::get('/posts/filterByBrand', [PostController::class, 'filterByBrand'])->na
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 // Rota para adicionar um comentário
 Route::post('/posts/{post}/comment', [PostController::class, 'storeComment'])->name('posts.comment.store');
+
+Route::get('/shoes/{id}/edit', [ShoeController::class, 'edit'])->name('shoes.edit');
+Route::put('/shoes/{id}', [ShoeController::class, 'update'])->name('shoes.update');
+Route::get('/shoes', [ShoeController::class, 'index'])->name('viewShoes');
+Route::put('/shoes/{id}', [ShoeController::class, 'update'])->name('shoes.update');
+
 

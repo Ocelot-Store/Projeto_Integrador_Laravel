@@ -94,6 +94,10 @@
                                 <p class="category">Nike Dunk Low</p>
                                 <p class="description">{{ $shoe->description }}</p>
                                 <p class="price">$ {{ $shoe->price }}</p>
+
+                                <div class="actions">
+                                  <a href="{{ route('shoes.edit', $shoe->id) }}" class="button edit-button">Editar</a>
+                                </div>
                             </div>
                         </div>
                     </div>
