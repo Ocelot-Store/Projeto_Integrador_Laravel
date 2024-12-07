@@ -10,41 +10,46 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-
-
-
 class PostController extends Controller
 {
     // Exibe a lista de posts e o formulário para criar novos
     public function index(Request $request)
     {
-        $shoeId = $request->query('shoe_id', null); // Se não houver 'shoe_id' na URL, o valor será null
-        $posts = Post::with('user')->orderBy('created_at', 'desc')->get(); // Recupera posts com os usuários associados
-        $users = User::all();
-        $shoe = null;
-        $brands = Brand::all(); // Adicionado para garantir que as marcas sejam passadas
-    
-        if ($shoeId) {
-            $shoe = Shoe::find($shoeId); // Tenta encontrar o tênis pelo ID
+        $selectedBrand = $request->query('brand_id', null); // Obtém a marca selecionada
+        $shoeId = $request->query('shoe_id', null); // Obtém o ID do tênis, se fornecido
+
+        // Constrói a query de posts
+        $postsQuery = Post::with(['user', 'shoe.brand'])
+            ->orderBy('created_at', 'desc');
+
+        // Aplica o filtro por marca, se necessário
+        if ($selectedBrand) {
+            $postsQuery->whereHas('shoe', function ($query) use ($selectedBrand) {
+                $query->where('brand_id', $selectedBrand);
+            });
         }
-    
-        return view('posts.index', compact('posts', 'users', 'shoeId', 'shoe', 'brands')); // Passa as marcas
+
+        $posts = $postsQuery->get(); // Obtém os posts filtrados
+        $brands = Brand::all(); // Lista de marcas para o dropdown
+        $users = User::all(); // Lista de usuários
+        $shoe = $shoeId ? Shoe::find($shoeId) : null; // Carrega o tênis, se fornecido
+
+        return view('posts.index', compact('posts', 'users', 'shoeId', 'shoe', 'brands', 'selectedBrand'));
     }
-    
+
 
     // Armazena um novo post
     public function store(Request $request)
     {
         $validated = $request->validate([
             'content' => 'required|string|max:1000',
-            'shoe_id' => 'nullable|exists:shoe,id', // Valida se o ID do tênis existe
+            'shoe_id' => 'nullable|exists:shoe,id',
         ]);
 
         Post::create([
-            'user_id' => auth()->id(), // ID do usuário autenticado
-            'shoe_id' => $validated['shoe_id'] ?? null, // Se não for fornecido, o valor será null
-            'content' => $validated['content'], // Envia o conteúdo validado
+            'user_id' => auth()->id(),
+            'shoe_id' => $validated['shoe_id'] ?? null,
+            'content' => $validated['content'],
         ]);
 
         return redirect()->route('posts.index')->with('success', 'Post criado com sucesso!');
@@ -56,7 +61,6 @@ class PostController extends Controller
             'content' => 'required|string|max:500',
         ]);
 
-        // Cria o comentário
         Comment::create([
             'comment' => $validated['content'],
             'user_id' => auth()->id(),
@@ -68,62 +72,73 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        // Recupera o post com os comentários
-        $post->load('comments.user'); // Carrega os comentários e os usuários associados
+        $post->load('comments.user');
 
         return view('posts.show', compact('post'));
     }
 
-    public function following()
+    public function following(Request $request)
     {
-        // Posts dos usuários que o usuário autenticado segue
-        $posts = Post::with(['user', 'comments'])
+        $selectedBrand = $request->query('brand_id', null); // Obtém a marca selecionada
+
+        $postsQuery = Post::with(['user', 'comments', 'shoe.brand'])
             ->whereIn('user_id', Auth::user()->following->pluck('id'))
-            ->latest()
-            ->get();
+            ->latest();
 
-        $users = User::all();
-        $brands = Brand::all(); // Adicionado para garantir que as marcas sejam passadas
-
-        // Passando a variável 'followingOnly' para a view
-        return view('posts.index', compact('posts', 'users', 'brands'))->with('followingOnly', true);
-    }
-
-
-    public function myPosts()
-    {
-        // Posts do usuário autenticado
-        $posts = Post::with(['user', 'comments'])
-            ->where('user_id', Auth::id())
-            ->latest()
-            ->get();
-        $users = User::all();
-        $brands = Brand::all(); // Adicionado para garantir que as marcas sejam passadas
-
-        return view('posts.index', compact('posts', 'users', 'brands'));
-    }
-    public function filterByBrand(Request $request)
-    {
-        // Obtém a marca escolhida pelo usuário
-        $brand = Brand::find($request->brand_id);
-
-        // Se a marca existir, filtra os posts com base nos tênis dessa marca
-        if ($brand) {
-            $posts = Post::with(['user', 'shoe'])
-                ->whereHas('shoe', function ($query) use ($brand) {
-                    $query->where('brand_id', $brand->id);
-                })
-                ->latest()
-                ->get();
-        } else {
-            // Caso contrário, exibe todos os posts
-            $posts = Post::with(['user', 'shoe'])->latest()->get();
+        // Aplica o filtro por marca, se necessário
+        if ($selectedBrand) {
+            $postsQuery->whereHas('shoe', function ($query) use ($selectedBrand) {
+                $query->where('brand_id', $selectedBrand);
+            });
         }
 
-        // Passa a lista de marcas e posts para a view
+        $posts = $postsQuery->get();
+        $users = User::all();
+        $brands = Brand::all();
+
+        return view('posts.index', compact('posts', 'users', 'brands', 'selectedBrand'))->with('followingOnly', true);
+    }
+
+    public function myPosts(Request $request)
+    {
+        $selectedBrand = $request->query('brand_id', null); // Obtém a marca selecionada
+
+        $postsQuery = Post::with(['user', 'comments', 'shoe.brand'])
+            ->where('user_id', Auth::id())
+            ->latest();
+
+        // Aplica o filtro por marca, se necessário
+        if ($selectedBrand) {
+            $postsQuery->whereHas('shoe', function ($query) use ($selectedBrand) {
+                $query->where('brand_id', $selectedBrand);
+            });
+        }
+
+        $posts = $postsQuery->get();
+        $users = User::all();
+        $brands = Brand::all();
+
+        return view('posts.index', compact('posts', 'users', 'brands', 'selectedBrand'));
+    }
+
+
+    public function filterByBrand(Request $request)
+    {
+        $brand = Brand::find($request->brand_id);
+
+        $postsQuery = Post::with(['user', 'shoe.brand'])->latest();
+
+        if ($brand) {
+            $postsQuery->whereHas('shoe', function ($query) use ($brand) {
+                $query->where('brand_id', $brand->id);
+            });
+        }
+
+        $posts = $postsQuery->get();
         $brands = Brand::all();
         $users = User::all();
+        $selectedBrand = $request->brand_id;
 
-        return view('posts.index', compact('posts', 'brands', 'users'));
+        return view('posts.index', compact('posts', 'brands', 'users', 'selectedBrand'));
     }
 }

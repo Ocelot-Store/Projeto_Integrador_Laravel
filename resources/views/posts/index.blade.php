@@ -11,7 +11,6 @@
 
     <!-- Formulário para Criar Post -->
 
-
     <div class="posts-container">
         <div class="menu">
             <a href="{{ route('posts.index') }}"><button><img src="{{ asset('assets/postsHome.png') }}" alt=""> Home</button></a>
@@ -19,19 +18,20 @@
             <a href="{{ route('posts.myPosts') }}"><button><img src="{{ asset('assets/postsMyPosts.png') }}" alt=""> My posts</button></a>
 
             <!-- Menu de Brands -->
-            <form action="{{ route('posts.filterByBrand') }}" method="GET">
-                <select name="brand_id" onchange="this.form.submit()">
-                    <option value="">Selecione uma Marca</option>
+            <form method="GET" action="{{ route('posts.index') }}" class="d-flex align-items-center mb-4">
+                <select name="brand_id" id="brand_id" class="form-select w-auto" onchange="this.form.submit()">
+                    <option value="">Todas as Marcas</option>
                     @foreach($brands as $brand)
-                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                    <option value="{{ $brand->id }}" {{ $selectedBrand == $brand->id ? 'selected' : '' }}>
+                        {{ $brand->name }}
+                    </option>
                     @endforeach
                 </select>
             </form>
 
+
+
         </div>
-
-
-
 
         <!-- Lista de Posts -->
         <div class="posts-list">
@@ -41,7 +41,7 @@
                 @if (isset($shoeId))
                 <input type="hidden" name="shoe_id" value="{{ $shoeId }}">
                 @endif
-                <div style="display: flex; gap: 10px;">
+                <div style="display: flex; gap: 10px; margin-bottom: 5px;">
                     <img src="{{ Auth::user()->profileImage ? asset('storage/' . Auth::user()->profileImage) : asset('assets/DarkUser.png') }}" class="user-image" alt="">
                     <textarea id="content" name="content" rows="3" placeholder="O que está acontecendo?" required></textarea>
                 </div>
