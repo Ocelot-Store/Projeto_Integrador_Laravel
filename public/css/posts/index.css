@@ -284,6 +284,7 @@ footer {
 
 .button-container {
     display: flex;
+    flex-direction: row-reverse;
 }
 
 .cancel-btn {

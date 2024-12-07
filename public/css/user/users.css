@@ -50,6 +50,7 @@ a {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    
 }
 
 .Users-User {
@@ -62,7 +63,8 @@ a {
     transition: box-shadow 0.3s ease;
     width: 90%; /* Aumentando a largura para ocupar mais espaço horizontal */
     max-width: 800px;
-    margin: 3px auto;
+    margin: 0px auto;
+    margin-bottom: 15px;
 
     border-color: white !important;
     background-color: #fff;
