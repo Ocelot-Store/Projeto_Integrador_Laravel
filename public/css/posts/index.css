@@ -290,7 +290,7 @@ footer {
 .cancel-btn {
     display: flex;
     align-items: center;
-    margin-left: 10px;
+    margin-right: 10px;
     color: black;
 }
 
