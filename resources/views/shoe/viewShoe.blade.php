@@ -10,14 +10,6 @@
     <div class="row shoe-details">
         <div class="col-md-4">
             <h2 class="shoe-title" style="font-size: 2rem;">{{ $shoe->model }}</h2>
-            <div class="rating">
-                <span class="stars">
-                    @for ($i = 0; $i < 5; $i++)
-                        <i class="bi bi-star{{ $i < $shoe->rating ? '' : '-fill' }}"></i>
-                        @endfor
-                </span>
-                <span> ({{ $shoe->reviews_count }} avaliações)</span>
-            </div>
 
             <!-- Novas Informações de Categoria -->
             <div class="category-info mt-4">
@@ -29,26 +21,16 @@
                 <p><strong>Garantia do Fabricante:</strong> 3 meses</p>
             </div>
 
-            <div class="color-selection my-3">
-                <label class="form-label">Selecione a Cor:</label>
-                <div class="color-options">
-                    <input type="radio" id="color-black" name="color" value="black" class="color-circle-input">
-                    <label for="color-black" class="color-circle" style="background-color: #000;"></label>
-
-                    <input type="radio" id="color-white" name="color" value="white" class="color-circle-input">
-                    <label for="color-white" class="color-circle" style="background-color: #fff; border: 1px solid #ccc;"></label>
-
-                    <input type="radio" id="color-blue" name="color" value="blue" class="color-circle-input">
-                    <label for="color-blue" class="color-circle" style="background-color: #007bff;"></label>
-
-                    <input type="radio" id="color-red" name="color" value="red" class="color-circle-input">
-                    <label for="color-red" class="color-circle" style="background-color: #ff0000;"></label>
+            <div class="size-selection my-4">
+                <label class="form-label">Selecione o Tamanho:</label>
+                <div class="size-options">
+                    <span class="size-circle">36</span>
+                    <span class="size-circle">37</span>
+                    <span class="size-circle">38</span>
+                    <span class="size-circle">39</span>
+                    <span class="size-circle">40</span>
+                    <span class="size-circle">41</span>
                 </div>
-            </div>
-
-
-            <div class="share-link my-3">
-                <button type="button" class="btn btn-outline-primary btn-sm" onclick="shareLink()">Compartilhar Link</button>
             </div>
         </div>
 
@@ -61,18 +43,6 @@
         <div class="col-md-4">
             <div class="shoe-info">
                 <p class="price">Preço: <strong>R$ {{ number_format($shoe->price, 2, ',', '.') }}</strong></p>
-
-                <div class="size-selection my-4">
-                    <label class="form-label">Selecione o Tamanho:</label>
-                    <div class="size-options">
-                        <span class="size-circle">36</span>
-                        <span class="size-circle">37</span>
-                        <span class="size-circle">38</span>
-                        <span class="size-circle">39</span>
-                        <span class="size-circle">40</span>
-                        <span class="size-circle">41</span>
-                    </div>
-                </div>
 
                 <div class="seller mt-4 text-center">
                     <div class="seller-image-container">
@@ -90,7 +60,6 @@
                             </button>
                         </form>
 
-
                         <form action="{{ route('addFavorite') }}" method="POST" class="d-inline">
                             @csrf
                             <input type="hidden" name="shoe_id" value="{{ $shoe->id }}">
@@ -99,16 +68,11 @@
                             </button>
                         </form>
 
-
                         <!-- resources/views/shoes/viewShoe.blade.php -->
                         <a href="{{ route('posts.index', ['shoe_id' => $shoe->id]) }}" class="btn btn-outline-secondary rounded-button">
                             Post <img src="{{ asset('assets/post.png') }}" style="width: 20px;" alt="">
                         </a>
-
-
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -123,26 +87,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    function alertFunction() {
-        alert("A funcionalidade ainda não está implementada.");
-    }
-
-    function toggleDescription() {
-        var moreText = document.getElementById("more");
-        var btnText = document.querySelector(".btn-link");
-        if (moreText.style.display === "none") {
-            moreText.style.display = "inline";
-            btnText.innerHTML = "Ver menos";
-        } else {
-            moreText.style.display = "none";
-            btnText.innerHTML = "Ver mais";
-        }
-    }
-
-    function shareLink() {
-        alert("Link compartilhado!");
-    }
-</script>
 @endsection
