@@ -107,7 +107,7 @@ a {
     right: 10px; /* Distância da borda direita do container */
     top: 50%; /* Posiciona o botão verticalmente no meio */
     transform: translateY(-50%); /* Centraliza o botão verticalmente */
-    background-color: #000;
+    background-color: #3924a3;
     color: #fff;
     border: none;
     border-radius: 15px;
@@ -118,11 +118,11 @@ a {
 }
 
 .follow-btn:hover {
-    background-color: #333; /* Cor mais escura ao passar o mouse */
+    background-color: #3f28b4; /* Cor mais escura ao passar o mouse */
 }   
 
 .unfollow {
-    background-color: black;
+    background-color: #3924a3;
 }
 
 
