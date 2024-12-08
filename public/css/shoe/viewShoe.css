@@ -16,40 +16,11 @@ body {
     color: #aaaaaa;
 }
 
-.color-options {
-    display: flex;
-    gap: 10px;
-}
-
-.color-circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: inline-block;
-    border: 1px solid transparent;
-}
-
-.color-circle-input {
-    display: none;
-}
-
-.color-circle-input:checked + .color-circle {
-    border: 2px solid #3430D3; /* Destaque para o círculo selecionado */
-}
-
 .size-options {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
     margin-bottom: 20px;
-}
-
-.color-circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
 }
 
 .size-circle {
@@ -61,6 +32,16 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    font-weight: bold;
+    background-color: #fff;
+    color: #000;
+}
+
+.size-circle:hover {
+    background-color: rgba(0, 0, 0, 0.1);;
+    color: #000000;
+    border-color: #000;
 }
 
 .seller {
