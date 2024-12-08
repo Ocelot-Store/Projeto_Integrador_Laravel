@@ -46,7 +46,7 @@
 
                 <div class="seller mt-4 text-center">
                     <div class="seller-image-container">
-                        <img src="{{ $shoe->user->path ?? asset('Assets/DarkUser.png') }}" alt="Imagem do Vendedor" class="user-image">
+                        <img src="{{ asset('storage/' . $shoe->user->profileImage) ?? asset('Assets/DarkUser.png') }}" alt="Imagem do Vendedor" class="user-image">
                     </div>
                     <span>Vendedor(a): <strong>{{ $shoe->user->name ?? 'Desconhecido(a)' }}</strong></span>
                 </div>
