@@ -63,7 +63,7 @@
 
         <div class="user-options">
             <a href="{{ route('addShoe') }}" class="button">+ ADICIONAR CALÇADOS</a>
-            <a href="{{ route('cart.index') }}" class="button">Ver Carrinho</a>
+            <a href="{{ route('cart.index') }}" class="button"> VER CARRINHO</a>
         </div>
     </header>
 
@@ -96,7 +96,7 @@
                                 <p class="price">$ {{ $shoe->price }}</p>
 
                                 <div class="actions">
-                                  <a href="{{ route('shoes.edit', $shoe->id) }}" class="button edit-button">Editar</a>
+                                  <a href="{{ route('shoes.edit', $shoe->id) }}" class="button edit-button">EDITAR</a>
                                 </div>
                             </div>
                         </div>

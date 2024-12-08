@@ -85,9 +85,29 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')
 // Rota para adicionar um comentário
 Route::post('/posts/{post}/comment', [PostController::class, 'storeComment'])->name('posts.comment.store');
 
-Route::get('/shoes/{id}/edit', [ShoeController::class, 'edit'])->name('shoes.edit');
-Route::put('/shoes/{id}', [ShoeController::class, 'update'])->name('shoes.update');
+// Rota para visualizar a lista de calçados
 Route::get('/shoes', [ShoeController::class, 'index'])->name('viewShoes');
-Route::put('/shoes/{id}', [ShoeController::class, 'update'])->name('shoes.update');
+
+Route::get('/shoes', [ShoeController::class, 'index'])->name('viewShoes');
+Route::get('/shoes/{id}/edit', [ShoeController::class, 'edit'])->name('editShoe');
+Route::put('/shoes/{id}', [ShoeController::class, 'update'])->name('updateShoe');
+
+
+Route::put('/shoes/update/{id}', [ShoeController::class, 'update'])->name('updateShoe');
+// Rota para visualizar todos os tênis
+Route::get('/shoes', [ShoeController::class, 'index'])->name('viewShoes');
+
+// Rota para exibir a lista de tênis
+Route::get('/shoes', [ShoeController::class, 'index'])->name('viewShoes');
+
+// Rota para exibir o formulário de edição de um tênis
+Route::get('/shoes/{id}/edit', [ShoeController::class, 'edit'])->name('editShoe');
+
+// Rota para atualizar os dados de um tênis
+Route::put('/shoes/{id}', [ShoeController::class, 'update'])->name('updateShoe');
+Route::get('/shoes/{id}/edit', [ShoeController::class, 'edit'])->name('shoes.edit');
+
+Route::get('/shoe/{id}/edit', [ShoeManager::class, 'edit'])->name('shoe.edit'); // Exibe o formulário
+Route::put('/shoe/{id}', [ShoeManager::class, 'update'])->name('shoe.update');
 
 

@@ -106,54 +106,66 @@
     </div>
 @endif
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            function setupCarousel(carousel) {
+                const items = carousel.querySelector('.carousel-items');
+                if (!items) return; // Verifica se o elemento existe
+
+                const totalItems = items.querySelectorAll('.shoe-item').length;
+                if (totalItems === 0) return; // Verifica se há itens
+
+                const itemWidth = 320; // Ajuste de acordo com a largura total do item
+                const maxOffset = -(itemWidth * (totalItems - 1));
+                let offset = 0;
+
+                const prevButton = carousel.querySelector('.prev');
+                const nextButton = carousel.querySelector('.next');
+
+                nextButton.addEventListener('click', () => {
+                    if (offset > maxOffset) {
+                        offset -= itemWidth;
+                        items.style.transform = `translateX(${offset}px)`;
+                        prevButton.style.opacity = 1; // Exibe o botão Prev
+                    }
+                    if (offset <= maxOffset) {
+                        nextButton.style.opacity = 0; // Esconde o botão Next
+                    }
+                });
+
+                prevButton.addEventListener('click', () => {
+                    if (offset < 0) {
+                        offset += itemWidth;
+                        items.style.transform = `translateX(${offset}px)`;
+                        nextButton.style.opacity = 1; // Exibe o botão Next
+                    }
+                    if (offset >= 0) {
+                        prevButton.style.opacity = 0; // Esconde o botão Prev
+                    }
+                });
+
+                // Inicializa a opacidade dos botões
+                prevButton.style.opacity = 0; // Inicialmente invisível
+            }
+
+            const carousels = document.querySelectorAll('.carousel');
+            if (carousels.length === 0) {
+                console.warn('Nenhum carrossel encontrado.'); // Log opcional para debugging
+            } else {
+                carousels.forEach(carousel => setupCarousel(carousel));
+            }
+        });
+    </script>
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        function setupCarousel(carousel) {
-            const items = carousel.querySelector('.carousel-items');
-            if (!items) return; // Verifica se o elemento existe
-
-            const totalItems = items.querySelectorAll('.shoe-item').length;
-            if (totalItems === 0) return; // Verifica se há itens
-
-            const itemWidth = 320; // Ajuste de acordo com a largura total do item
-            const maxOffset = -(itemWidth * (totalItems - 1));
-            let offset = 0;
-
-            const prevButton = carousel.querySelector('.prev');
-            const nextButton = carousel.querySelector('.next');
-
-            nextButton.addEventListener('click', () => {
-                if (offset > maxOffset) {
-                    offset -= itemWidth;
-                    items.style.transform = `translateX(${offset}px)`;
-                    prevButton.style.opacity = 1; // Exibe o botão Prev
-                }
-                if (offset <= maxOffset) {
-                    nextButton.style.opacity = 0; // Esconde o botão Next
-                }
-            });
-
-            prevButton.addEventListener('click', () => {
-                if (offset < 0) {
-                    offset += itemWidth;
-                    items.style.transform = `translateX(${offset}px)`;
-                    nextButton.style.opacity = 1; // Exibe o botão Next
-                }
-                if (offset >= 0) {
-                    prevButton.style.opacity = 0; // Esconde o botão Prev
-                }
-            });
-
-            // Inicializa a opacidade dos botões
-            prevButton.style.opacity = 0; // Inicialmente invisível
-        }
-
-        const carousels = document.querySelectorAll('.carousel');
-        if (carousels.length === 0) {
-            console.warn('Nenhum carrossel encontrado.'); // Log opcional para debugging
-        } else {
-            carousels.forEach(carousel => setupCarousel(carousel));
-        }
-    });
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
 </script>
+
 @endsection

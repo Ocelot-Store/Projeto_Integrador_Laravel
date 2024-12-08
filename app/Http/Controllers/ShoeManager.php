@@ -8,7 +8,7 @@ use App\Models\Shoe;
 use App\Models\Brand;
 use App\Models\Favorite;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Log; 
 
 class ShoeManager extends Controller
 {
@@ -134,4 +134,62 @@ class ShoeManager extends Controller
         // Retorna a view com o tênis mais barato
         return view('shoe.highlights', compact('cheapestShoe'));
     }
+
+        public function update(Request $request, $id)
+        {
+            try {
+                // Validação dos dados recebidos
+                $validatedData = $request->validate([
+                    'model' => 'required|string|max:100',
+                    'brand_id' => 'required|exists:brands,id',
+                    'size' => 'required|string|max:100',
+                    'color' => 'required|string|max:100',
+                    'description' => 'required|string|max:999',
+                    'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+                    'price' => 'required|numeric|min:0',
+                    'category' => 'nullable|string|max:100',
+                ], [
+                    'model.required' => 'O modelo é obrigatório.',
+                    'brand_id.exists' => 'A marca selecionada não existe.',
+                    'price.numeric' => 'O preço deve ser numérico.',
+                    'image.image' => 'O arquivo enviado deve ser uma imagem.',
+                ]);
+
+                // Busca o tênis ou lança exceção
+                $shoe = Shoe::findOrFail($id);
+
+                // Verifica se o usuário tem permissão (opcional)
+                if ($shoe->user_id !== auth()->id()) {
+                    return redirect()->route('viewShoes')->with('error', 'Você não tem permissão para editar este tênis.');
+                }
+
+                // Atualiza os dados
+                $shoe->fill($validatedData);
+
+                // Substitui a imagem, se necessário
+                if ($request->hasFile('image')) {
+                    // Remove a imagem antiga, se existir
+                    if ($shoe->image && Storage::disk('public')->exists($shoe->image)) {
+                        Storage::disk('public')->delete($shoe->image);
+                    }
+
+                    // Armazena a nova imagem com um nome único
+                    $path = $request->file('image')->storeAs(
+                        'images/shoes',
+                        uniqid() . '.' . $request->file('image')->getClientOriginalExtension(),
+                        'public'
+                    );
+                    $shoe->image = $path;
+                }
+
+                $shoe->save();
+
+                return redirect()->route('viewShoes')->with('success', 'Tênis atualizado com sucesso!');
+            } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+                return redirect()->route('viewShoes')->with('error', 'Tênis não encontrado.');
+            } catch (\Exception $e) {
+                Log::error('Erro ao atualizar o tênis: ' . $e->getMessage());
+                return redirect()->back()->withInput()->with('error', 'Erro ao atualizar o tênis. Tente novamente.');
+            }
+        }
 }

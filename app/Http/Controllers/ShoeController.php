@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Shoe;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Brand; // Importar o modelo Brand
 
 class ShoeController extends Controller
 {
@@ -17,20 +16,20 @@ class ShoeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-{
-    try {
-        // Busca o tênis pelo ID
-        $shoe = Shoe::findOrFail($id);
+    {
+        try {
+            // Busca o tênis pelo ID, ou falha com uma exceção
+            $shoe = Shoe::findOrFail($id);
 
-        // Carrega todas as marcas
-        $brands = Brand::all();
-
-        // Retorna a view de edição com os dados do tênis e as marcas
-        return view('shoe.edit', compact('shoe', 'brands'));
-    } catch (\Exception $e) {
-        return redirect()->route('viewShoes')->with('error', 'Tênis não encontrado.');
+            // Retorna a view de edição com os dados do tênis
+            return view('shoe.edit', compact('shoe')); // Certifique-se de que a view esteja no caminho correto
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return redirect()->route('viewShoes')->with('error', 'Tênis não encontrado.');
+        } catch (\Exception $e) {
+            Log::error('Erro ao exibir formulário de edição: ' . $e->getMessage());
+            return redirect()->route('viewShoes')->with('error', 'Erro ao carregar a página de edição.');
+        }
     }
-} 
 
     /**
      * Atualiza os dados de um tênis no banco de dados.
