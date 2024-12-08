@@ -5,7 +5,24 @@ body {
     color: #14171a;
     margin: 0;
     padding: 0;
+
+    background-image: url('/assets/Posts_Index.png');
+    background-size: cover;
+    background-position: center;
+
 }
+/* Camada de preto */
+body:before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
 a {
     text-decoration: none !important;
 }
@@ -25,7 +42,7 @@ a {
 /* Header */
 h1 {
     font-size: 24px;
-    color: black;
+    color: rgb(255, 255, 255);
     text-align: center;
 }
 
@@ -80,7 +97,6 @@ h1 {
 }
 
 .menu select {
-    margin-left: 10px;
     width: 160px !important;
     padding: 0.5rem;
     font-size: 1rem;
@@ -231,6 +247,10 @@ footer {
     width: 30%;
     border: 1px solid #cfd2d3;
     border-radius: 10px;
+}
+
+.users-list h2 {
+    color:white;
 }
 
 .users-list a {
