@@ -1,19 +1,23 @@
 /* Geral */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #ffffff; /* Fundo claro */
+    background-color: #ffffff;
+    /* Fundo claro */
     color: #14171A;
     margin: 0;
     padding: 0;
 }
 
+/* Container geral */
 .container {
-    max-width: 600px;
+    display: flex;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 20px;
+    padding-top: 20px;
+    justify-content: space-between;
 }
 
-/* Post principal */
+/* Coluna do Post */
 .card {
     background-color: #ffffff;
     border: 1px solid #E1E8ED;
@@ -21,7 +25,22 @@ body {
     padding: 15px;
     margin-bottom: 20px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    /* Ajustei a largura do post para 60% */
     display: flex;
+    flex-direction: column;
+}
+
+.card a {
+    text-decoration: none !important;
+    width: fit-content;
+}
+
+/* Alinhamento de imagem e nome do usuário no post */
+.card-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .user-image {
@@ -32,8 +51,10 @@ body {
     object-fit: cover;
 }
 
-.card-info {
-    flex: 1;
+/* Nome do usuário e data do post */
+.card-info div {
+    display: flex;
+    flex-direction: column;
 }
 
 .card-info .text-muted {
@@ -47,16 +68,32 @@ body {
     margin-bottom: 10px;
 }
 
-/* Tênis */
 .shoe-item {
+    background-color: white;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #f5f8fa;
-    border-radius: 10px;
-    border: 1px solid #E1E8ED;
-    transition: transform 0.2s;
+    box-sizing: border-box;
+    border-radius: 20px;
+    box-shadow: 0px 2.5px 5px rgba(0, 0, 0, 0.1) !important;
+    transition: transform 0.2s ease;
+}
+
+
+@media (min-width: 900px) {
+    .shoe-item {
+        padding-block: 20px;
+        width: 300px;
+        margin: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .shoe-item {
+        padding: 10px;
+        width: fit-content;
+        margin: 20px 5px;
+    }
 }
 
 .shoe-item:hover {
@@ -64,27 +101,69 @@ body {
 }
 
 .shoe-item img {
-    width: 80px;
-    height: 80px;
-    margin-right: 15px;
-    border-radius: 10%;
+    margin-bottom: 10px;
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+    border-radius: 5%;
+    width: 230px;
+    height: 230px;
     object-fit: cover;
 }
 
-/* Formulário */
+.shoe-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 5% 0;
+}
+
+.shoe-info-name {
+    font-size: large;
+    color: black;
+    text-decoration: none;
+}
+
+.shoe-info-otherinfo {
+    font-size: medium;
+    color: black;
+}
+
+.shoe-item form button {
+    background: none;
+    /* Remove o fundo padrão do botão */
+    border: none;
+    /* Remove a borda padrão do botão */
+    padding: 0;
+    /* Remove o preenchimento do botão */
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    /* Adiciona o cursor de ponteiro */
+}
+
+/* Formulário de Comentário */
+/* Formulário de Comentário */
+.comment-section {
+    width: 35%;
+    /* Ajustei a largura da seção de comentários para 35% */
+    margin-left: 20px;
+}
+
 .comment-form textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #E1E8ED;
     border-radius: 20px;
     font-size: 14px;
-    background-color: #f5f8fa;
+    background-color: #ffffff;
     resize: none;
 }
 
 .comment-form button {
     margin-top: 10px;
-    background-color: #1DA1F2;
+    background-color: #3924a3;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -95,12 +174,14 @@ body {
 }
 
 .comment-form button:hover {
-    background-color: #0D8DDB;
+    background-color: #3f28b4;
 }
 
-/* Lista de comentários */
+/* Lista de Comentários */
 .comments-list {
     margin-top: 20px;
+    max-height: 250px;
+    overflow-y: auto;
 }
 
 .comment {
@@ -110,7 +191,16 @@ body {
     padding: 10px;
     margin-bottom: 10px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+}
+
+.comment .text-muted {
+    font-size: 12px;
+    color: #657786;
+}
+
+.comment p {
+    margin-bottom: 5px;
 }
 
 .comment img {
@@ -120,9 +210,3 @@ body {
     margin-right: 10px;
     object-fit: cover;
 }
-
-.comment .text-muted {
-    font-size: 12px;
-    color: #657786;
-}
-
