@@ -192,7 +192,10 @@ h1 {
 
     border-radius: 20px !important;
     box-shadow: 0px 2.5px 5px rgba(0, 0, 0, 0.1) !important;
+    padding-right: 50px;
 }
+
+
 
 .card img{
     margin-right: 5px;
