@@ -206,7 +206,7 @@ input[type="number"] {
 
 
 input[type="submit"] {
-    background-color: rgb(0, 0, 0);
+    background-color: #3924a3;
     color: #ffffff;
     font-size: large;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.437);

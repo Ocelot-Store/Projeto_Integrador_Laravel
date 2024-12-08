@@ -366,6 +366,32 @@ footer {
     cursor: pointer; /* Adiciona o cursor de ponteiro */
 }
 
-.follow-btn{
+/* Botão de Seguir */
+.follow-btn {
+    background-color: #3924a3; /* Verde, por exemplo */
+    color: white; /* Cor do texto */
+    border: none; /* Sem borda */
+    padding: 10px 20px; /* Ajuste de tamanho */
+    border-radius: 25px; /* Borda arredondada */
+    transition: background-color 0.3s ease; /* Animação de hover */
     margin-top: 0 !important;
 }
+
+.follow-btn:hover {
+    background-color: #3924a3; /* Cor mais escura no hover */
+}
+
+/* Botão de Postar */
+.container form button {
+    background-color: #3924a3; /* Azul, por exemplo */
+    color: white; /* Cor do texto */
+    border: none; /* Sem borda */
+    padding: 10px 20px; /* Ajuste de tamanho */
+    border-radius: 25px; /* Borda arredondada */
+    transition: background-color 0.3s ease; /* Animação de hover */
+}
+
+.container form button:hover {
+    background-color: #3f28b4; /* Cor mais escura no hover */
+}
+
