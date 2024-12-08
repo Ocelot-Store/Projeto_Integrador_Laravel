@@ -23,7 +23,7 @@
         </li>
         <li class="ms-1" style="margin-bottom: 0;">
           <a href="{{ route('user') }}">
-            <img src="{{ Auth::user()->profileImage ? asset('storage/' . Auth::user()->profileImage) : asset('assets/DarkUser.png') }}" alt="Usu rio" class="img-fluid" style="width: 40px; height: 40px; margin-bottom: 0; border-radius: 50%; object-fit: cover">
+            <img src="{{ Auth::user()->profileImage ? asset('storage/' . Auth::user()->profileImage) : asset('assets/DarkUser.png') }}" alt="Usu rio" class="img-fluid" style="width: 40px; height: 40px; margin-bottom: 0; border-radius: 50%; object-fit: cover;">
           </a>
         </li>
         <li style="margin-bottom: 0;">
