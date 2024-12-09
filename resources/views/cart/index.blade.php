@@ -24,117 +24,159 @@
     </div>
     
     @else
-    <h1>Meu Carrinho</h1>
+    <h2>Meu Carrinho</h2>
+    <div class="cart-container">
+        
         <div class="cart-item">
             @foreach($cartItems as $item)
                 <div class="cart-product">
-                <label class="custom-checkbox">
-                <input type="checkbox" class="product-checkbox" data-price="{{ $item->shoe->price * $item->quantity }}" checked>
-                <span class="checkmark"></span>
-            </label>
-
 
                     <div class="product-info">
                         <img src="{{ asset('storage/' . $item->shoe->image) }}" alt="{{ $item->shoe->model }}" class="product-image">
                         <div class="details">
                             <h2>{{ $item->shoe->model }}</h2>
-                            <h3>{{ \Illuminate\Support\Str::limit($item->shoe->description,100)}}</h3
+                            <h3>{{ \Illuminate\Support\Str::limit($item->shoe->description, 50) }}</h3>
                             <span>R$ {{ number_format($item->shoe->price, 2, ',', '.') }}</span>
                         </div>
                     </div>
                     <div class="quantity">
-                        <form action="{{ route('cart.update', $item->id) }}" method="POST">
+                        <form action="{{ route('cart.update', $item->id) }}" method="POST" class="update-quantity-form">
                             @csrf
                             <div class="quantity-control">
-                                <button type="button" class="btn-decrement">-</button>
+                                <button type="button" class="btn-decrement" data-id="{{ $item->id }}">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
                                 <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" class="quantity-input" readonly>
-                                <button type="button" class="btn-increment">+</button>
+                                <button type="button" class="btn-increment" data-id="{{ $item->id }}">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
                             </div>
                         </form>
                     </div>
+
                     <div class="price">
-                        <span>R$ {{ number_format($item->shoe->price * $item->quantity, 2, ',', '.') }}</span>
+                        <span class="item-price">R$ {{ number_format($item->shoe->price * $item->quantity, 2, ',', '.') }}</span>
                     </div>
                     <div class="actions">
                         <form action="{{ route('cart.remove', $item->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn-remove">Remover</button>
+                            <button type="submit" class="btn-remove">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
                         </form>
                     </div>
+
                 </div>
             @endforeach
         </div>
 
         <div class="cart-summary">
+            <h5>Resumo da compra</h5>
             <div class="subtotal">
                 <span>Subtotal</span>
-                <span id="subtotal">{{ number_format($cartItems->sum(fn($item) => $item->shoe->price * $item->quantity), 2, ',', '.') }}</span>
-             </div>
-
-            <div class="shipping">
-                <form action="{{ route('calcular-frete') }}" method="POST">
-                    @csrf
-                    <label for="cep">CEP de destino:</label>
-                    <input type="text" id="cep" class="form-frete" name="cep" required>
-
-                    <button type="submit" class="btn-frete">Calcular Frete</button>
-                </form>
-
-                @if(session('frete'))
-                    <p>Valor do Frete: R$ {{ session('frete') }}</p>
-                @endif
+                <span id="subtotal">{{ number_format(session('subtotal', 0), 2, ',', '.') }}</span>
             </div>
+
+            @if($errors->has('coupon_code'))
+                <div class="alert alert-danger">
+                    {{ $errors->first('coupon_code') }}
+                </div>
+            @endif
+
+            <div class="descontos">
+                <form action="{{ route('cart.applyCoupon') }}" method="POST">
+                    @csrf
+                    <span>Cupom de Desconto</span>
+                    <button class="btn-apply" id="apply-coupon-btn">Adicionar</button>
+                    <div id="coupon-form" style="display: none; margin-top: 20px;">
+                        <input type="text" name="coupon_code" id="coupon_code" required class="input-coupon">
+                        <button class="btn-add-descount" type="submit">Aplicar</button>
+                    </div>
+                </form>
+            </div>
+
+            @if(session('coupon_applied') && session('discount') > 0)
+                <p>Desconto: R$ {{ number_format(session('discount'), 2, ',', '.') }}</p>
+            @endif
+
 
             <div class="total">
                 <strong>Total</strong>
-                <strong>R$ <span id="total">{{ number_format($cartItems->sum(fn($item) => $item->shoe->price * $item->quantity), 2, ',', '.') }}</span></strong>
+                <strong>R$ <span id="total">{{ number_format(session('total', session('subtotal', 0)), 2, ',', '.') }}</span></strong>
             </div>
-            <button class="btn-pay">Enviar Pedido</button>
+
+
+            <div class="btns">
+                <a href="{{ route('cart.ordered') }}" class="btn-pay">Enviar Pedido</a>
+                <a href="{{ route('home') }}" class="btn-home">Escolher mais produtos</a>
+            </div>
+
         </div>
+
     @endif
 </div>
+
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const checkboxes = document.querySelectorAll('.product-checkbox');
-    const subtotalElement = document.getElementById('subtotal');
-    const totalElement = document.getElementById('total');
+const decrementButtons = document.querySelectorAll('.btn-decrement');
+const incrementButtons = document.querySelectorAll('.btn-increment');
 
-    function updateTotal() {
-        let subtotal = 0;
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                const price = parseFloat(checkbox.getAttribute('data-price'));
-                const quantity = parseInt(checkbox.closest('.cart-product').querySelector('.quantity-input').value);
-                subtotal += price * quantity;
-            }
-        });
-        subtotalElement.textContent = subtotal.toFixed(2).replace('.', ',');
-        totalElement.textContent = subtotal.toFixed(2).replace('.', ',');
-    }
-
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', updateTotal);
-    });
-
-    // Botões de incremento e decremento
-    document.querySelector('.btn-decrement').addEventListener('click', function() {
-        const quantityInput = document.querySelector('.quantity-input');
+decrementButtons.forEach(button => {
+    button.addEventListener('click', function () {
+        const quantityInput = this.closest('.quantity-control').querySelector('.quantity-input');
         let currentValue = parseInt(quantityInput.value);
-        if (currentValue > 1) { 
+        if (currentValue > 1) {
             quantityInput.value = currentValue - 1;
+            updateTotal(); // Atualiza o total após a alteração
         }
     });
+});
 
-    document.querySelector('.btn-increment').addEventListener('click', function() {
-        const quantityInput = document.querySelector('.quantity-input');
+incrementButtons.forEach(button => {
+    button.addEventListener('click', function () {
+        const quantityInput = this.closest('.quantity-control').querySelector('.quantity-input');
         let currentValue = parseInt(quantityInput.value);
         quantityInput.value = currentValue + 1;
+        updateTotal(); // Atualiza o total após a alteração
+    });
+});
+
+// Função para atualizar o subtotal e o total na interface
+function updateTotal() {
+    // Recupere o subtotal (soma dos valores dos produtos)
+    let subtotal = 0;
+    const itemPrices = document.querySelectorAll('.item-price');
+    const quantityInputs = document.querySelectorAll('.quantity-input');
+    
+    itemPrices.forEach((item, index) => {
+        const price = parseFloat(item.textContent.replace('R$', '').replace(',', '.'));
+        const quantity = parseInt(quantityInputs[index].value);
+        subtotal += price * quantity;
     });
 
-    updateTotal();
-});
+    // Atualiza o subtotal na página
+    document.getElementById('subtotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+
+    // Atualiza o total (considerando o desconto, se houver)
+    let discount = parseFloat('{{ session("discount", 0) }}');
+    let total = subtotal - discount;
+
+    document.getElementById('total').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+}
+
+// Chama a função de atualização do total ao carregar a página
+updateTotal();
+
+    document.getElementById('apply-coupon-btn').addEventListener('click', function() {
+        event.preventDefault();
+        var couponForm = document.getElementById('coupon-form');
+        
+        
+        if (couponForm.style.display === 'none' || couponForm.style.display === '') {
+            couponForm.style.display = 'block'; 
+        } else {
+            couponForm.style.display = 'none'; 
+        }
+    });
 </script>
-
-
 @endsection
