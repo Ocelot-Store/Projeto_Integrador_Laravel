@@ -15,7 +15,7 @@
             <div class="category-info mt-4">
                 <p><strong>Indicado para:</strong> Caminhada</p>
                 <p><strong>Material:</strong> Sintético</p>
-                <p><strong>Categoria:</strong> Esporte Casual</p>
+                <p><strong>Categoria:</strong> {{ $shoe->category }}</p>
                 <p><strong>Peso do Produto:</strong> 250g</p>
                 <p><strong>Tecnologia:</strong> Air Max</p>
                 <p><strong>Garantia do Fabricante:</strong> 3 meses</p>
