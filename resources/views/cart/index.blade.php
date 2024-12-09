@@ -20,7 +20,7 @@
         <h2>Seu carrinho está vazio.</h2>
         <p>Continue navegando até encontrar algo que você goste e adicione aqui</p>
         <i class="fa-solid fa-cart-shopping"></i>
-        <a href="{{ route('home') }}" class="btn-back">Voltar</a>
+        <a href="{{ route('home') }}" style="background-color: #3924a3;" class="btn-back">Voltar</a>
     </div>
     
     @else
