@@ -77,12 +77,16 @@
 
             @foreach ($posts as $post)
             <div class="card">
-                <img class="user-image" src="{{ $post->user->profileImage ? asset('storage/' . $post->user->profileImage) : asset('assets/DarkUser.png') }}" alt="Imagem de Perfil">
+                <a href="{{ route('user.show', $post->user->id) }}">
+                    <img class="user-image" src="{{ $post->user->profileImage ? asset('storage/' . $post->user->profileImage) : asset('assets/DarkUser.png') }}" alt="Imagem de Perfil">
+                </a>
                 <div class="card-info">
-                    <p class="text-muted">
-                        <strong>{{ $post->user->name }}</strong>
-                        {{ $post->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y H:i') }}
-                    </p>
+                    <a href="{{ route('user.show', $post->user->id) }}">
+                        <p class="text-muted">
+                            <strong>{{ $post->user->name }}</strong>
+                            {{ $post->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y H:i') }}
+                        </p>
+                    </a>
                     <p class="card-text">{{ $post->content }}</p>
                     <!-- Verifica se o post tem um shoe_id associado e exibe o tênis -->
                     @if ($post->shoe_id)
