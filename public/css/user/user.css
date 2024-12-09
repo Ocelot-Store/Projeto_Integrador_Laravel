@@ -169,7 +169,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px 20px;
-    background-color: #333; /* Cor de fundo preto */
+    background-color: #3924a3; /* Cor de fundo preto */
     color: #ffffff; /* Texto branco */
     font-weight: 500;
     border-radius: 8px;
@@ -184,7 +184,7 @@ body {
 }
 
 .button:hover {
-    background-color: #000; /* Cor de fundo preto mais intenso */
+    background-color: #3f28b4; /* Cor de fundo preto mais intenso */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 

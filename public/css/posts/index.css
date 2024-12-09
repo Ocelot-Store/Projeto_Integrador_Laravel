@@ -335,6 +335,15 @@ footer {
     transition: transform 0.2s ease;
 }
 
+.shoe-info-name {
+    font-size: large;
+    color: black;
+    white-space: nowrap; /* Garante que o texto fique em uma única linha */
+    overflow: hidden; /* Esconde o texto que ultrapassar o limite */
+    text-overflow: ellipsis; /* Adiciona os "..." ao final do texto */
+    max-width: 230px; /* Ajuste a largura máxima para se adequar ao layout */
+}
+
 @media (min-width: 900px) {
     .shoe-item {
         padding-block: 20px;

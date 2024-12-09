@@ -90,6 +90,16 @@ a {
     margin: 5% 0;
 }
 
+.product-card h2 {
+    white-space: nowrap; /* Evita quebra de linha */
+    overflow: hidden;    /* Oculta texto que ultrapassa */
+    text-overflow: ellipsis; /* Adiciona os três pontos */
+    max-width: 100%;     /* Limita a largura */
+    font-size: 1.2rem;   /* Ajuste o tamanho conforme necessário */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
 .shoe-info-name {
     font-size: large;
     color: black;
