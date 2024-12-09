@@ -22,6 +22,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-family: 'Poppins', sans-serif;
+    font-weight: light; 
 }
 
 .popup-message p {
@@ -111,6 +113,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: light; 
 }
 
 .upload-icon {
@@ -175,6 +179,8 @@ body {
     border: none;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+    font-weight: light; 
 }
 
 .button:hover {
@@ -184,7 +190,9 @@ body {
 
 .button-secondary {
     background-color: #f0f0f5; /* Cinza claro para o secundário */
-    color: #333; /* Texto preto */
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    font-weight: light;  /* Texto preto */
 }
 
 .button-secondary:hover {
@@ -213,11 +221,14 @@ body {
     font-weight: 500;
     transition: color 0.3s;
     position: relative;
+    font-family: 'Poppins', sans-serif;
+    font-weight: light; 
 }
 .tab.active, .tab:hover {
     color: #333; /* Texto preto para a aba ativa e ao passar o mouse */
     font-weight: bold;
-}
+    font-family: 'Poppins', sans-serif;
+   }
 .tab-content {
     display: none;
     animation: fadeIn 0.3s ease-in-out;
@@ -262,6 +273,8 @@ body {
 .product-details {
     padding: 20px;
     color: #333;
+    font-family: 'Poppins', sans-serif;
+    font-weight: light; 
 }
 
 .product-details h2 {
@@ -284,8 +297,9 @@ body {
 .price {
     font-size: 20px;
     color: #333;
-    font-weight: bold;
     margin-top: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold; 
 }
 
 .description {
@@ -295,6 +309,8 @@ body {
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     max-height: 4.5em; /* Ajuste conforme a altura da linha */
+    font-family: 'Poppins', sans-serif;
+    font-weight: light; 
 }
 
 /* Back Button */
@@ -302,6 +318,31 @@ body {
     display: flex;
     justify-content: flex-start;
     padding: 20px 0;
+}
+.edit-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3924a3; /* Cor azul para o botão */
+    color: #ffffff; /* Texto branco */
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    background-color: #3f28b4; /* Azul mais escuro ao passar o mouse */
+    transform: translateY(-3px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Aumenta o destaque da sombra */
+}
+
+.edit-button:active {
+    background-color: #3f28b4; /* Azul ainda mais escuro ao clicar */
+    transform: translateY(1px); /* Simula o clique */
 }
 
 /* Additional Styling for Responsiveness */

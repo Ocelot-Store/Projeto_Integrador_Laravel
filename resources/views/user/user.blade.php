@@ -96,7 +96,7 @@
                             <p class="price">$ {{ $shoe->price }}</p>
 
                             <div class="actions">
-                                <a href="{{ route('shoe.edit', $shoe->id) }}" class="edit-button">Editar</a>
+                                <a href="{{ route('shoe.edit', $shoe->id) }}" class="edit-button">EDITAR</a>
                             </div>
                         </div>
                     </div>

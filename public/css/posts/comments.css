@@ -60,12 +60,16 @@ body {
 .card-info .text-muted {
     font-size: 14px;
     color: #657786;
+    font-family: 'Poppins', sans-serif;
+    font-weight: light; 
 }
 
 .card-text {
     font-size: 15px;
     line-height: 1.6;
     margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: light; 
 }
 
 .shoe-item {

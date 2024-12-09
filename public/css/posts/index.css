@@ -44,11 +44,15 @@ h1 {
     font-size: 24px;
     color: rgb(255, 255, 255);
     text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold; 
 }
 
 .posts-container {
     display: flex;
     gap: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: light; 
     
 }
 
@@ -63,7 +67,7 @@ h1 {
     height: fit-content;
     border-radius: 10px;
     font-size: large
-}
+  }
 
 
 .menu button {
