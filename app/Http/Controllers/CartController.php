@@ -5,19 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Shoe;
+use App\Models\Coupon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 
 class CartController extends Controller
 {
     public function index() {
         $cartItems = Cart::with('shoe')->get();
+
+        // Calcular o subtotal (soma do preço de todos os itens)
         $cartTotal = $cartItems->sum(function($item) {
             return $item->shoe->price * $item->quantity;
         });
+
+        // Armazenar o subtotal na sessão para uso posterior
+        session()->put('subtotal', $cartTotal);
+
         return view('cart.index', compact('cartItems', 'cartTotal'));
     }
-    
+
     public function addToCart(Request $request, $shoeId)
     {
         $cartItem = Cart::where('user_id', Auth::id())
@@ -55,16 +61,46 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Item removido do carrinho.');
     }
 
-    public function calcularFrete(Request $request)
-    {
-        $cepOrigem = '18013-280'; // CEP de origem fixo
-        $cepDestino = $request->input('cep');
-        $peso = $request->input('peso');
-
-        // API fictícia para calcular o frete
-        $tarifaBase = 10.00; // Valor fixo em reais
     
-        return redirect()->back()->with('frete', $tarifaBase);
+
+    public function applyCoupon(Request $request)
+    {
+        // Remover qualquer valor de desconto da sessão
+        session()->forget(['discount', 'coupon_applied']);
+
+        $couponCode = $request->input('coupon_code');
+        $coupon = Coupon::where('code', $couponCode)->first();
+        
+        // Se o cupom não for válido ou expirado, ou mesmo se for válido, removemos qualquer desconto da sessão
+        if (!$coupon || !$coupon->isValid()) {
+            // Redireciona de volta com erro, sem aplicar nada
+            return redirect()->back()->withErrors(['coupon_code' => 'Cupom inválido ou expirado!']);
+        }
+
+        $subtotal = session('subtotal', 0);
+
+        if ($subtotal <= 0) {
+            return redirect()->back()->withErrors(['coupon_code' => 'Subtotal inválido.']);
+        }
+
+        // Calculando o desconto
+        $discount = ($subtotal * $coupon->discount) / 100;
+        $total = $subtotal - $discount;
+
+        // Salvando as informações de desconto na sessão, quando o cupom for válido
+        session([
+            'discount' => $discount,
+            'total' => $total,
+            'subtotal' => $subtotal,
+            'coupon_applied' => true, // Definir que um cupom foi aplicado com sucesso
+        ]);
+
+        return redirect()->back()->with('message', 'Cupom aplicado com sucesso!');
+    }
+
+    public function confirmacao()
+    {
+        return view('pedido.confirmacao');
     }
 
 }

@@ -5,6 +5,10 @@ use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ShoeManager;
 use App\Http\Controllers\UserManager;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController; 
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ShoeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 
@@ -73,13 +77,8 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{shoeId}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/update/{cartId}', [CartController::class, 'updateCart'])->name('cart.update');
 Route::delete('/cart/remove/{cartId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-
-// Rotas do cálculo do frete
-Route::get('/calculadora-frete', function () {
-    return view('calculadora-frete');
-})->name('calculadora-frete');
-
-Route::post('/calcular-frete', [CartController::class, 'calcularFrete'])->name('calcular-frete');
+Route::post('/cart/apply-coupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
+Route::get('/cart/ordered', [OrderController::class, 'ordered'])->name('cart.ordered');
 
 // Rotas relacionadas aos posts
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
