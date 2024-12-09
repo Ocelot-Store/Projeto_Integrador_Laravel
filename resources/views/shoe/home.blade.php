@@ -29,7 +29,7 @@
                             <div class="shoe-item">
                                 <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
                                 <div class="shoe-info-name">
-                                    <span class="model">{{ $shoe->model }}</span> <br>
+                                    <span class="model">{{ \Illuminate\Support\Str::limit($shoe->model, 20) }}</span> <br>
                                 </div>
                                 <div class="shoe-info-otherinfo">
                                     <span class="brand">{{ $shoe->brand->name }}</span>
@@ -60,7 +60,7 @@
                     <div class="shoe-item">
                         <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
                         <div class="shoe-info-name">
-                            <span class="model">{{ $shoe->model }}</span> <br>
+                            <span class="model">{{ \Illuminate\Support\Str::limit($shoe->model, 20) }}</span> <br>
                         </div>
                         <div class="shoe-info-otherinfo">
                             <span class="brand">{{ $shoe->brand->name }}</span>
@@ -89,7 +89,7 @@
                     <div class="shoe-item">
                         <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->model }}" width="200">
                         <div class="shoe-info-name">
-                            <span class="model">{{ $shoe->model }}</span> <br>
+                            <span class="model">{{ \Illuminate\Support\Str::limit($shoe->model, 20) }}</span> <br>
                         </div>
                         <div class="shoe-info-otherinfo">
                             <span class="brand">{{ $shoe->brand->name }}</span>

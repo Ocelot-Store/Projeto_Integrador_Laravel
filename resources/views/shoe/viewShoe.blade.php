@@ -42,7 +42,7 @@
 
         <div class="col-md-4">
             <div class="shoe-info">
-                <p class="price">Preço: <strong>R$ {{ number_format($shoe->price, 2, ',', '.') }}</strong></p>
+                <p class="price">Preço: <strong> ${{ number_format($shoe->price, 2, ',', '.') }}</strong></p>
 
                 <div class="seller mt-4 text-center">
                     <div class="seller-image-container">

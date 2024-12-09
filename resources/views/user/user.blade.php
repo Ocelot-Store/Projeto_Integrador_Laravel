@@ -90,8 +90,8 @@
                             <img src="{{ asset('storage/' . $shoe->image) }}" alt="Imagem do Tênis" class="img-fluid">
                         </div>
                         <div class="product-details">
-                        <h2>{{ \Illuminate\Support\Str::limit($shoe->model, 15) }} <span class="new-label">NEW</span></h2>
-                            <p class="category">Nike Dunk Low</p>
+                            <h2>{{ \Illuminate\Support\Str::limit($shoe->model, 15) }} <span class="new-label">NEW</span></h2>
+                            <p class="category">{{ $shoe->category}}</p>
                             <p class="description">{{ $shoe->description }}</p>
                             <p class="price">$ {{ $shoe->price }}</p>
 
