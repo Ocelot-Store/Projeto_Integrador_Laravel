@@ -17,6 +17,8 @@ body {
     color: white;
     position: relative;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold; 
 }
 
 

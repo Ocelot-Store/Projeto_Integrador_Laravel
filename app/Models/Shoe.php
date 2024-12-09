@@ -12,6 +12,8 @@ class Shoe extends Model
     // Define o nome da tabela, caso seja diferente do padrão
     protected $table = 'shoe';
 
+    
+
     // Define os campos que podem ser preenchidos em massa
     protected $fillable = [
         'model',

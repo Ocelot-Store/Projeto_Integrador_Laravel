@@ -34,13 +34,17 @@ body{
     text-shadow: 2px 2px 10px rgba(0, 0, 0);
     border: none;
     padding: 0;
-    font-size: large;   
+    font-size: large; 
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;   
 }
 .Login-button{
     background-color: white;
     color: #000000;
     font-size: large;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.741);
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold; 
 }
 .Login-button:hover {
     transform: scale(1.2);

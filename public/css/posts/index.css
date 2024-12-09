@@ -1,3 +1,12 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Garantir que a altura total seja usada */
+    overflow: hidden; /* Impedir scroll global */
+    display: flex;
+    flex-direction: column;
+}
 /* Geral */
 body {
     font-family: "Arial", sans-serif;
@@ -44,11 +53,15 @@ h1 {
     font-size: 24px;
     color: rgb(255, 255, 255);
     text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold; 
 }
 
 .posts-container {
     display: flex;
     gap: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: light; 
     
 }
 
@@ -63,7 +76,7 @@ h1 {
     height: fit-content;
     border-radius: 10px;
     font-size: large
-}
+  }
 
 
 .menu button {
@@ -149,6 +162,7 @@ h1 {
     overflow-y: auto; /* Permite rolagem vertical apenas na lista */
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
+    padding-bottom: 50px;
 }
 .posts-list::-webkit-scrollbar {
     display: none; /* Chrome, Safari e Edge */
@@ -192,7 +206,10 @@ h1 {
 
     border-radius: 20px !important;
     box-shadow: 0px 2.5px 5px rgba(0, 0, 0, 0.1) !important;
+    padding-right: 50px !important;
 }
+
+
 
 .card img{
     margin-right: 5px;
@@ -326,6 +343,15 @@ footer {
     border-radius: 20px;
     box-shadow: 0px 2.5px 5px rgba(0, 0, 0, 0.1) !important;
     transition: transform 0.2s ease;
+}
+
+.shoe-info-name {
+    font-size: large;
+    color: black;
+    white-space: nowrap; /* Garante que o texto fique em uma única linha */
+    overflow: hidden; /* Esconde o texto que ultrapassar o limite */
+    text-overflow: ellipsis; /* Adiciona os "..." ao final do texto */
+    max-width: 230px; /* Ajuste a largura máxima para se adequar ao layout */
 }
 
 @media (min-width: 900px) {
