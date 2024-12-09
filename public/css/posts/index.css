@@ -1,3 +1,12 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Garantir que a altura total seja usada */
+    overflow: hidden; /* Impedir scroll global */
+    display: flex;
+    flex-direction: column;
+}
 /* Geral */
 body {
     font-family: "Arial", sans-serif;
@@ -153,6 +162,7 @@ h1 {
     overflow-y: auto; /* Permite rolagem vertical apenas na lista */
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
+    padding-bottom: 50px;
 }
 .posts-list::-webkit-scrollbar {
     display: none; /* Chrome, Safari e Edge */

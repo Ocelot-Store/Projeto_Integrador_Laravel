@@ -1,26 +1,50 @@
-/* Geral */
+html,
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #ffffff;
-    /* Fundo claro */
-    color: #14171A;
     margin: 0;
     padding: 0;
+    height: 100%; /* Garantir que a altura total seja usada */
+    overflow: hidden; /* Impedir scroll global */
+    display: flex;
+    flex-direction: column;
+}
+body {
+    font-family: "Arial", sans-serif;
+    background-color: rgb(253, 253, 253) !important;
+    margin: 0;
+    padding: 0;
+    background-image: url('/assets/Posts_Index.png');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Camada de preto */
+body:before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
 }
 
 /* Container geral */
 .container {
     display: flex;
-    max-width: 100%;
+    flex-direction: row; /* Organiza a seção de comentários e o post lado a lado */
+
+    height: 100%;
     margin: 0 auto;
     padding-top: 20px;
     justify-content: space-between;
+    height: 100%;
 }
 
 /* Coluna do Post */
 .card {
     background-color: #ffffff;
-    border: 1px solid #E1E8ED;
+    border: 1px solid #e1e8ed;
     border-radius: 10px;
     padding: 15px;
     margin-bottom: 20px;
@@ -29,6 +53,8 @@ body {
     /* Ajustei a largura do post para 60% */
     display: flex;
     flex-direction: column;
+    height: fit-content !important;
+    padding-right: 50px;
 }
 
 .card a {
@@ -60,16 +86,21 @@ body {
 .card-info .text-muted {
     font-size: 14px;
     color: #657786;
-    font-family: 'Poppins', sans-serif;
-    font-weight: light; 
+    font-family: "Poppins", sans-serif;
+    font-weight: light;
 }
 
 .card-text {
     font-size: 15px;
     line-height: 1.6;
     margin-bottom: 10px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: light; 
+    font-family: "Poppins", sans-serif;
+    font-weight: light;
+    margin-left: 60px;
+}
+
+.post-time{
+    margin: 0;
 }
 
 .shoe-item {
@@ -156,17 +187,18 @@ body {
 }
 
 /* Formulário de Comentário */
-/* Formulário de Comentário */
 .comment-section {
-    width: 35%;
-    /* Ajustei a largura da seção de comentários para 35% */
-    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 35%; /* Ajuste da largura da seção de comentários */
+    height: 100%; /* Garante que ocupa a altura completa */
+    overflow: hidden; /* Previne scroll externo */
 }
 
 .comment-form textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #E1E8ED;
+    border: 1px solid #e1e8ed;
     border-radius: 20px;
     font-size: 14px;
     background-color: #ffffff;
@@ -189,21 +221,37 @@ body {
     background-color: #3f28b4;
 }
 
-/* Lista de Comentários */
+
+h3 {
+    margin-top: 20px !important;
+    color: #fff !important;
+
+}
+
 .comments-list {
+    flex: 1; /* Permite ocupar a altura disponível */
+    overflow-y: auto; /* Scroll interno */
     margin-top: 20px;
-    max-height: 250px;
-    overflow-y: auto;
+    padding-right: 10px; /* Espaço para barra de rolagem */
+    padding-bottom: 60px; /* Espaço extra para evitar corte do último comentário */
+    box-sizing: border-box; /* Garante que padding seja considerado na altura */
+    max-width: 100%;
 }
 
 .comment {
-    background-color: #ffffff;
-    border: 1px solid #E1E8ED;
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
+
+    border-color: white !important;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border-radius: 20px !important;
+    box-shadow: 0px 2.5px 5px rgba(0, 0, 0, 0.1) !important;
+    padding: 20px;
+}
+
+.comment-info {
+    display: flex;
 }
 
 .comment .text-muted {
@@ -216,8 +264,8 @@ body {
 }
 
 .comment img {
-    width: 32px;
-    height: 32px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     margin-right: 10px;
     object-fit: cover;
