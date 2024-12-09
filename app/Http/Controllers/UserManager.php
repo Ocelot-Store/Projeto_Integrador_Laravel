@@ -20,7 +20,7 @@ class UserManager extends Controller
         // Obtém todos os sapatos do usuário
         $shoes = $user->shoes;
 
-        $favorites = Favorite::all();
+        $favorites = Favorite::where('user_id', Auth::id())->get();
 
         // Retorna a view com as informações do usuário e seus sapatos
         return view('user.user', compact('user', 'shoes', 'favorites'));
