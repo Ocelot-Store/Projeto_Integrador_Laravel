@@ -64,7 +64,7 @@
             @foreach ($post->comments as $comment)
             <div class="comment">
                 <div class="comment-info" >
-                    <img class="user-image" src="{{ $post->user->profileImage ? asset('storage/' . $post->user->profileImage) : asset('assets/DarkUser.png') }}" style="min-width: 50px;" alt="Imagem de Perfil">
+                    <img class="user-image" src="{{ $comment->user->profileImage ? asset('storage/' . $comment->user->profileImage) : asset('assets/DarkUser.png') }}" style="min-width: 50px;" alt="Imagem de Perfil">
                     <div style="display: flex; flex-direction: column; margin-top: 10px;">
                         <div style="display: flex; align-items: center; margin-bottom: 10px;">
                             <strong style="margin-right: 5px;">- {{ $comment->user->name }} </strong>
