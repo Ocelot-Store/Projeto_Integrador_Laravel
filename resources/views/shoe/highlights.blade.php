@@ -12,7 +12,7 @@
             <section id="highlight" class="highlight-section">
                 <div class="content">
                     <h1>Destaque do dia:</h1>
-                    <h2>Dunk Low - Verde</h2>
+                    <h2>Nike Revolution 6</h2>
                     <!-- Link estático ou variável dependendo dos requisitos -->
                     <a href="{{ route('viewShoe', 1) }}">Confira mais Informações</a> <!-- Substitua o ID com um ID válido se necessário -->
                 </div>
