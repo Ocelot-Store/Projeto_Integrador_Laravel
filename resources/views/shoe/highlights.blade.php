@@ -14,7 +14,7 @@
                     <h1>Destaque do dia:</h1>
                     <h2>Nike Revolution 6</h2>
                     <!-- Link estático ou variável dependendo dos requisitos -->
-                    <a href="{{ route('viewShoe', 1) }}">Confira mais Informações</a> <!-- Substitua o ID com um ID válido se necessário -->
+                    <a href="{{ route('viewShoe', 11) }}">Confira mais Informações</a> <!-- Substitua o ID com um ID válido se necessário -->
                 </div>
                 <div class="image-container">
                     <img src="{{ asset('storage/images/shoes/tenis11.png') }}" alt="Tênis Nike Verde" class="d-block w-100">
