@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function index() {
-        $cartItems = Cart::with('shoe')->get();
+    public function index()
+    {
+        $cartItems = Cart::with('shoe')
+                        ->where('user_id', Auth::id())
+                        ->get();
 
         // Calcular o subtotal (soma do preço de todos os itens)
         $cartTotal = $cartItems->sum(function($item) {
