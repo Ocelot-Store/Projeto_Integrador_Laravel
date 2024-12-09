@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
+
 <div class="Main">
     <h1>Lista de Usuários</h1>
 
@@ -18,6 +19,7 @@
     <p>Erro: Não foi possível carregar os números de seguidores e seguidos.</p>
     @endif
 
+    @if(!$isSearch)
     <div class="Users">
         <!-- Lista de Todos os Usuários -->
         <div id="todos-os-usuarios-list" class="user-list">
@@ -106,6 +108,96 @@
             @endforeach
         </div>
     </div>
+    @else
+    <div class="Users">
+        <!-- Lista de Todos os Usuários -->
+        <div id="todos-os-usuarios-list" class="user-list">
+            @foreach ($searchedUsers as $user)
+            @if($user->id !== Auth::id())
+            <a href="{{ route('user.show', $user->id) }}">
+                <div class="Users-User">
+                    <img src="{{ $user->profileImage ? asset('storage/' . $user->profileImage) : asset('assets/DarkUser.png') }}"
+                        alt="Imagem de perfil de {{ $user->name }}"
+                        class="user-profile-img">
+                    <div class="user-info">
+                        <p><strong>{{ $user->name }}</strong></p>
+                    </div>
+                    @if(Auth::user()->following->contains($user->id))
+                    <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="follow-btn unfollow">Deixar de Seguir</button>
+                    </form>
+                    @else
+                    <form action="{{ route('user.follow', $user->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="follow-btn">Seguir</button>
+                    </form>
+                    @endif
+                </div>
+            </a>
+            @endif
+            @endforeach
+        </div>
+
+
+        <!-- Lista de "Seguindo", que será alternada -->
+        <div id="seguindo-list" class="user-list" style="display: none;">
+            @foreach ($seguindoLista as $userFollowing)
+            <a href="{{ route('user.show', $userFollowing->id) }}">
+                <div class="Users-User">
+                    <img src="{{ $userFollowing->profileImage ? asset('storage/' . $userFollowing->profileImage) : asset('assets/DarkUser.png') }}"
+                        alt="Imagem de perfil de {{ $userFollowing->name }}"
+                        class="user-profile-img">
+                    <div class="user-info">
+                        <p><strong>{{ $userFollowing->name }}</strong></p>
+                    </div>
+                    @if(Auth::user()->following->contains($userFollowing->id))
+                    <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="follow-btn unfollow">Deixar de Seguir</button>
+                    </form>
+                    @else
+                    <form action="{{ route('user.follow', $user->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="follow-btn">Seguir</button>
+                    </form>
+                    @endif
+                </div>
+            </a>
+            @endforeach
+        </div>
+
+        <!-- Lista de "Seguidores", que será alternada -->
+        <div id="seguidores-list" class="user-list" style="display: none;">
+            @foreach ($seguidoresLista as $follower)
+            @if($follower->id !== Auth::id())
+            <a href="{{ route('user.show', $user->id) }}">
+                <div class="Users-User">
+                    <img src="{{ $follower->profileImage ? asset('storage/' . $follower->profileImage) : asset('assets/DarkUser.png') }}"
+                        alt="Imagem de perfil de {{ $follower->name }}"
+                        class="user-profile-img">
+                    <div class="user-info">
+                        <p><strong>{{ $follower->name }}</strong></p>
+                    </div>
+
+                    @if(Auth::user()->following->contains($follower->id))
+                    <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="follow-btn unfollow">Deixar de Seguir</button>
+                    </form>
+                    @else
+                    <form action="{{ route('user.follow', $user->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="follow-btn">Seguir</button>
+                    </form>
+                    @endif
+                </div>
+            </a>
+            @endif
+            @endforeach
+        </div>
+    </div>
+    @endif
 
     <!-- Modal para exibir Seguidores ou Seguindo -->
     <div id="modal" class="modal">

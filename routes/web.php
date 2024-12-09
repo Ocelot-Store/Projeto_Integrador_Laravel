@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/{user}/follow', [UserManager::class, 'follow'])->name('user.follow');
     Route::post('/user/{user}/unfollow', [UserManager::class, 'unfollow'])->name('user.unfollow');
 });
+Route::get('/users/search', [UserController::class, 'search'])->middleware('auth')->name('searchUsers');
 
 // Rotas relacionadas a tênis
 Route::get('/addShoe', [ShoeManager::class, 'addShoe'])->middleware('auth')->name('addShoe');
