@@ -30,7 +30,7 @@
                 @csrf
                 <div class="input-box">
                     <img src="../assets/DarkUser.png" alt="">
-                    <input type="text" class="form-control" name="name" placeholder="Name">
+                    <input type="text" class="form-control" name="name" placeholder="Nome">
                 </div>
                 <div class="input-box">
                     <img src="../assets/Email.png" alt="">
@@ -38,18 +38,18 @@
                 </div>
                 <div class="input-box">
                     <img src="../assets/Address.png" alt="">
-                    <input type="text" class="form-control" name="address" placeholder="Address">
+                    <input type="text" class="form-control" name="address" placeholder="Endereço">
                 </div>
                 <div class="input-box">
                     <img src="../assets/Password.png" alt="">
-                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <input type="password" class="form-control" name="password" placeholder="Senha">
                 </div>
                 <div class="input-box">
                     <img src="../assets/Password.png" alt="">
-                    <input type="password" class="form-control" name="PasswordConfirmation" placeholder="Password Confirmation">
+                    <input type="password" class="form-control" name="PasswordConfirmation" placeholder="Confirmar Senha">
                 </div>
                 <div class="divsubmit">
-                <input type="submit" value="Submit">
+                <input type="submit" value="Cadastrar">
                 </div>
             </form>
         </div>

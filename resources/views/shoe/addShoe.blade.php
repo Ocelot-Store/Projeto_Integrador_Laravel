@@ -28,12 +28,12 @@
         <form action="{{route('addShoe.post')}}" method="POST"  class="ms-auto me-auto mt-3" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
-                <label for="model" class="form-label">Model</label>
+                <label for="model" class="form-label">Modelo</label>
                 <input type="text" class="form-control" name="model" >
             </div>
 
             <div>
-                <label for="price">Price:</label>
+                <label for="price">Preço</label>
                 <input type="number" class="form-control" name="price" required step="0.01"><br>
             </div>
 
@@ -42,16 +42,11 @@
                 <input type="text" class="form-control" name="size" >
             </div>
 
-            <div class="mb-3">
-                <label for="color" class="form-label">Color</label>
-                <input type="text" class="form-control" name="color" >
-            </div>
-
-            <label for="brand">Brand:</label>
+            <label for="brand">Marca</label>
 
             <div class="mb-3">
                 <select name="brand_id" required>
-                    <option value="">Select a brand</option>
+                    <option value="">Selecionar uma marca</option>
                     @foreach($brands as $brand)
                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                     @endforeach
@@ -59,16 +54,16 @@
             </div>
 
             <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
+                <label for="description" class="form-label">Descrição</label>
                 <textarea class="form-control" name="description" rows="3" required></textarea>
             </div>
 
             <div class="mb-3">
-                <label for="image" class="form-label">Image:</label>
+                <label for="image" class="form-label">Imagem</label>
                 <input class="form-control" type="file" name="image" accept=".jpg,.jpeg,.png" required>
             </div>
                         
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
     </div>
 @endsection
