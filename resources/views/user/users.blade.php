@@ -186,7 +186,7 @@
                         <button type="submit" class="follow-btn unfollow">Deixar de Seguir</button>
                     </form>
                     @else
-                    <form action="{{ route('user.follow', $user->id) }}" method="POST">
+                    <form action="{{ route('user.follow', $follower->id) }}" method="POST">
                         @csrf
                         <button type="submit" class="follow-btn">Seguir</button>
                     </form>
