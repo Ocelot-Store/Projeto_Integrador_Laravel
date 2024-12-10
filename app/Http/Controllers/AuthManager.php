@@ -52,7 +52,7 @@ class AuthManager extends Controller
         if(!$user){
             return redirect(route('registration'))->with("error", "Registration failed try again.");
         }
-        return redirect(route('login'))->with("success", "Registration completed, login to access the website");
+        return redirect(route('home'))->with("success", "Registration completed, login to access the website");
         
         
     }
