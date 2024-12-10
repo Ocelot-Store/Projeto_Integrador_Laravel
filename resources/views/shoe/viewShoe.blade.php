@@ -67,7 +67,7 @@
 
                         <!-- resources/views/shoes/viewShoe.blade.php -->
                         <a href="{{ route('posts.index', ['shoe_id' => $shoe->id]) }}" class="btn btn-outline-secondary rounded-button">
-                            Post <img src="{{ asset('assets/post.png') }}" style="width: 20px;" alt="">
+                            Postar <img src="{{ asset('assets/post.png') }}" style="width: 20px;" alt="">
                         </a>
                     </div>
                 </div>

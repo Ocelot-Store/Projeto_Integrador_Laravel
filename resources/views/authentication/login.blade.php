@@ -39,7 +39,7 @@
                     <input type="password" class="form-control" name="password" placeholder="Senha">
                 </div>
                 <div class="divsubmit">
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Login">
                 </div>
             </form>
         </div>

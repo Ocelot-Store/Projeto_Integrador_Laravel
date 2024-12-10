@@ -13,9 +13,9 @@
 
     <div class="posts-container">
         <div class="menu">
-            <a href="{{ route('posts.index') }}"><button><img src="{{ asset('assets/postsHome.png') }}" alt=""> Home</button></a>
-            <a href="{{ route('posts.following') }}"><button><img src="{{ asset('assets/postsFollowing.png') }}" alt=""> Following</button></a>
-            <a href="{{ route('posts.myPosts') }}"><button><img src="{{ asset('assets/postsMyPosts.png') }}" alt=""> My posts</button></a>
+            <a href="{{ route('posts.index') }}"><button><img src="{{ asset('assets/postsHome.png') }}" alt=""> Início</button></a>
+            <a href="{{ route('posts.following') }}"><button><img src="{{ asset('assets/postsFollowing.png') }}" alt=""> Seguindo</button></a>
+            <a href="{{ route('posts.myPosts') }}"><button><img src="{{ asset('assets/postsMyPosts.png') }}" alt=""> Meus Posts</button></a>
 
             <!-- Menu de Brands -->
             <form method="GET" action="{{ route('posts.index') }}" class="d-flex align-items-center mb-4">
