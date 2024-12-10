@@ -110,6 +110,15 @@
                     <div class="comments">
                         <a href="{{ route('posts.show', $post->id) }}"><img src="{{ asset('assets/comments.png') }}" alt=""> ({{ $post->comments->count() }})</a>
                     </div>
+                    @if (Auth::id() === $post->user_id)
+                    <form action="{{ route('posts.delete', $post->id) }}" method="POST" class="delete-form">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="delete-btn">
+                            <img src="{{ asset('assets/postsDelete.png') }}" alt="">  
+                        </button>
+                    </form>
+                    @endif
 
                 </div>
             </div>

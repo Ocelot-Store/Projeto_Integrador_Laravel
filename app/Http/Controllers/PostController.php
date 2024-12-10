@@ -141,4 +141,15 @@ class PostController extends Controller
 
         return view('posts.index', compact('posts', 'brands', 'users', 'selectedBrand'));
     }
+
+    public function delete(Post $post)
+    {
+        if ($post->user_id !== Auth::id()) {
+            abort(403, 'Ação não autorizada.');
+        }
+
+        $post->delete();
+
+        return redirect()->route('posts.index')->with('success', 'Post excluído com sucesso!');
+    }
 }

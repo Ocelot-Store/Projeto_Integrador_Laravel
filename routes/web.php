@@ -93,3 +93,7 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')
 
 // Rota para adicionar um comentário
 Route::post('/posts/{post}/comment', [PostController::class, 'storeComment'])->name('posts.comment.store');
+
+// Rota para excluir um comentário
+Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('posts.delete');
+
