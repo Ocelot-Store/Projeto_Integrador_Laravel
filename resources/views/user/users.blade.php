@@ -82,7 +82,7 @@
         <div id="seguidores-list" class="user-list" style="display: none;">
             @foreach ($seguidoresLista as $follower)
             @if($follower->id !== Auth::id())
-            <a href="{{ route('user.show', $user->id) }}">
+            <a href="{{ route('user.show', $follower->id) }}">
                 <div class="Users-User">
                     <img src="{{ $follower->profileImage ? asset('storage/' . $follower->profileImage) : asset('assets/DarkUser.png') }}"
                         alt="Imagem de perfil de {{ $follower->name }}"
@@ -171,7 +171,7 @@
         <div id="seguidores-list" class="user-list" style="display: none;">
             @foreach ($seguidoresLista as $follower)
             @if($follower->id !== Auth::id())
-            <a href="{{ route('user.show', $user->id) }}">
+            <a href="{{ route('user.show', $follower->id) }}">
                 <div class="Users-User">
                     <img src="{{ $follower->profileImage ? asset('storage/' . $follower->profileImage) : asset('assets/DarkUser.png') }}"
                         alt="Imagem de perfil de {{ $follower->name }}"

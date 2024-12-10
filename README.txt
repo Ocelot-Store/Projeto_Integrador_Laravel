@@ -1,9 +1,3 @@
-Conta da namorada do Bruno
-
-* E-mail: mayquer4gabrielly30@outlook.com
-* Senha: MayqueraGabrielly021120240943
-
-
 Cada vez que a configuração inicial for realizada, execute os seguintes comandos:
 
 php artisan migrate
@@ -14,4 +8,6 @@ app\public\images\users
 
 php artisan storage:link
 
-
+Opcional para carregar imagens:
+colocar os conteúdos de shoes.zip e users.zip em app\public\images\shoes e app\public\images\users respectivamente.
+ 
