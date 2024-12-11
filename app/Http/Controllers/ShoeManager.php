@@ -132,7 +132,16 @@ class ShoeManager extends Controller
             ->where('shoe_id', $shoe->id)
             ->exists();
 
-        return view('shoe.viewShoe', compact('shoe', 'isFavorite'));
+        $brand = $shoe->brand->name;
+
+        $relatedShoes = Shoe::where('id', '!=', $id)
+            ->whereHas('brand', function ($query) use ($brand) {
+                $query->where('name', $brand);
+            })
+            ->take(4)
+            ->get();
+
+        return view('shoe.viewShoe', compact('shoe', 'isFavorite', 'relatedShoes'));
     }
 
 
