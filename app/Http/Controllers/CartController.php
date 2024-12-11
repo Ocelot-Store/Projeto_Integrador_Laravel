@@ -40,7 +40,8 @@ class CartController extends Controller
             Cart::create([
                 'user_id' => Auth::id(),
                 'shoe_id' => $shoeId,
-                'quantity' => $request->input('quantity', 1)
+                'quantity' => $request->input('quantity', 1),
+                'size' => $request->input('size')
             ]);
         }
 
