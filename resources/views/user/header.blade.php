@@ -21,8 +21,8 @@
       <ul class="navbar-nav ms-auto" style="display: flex; margin-bottom: 0;">
         <li style="margin-bottom: 0;">
           <form class="d-flex" role="search" action="{{ route('searchUsers') }}" method="GET" style="margin-bottom: 0;">
-            <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search" style="margin-bottom: 0;">
-            <button class="btn btn-outline-success" type="submit" style="border-color: black; color: black; transition: all 0.2s ease-in-out; margin-bottom: 0;" onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor='transparent'">Search</button>
+            <input class="form-control me-2" type="search" name="query" placeholder="Buscar" aria-label="Search" style="margin-bottom: 0;">
+            <button class="btn btn-outline-success" type="submit" style="border-color: black; color: black; transition: all 0.2s ease-in-out; margin-bottom: 0;" onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor='transparent'">Buscar</button>
           </form>
         </li>
         <li class="ms-1" style="margin-bottom: 0;">
@@ -31,7 +31,7 @@
           </a>
         </li>
         <li style="margin-bottom: 0;">
-          <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+          <a class="nav-link" href="{{ route('logout') }}">Sair</a>
         </li>
       </ul>
 
