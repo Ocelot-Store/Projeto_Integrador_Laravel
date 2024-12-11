@@ -2,11 +2,6 @@
 <footer>
     <div class="footer-content">
         <p>&copy; {{ date('Y') }} Ocelot Store. Todos os direitos reservados.</p>
-        <ul>
-            <li><a href="{{ route('home') }}">Início</a></li>
-            <li><a href="#">Sobre</a></li>
-            <li><a href="#">Contato</a></li>
-        </ul>
     </div>
 </footer>
 
