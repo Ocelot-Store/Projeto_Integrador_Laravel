@@ -5,7 +5,6 @@ body {
 
 .shoe-image {
     border-radius: 20px;
-    border: 2px solid #e0e0e0;
     max-width: 100%;
     height: auto;
     margin-left: -15px;
@@ -137,7 +136,6 @@ body {
     font-size: 1.8rem;
     margin-top: 15px;
     display: flex;
-    justify-content: center;
 }
 
 .card-info div {

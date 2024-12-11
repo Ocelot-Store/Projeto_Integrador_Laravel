@@ -4,7 +4,6 @@
 @section('style')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <link rel="stylesheet" href="{{ asset('css/shoe/cart.css') }}">
-
 @endsection
 
 @section('content')
@@ -13,7 +12,6 @@
     @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-    
     
     @if($cartItems->isEmpty())
     <div class="empty-cart">
@@ -37,6 +35,8 @@
                             <h2>{{ $item->shoe->model }}</h2>
                             <h3>{{ \Illuminate\Support\Str::limit($item->shoe->description, 50) }}</h3>
                             <span>R$ {{ number_format($item->shoe->price, 2, ',', '.') }}</span>
+                            <!-- Exibe o tamanho do tênis aqui -->
+                            <p><strong>Tamanho:</strong> {{ $item->size }}</p> <!-- Considerando que o tamanho é um atributo do item -->
                         </div>
                     </div>
                     <div class="quantity">
@@ -100,12 +100,10 @@
                 <p>Desconto: R$ {{ number_format(session('discount'), 2, ',', '.') }}</p>
             @endif
 
-
             <div class="total">
                 <strong>Total</strong>
                 <strong>R$ <span id="total">{{ number_format(session('total', session('subtotal', 0)), 2, ',', '.') }}</span></strong>
             </div>
-
 
             <div class="btns">
                 <a href="{{ route('cart.ordered') }}" class="btn-pay">Enviar Pedido</a>
