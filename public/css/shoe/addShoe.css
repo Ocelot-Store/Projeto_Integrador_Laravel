@@ -1,0 +1,56 @@
+.form-label{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-label-especify{
+    color: #5d43e0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.btn-add-size, .btn-secondary, .btn-submit{
+    background-color: #5d43e0;
+    color: white;
+    font-size: 18px;  
+    font-weight: bold;
+    gap: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto;
+    padding: 10px 20px; 
+    text-align: center;
+}
+
+.remove-size-btn {
+    background-color: #fff;
+    color: #dc3545;
+    padding: 8px 15px; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-remove:hover {
+    background-color: #fa0000;
+    color: #fff;
+}
+
+.simple-select {
+    padding: 10px 20px; /* Mesma altura e largura dos botões */
+    width: auto; /* Ajusta a largura automaticamente */
+    min-width: 150px; /* Define uma largura mínima */
+    border: 1px solid #ccc; /* Borda cinza clara */
+    border-radius: 4px; /* Bordas levemente arredondadas */
+    font-size: 16px; /* Tamanho da fonte */
+    background-color: #fff; /* Cor de fundo */
+    outline: none; /* Remove o contorno ao focar */
+    transition: border-color 0.2s ease; /* Transição suave de borda */
+}
+
+/* Foco no select */
+.simple-select:focus {
+    border-color: #5d43e0; /* Borda roxa ao focar */
+}
