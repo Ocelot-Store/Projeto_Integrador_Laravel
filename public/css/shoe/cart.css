@@ -1,3 +1,6 @@
+a{
+    text-decoration: none !important;
+}
 .container {
     max-width: 800px;
     margin: auto;

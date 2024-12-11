@@ -84,23 +84,24 @@
             <section class="products">
                 @if(isset($shoes) && $shoes->isNotEmpty())
                 @foreach ($shoes as $shoe)
-                <div class="for-sale-container">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ asset('storage/' . $shoe->image) }}" alt="Imagem do Tênis" class="img-fluid">
-                        </div>
-                        <div class="product-details">
-                            <h2>{{ \Illuminate\Support\Str::limit($shoe->model, 15) }} <span class="new-label">NEW</span></h2>
-                            <p class="category">{{ $shoe->category}}</p>
-                            <p class="description">{{ $shoe->description }}</p>
-                            <p class="price">$ {{ $shoe->price }}</p>
-
-                            <div class="actions">
-                                <a href="{{ route('shoe.edit', $shoe->id) }}" class="edit-button">EDITAR</a>
+                <a href="{{ route('viewShoe', $shoe->id) }}">
+                    <div class="for-sale-container">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="{{ asset('storage/' . $shoe->image) }}" alt="Imagem do Tênis" class="img-fluid">
+                            </div>
+                            <div class="product-details">
+                                <h2>{{ \Illuminate\Support\Str::limit($shoe->model, 15) }} <span class="new-label">NEW</span></h2>
+                                <p class="category">{{ $shoe->category}}</p>
+                                <p class="description">{{ $shoe->description }}</p>
+                                <p class="price">$ {{ $shoe->price }}</p>
+                                <div class="actions">
+                                    <a href="{{ route('shoe.edit', $shoe->id) }}" class="edit-button">EDITAR</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
                 @endforeach
                 @else
                 <p>Nenhum produto à venda por este usuário.</p>
@@ -113,19 +114,21 @@
             <section class="products">
                 @if(isset($favorites) && $favorites->isNotEmpty())
                 @foreach ($favorites as $favorito)
-                <div class="for-sale-container">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ asset('storage/' . $favorito->shoe->image) }}" alt="Imagem do Tênis" class="img-fluid">
-                        </div>
-                        <div class="product-details">
-                            <h2>{{ $favorito->shoe->model }} <span class="new-label">NEW</span></h2>
-                            <p class="category">Nike Dunk Low</p>
-                            <p class="description">{{ $favorito->shoe->description }}</p>
-                            <p class="price">$ {{ $favorito->shoe->price }}</p>
+                <a href="{{ route('viewShoe', $favorito->id) }}">
+                    <div class="for-sale-container">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="{{ asset('storage/' . $favorito->shoe->image) }}" alt="Imagem do Tênis" class="img-fluid">
+                            </div>
+                            <div class="product-details">
+                                <h2>{{ $favorito->shoe->model }} <span class="new-label">NEW</span></h2>
+                                <p class="category">Nike Dunk Low</p>
+                                <p class="description">{{ $favorito->shoe->description }}</p>
+                                <p class="price">$ {{ $favorito->shoe->price }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
                 @endforeach
                 @else
                 <p>Nenhum produto adicionado aos favoritos.</p>

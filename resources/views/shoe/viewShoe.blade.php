@@ -15,6 +15,9 @@
             <div class="category-info mt-4">
                 <p><strong>Categoria:</strong> {{ $shoe->category }}</p>
             </div>
+            <div class="category-info mt-2">
+                <p><strong>Cor:</strong> {{ $shoe->color }}</p>
+            </div>
 
 
 

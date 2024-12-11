@@ -7,6 +7,12 @@ body {
     padding: 0;
     line-height: 1.6;
 }
+
+a{
+    text-decoration: none !important;
+    
+}
+
 /* Popup Message */
 .popup-message {
     position: fixed;
@@ -366,4 +372,12 @@ body {
         flex-direction: column;
         align-items: center;
     }
+}
+
+.for-sale-container a{
+    color: black;
+}
+
+.edit-button{
+    color: white !important;
 }
