@@ -98,3 +98,6 @@ Route::post('/posts/{post}/comment', [PostController::class, 'storeComment'])->n
 Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('posts.delete');
 
 Route::get('shoes/{id}', [ShoeManager::class, 'show'])->name('shoe.show');
+
+Route::get('shoes/{id}', [ShoeManager::class, 'show'])->name('shoe.show');
+Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');

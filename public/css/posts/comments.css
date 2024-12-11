@@ -7,6 +7,7 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 body {
     font-family: "Arial", sans-serif;
     background-color: rgb(253, 253, 253) !important;
@@ -31,30 +32,31 @@ body:before {
 
 /* Container geral */
 .container {
+    width: 100%;
+    max-width: 1200px; /* Definindo uma largura máxima para o conteúdo */
     display: flex;
-    flex-direction: row; /* Organiza a seção de comentários e o post lado a lado */
-
+    flex-direction: row;
     height: 100%;
     margin: 0 auto;
     padding-top: 20px;
     justify-content: space-between;
-    height: 100%;
 }
 
 /* Coluna do Post */
 .card {
-    background-color: #ffffff;
-    border: 1px solid #e1e8ed;
-    border-radius: 10px;
-    padding: 15px;
+    width: 800px; /* Largura total disponível */
+    max-width: 1100px; /* Aumenta a largura do fundo do card */
+    background-color: #ffffff; /* Fundo branco */
+    border: 1px solid #e1e8ed; /* Borda do card */
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 40px 20px; /* Aumenta o padding para expandir o fundo */
     margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    width: 60%;
-    /* Ajustei a largura do post para 60% */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra leve */
     display: flex;
     flex-direction: column;
-    height: fit-content !important;
-    padding-right: 50px;
+    height: auto !important; /* Ajusta a altura automaticamente conforme o conteúdo */
+    margin-left: 20px; /* Margem esquerda para espaçamento */
+    margin-right: 20px; /* Margem direita para espaçamento */
 }
 
 .card a {
@@ -99,7 +101,7 @@ body:before {
     margin-left: 60px;
 }
 
-.post-time{
+.post-time {
     margin: 0;
 }
 
@@ -143,15 +145,14 @@ body:before {
     transform: scale(1.01);
 }
 
+/* Corrigir o tamanho da imagem do post */
 .shoe-item img {
-    margin-bottom: 10px;
     max-width: 100%;
     height: auto;
-    transition: transform 0.3s ease;
+    object-fit: cover;
     border-radius: 5%;
     width: 230px;
     height: 230px;
-    object-fit: cover;
 }
 
 .shoe-info {
@@ -221,11 +222,9 @@ body:before {
     background-color: #3f28b4;
 }
 
-
 h3 {
     margin-top: 20px !important;
     color: #fff !important;
-
 }
 
 .comments-list {
@@ -241,7 +240,6 @@ h3 {
 .comment {
     display: flex;
     flex-direction: column;
-
     border-color: white !important;
     margin-bottom: 15px;
     background-color: #fff;
@@ -269,4 +267,62 @@ h3 {
     border-radius: 50%;
     margin-right: 10px;
     object-fit: cover;
+}
+
+/* Estilo de posts relacionados (não altera os principais) */
+.related-posts .d-flex {
+    display: flex;
+    justify-content: center; /* Centraliza os itens dentro do container */
+    gap: 20px; /* Espaçamento entre os cards */
+    flex-wrap: wrap; /* Quebra linha quando necessário */
+}
+
+.related-posts .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 18rem; /* Ajuste para o tamanho dos posts relacionados */
+    text-align: center;
+    margin: 10px; /* Margem para os posts relacionados */
+    padding: 15px; /* Padding para os posts relacionados */
+}
+
+.related-posts .card-body {
+    text-align: center; /* Centraliza o texto dentro do card */
+}
+
+.related-posts .no-related-posts {
+    color: white; /* Deixa o texto branco */
+    text-align: left; /* Alinha o texto à esquerda */
+    font-size: 1.2rem; /* Ajuste o tamanho da fonte conforme necessário */
+    margin-top: 20px; /* Espaçamento superior */
+}
+
+
+/* Ajuste para maior responsividade no mobile */
+@media (max-width: 768px) {
+    .shoe-item {
+        width: 100%; /* Deixe os itens de sapato mais fluidos */
+    }
+    .container {
+        flex-direction: column;
+    }
+}
+
+/* Ajuste para garantir que o conteúdo do layout se adapte mesmo com poucos posts */
+.related-posts .d-flex > .card {
+    width: 18rem; /* Tamanho fixo dos cards */
+}
+
+/* Se houver menos de 3 posts, ajusta o layout para centralizar os itens */
+.related-posts .d-flex:only-child {
+    justify-content: center; /* Centraliza quando há apenas 1 post */
+}
+
+.related-posts .d-flex:only-child > .card {
+    width: 100%; /* Faz o único card ocupar toda a largura disponível */
+}
+
+.related-posts .d-flex:only-child > .card-body {
+    text-align: center; /* Centraliza o conteúdo no único card */
 }

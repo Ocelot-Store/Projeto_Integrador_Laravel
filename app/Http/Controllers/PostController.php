@@ -72,10 +72,26 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        // Verificar se o post tem um 'shoe_id' válido
+        if (!$post->shoe_id) {
+            return redirect()->back()->with('error', 'Este post não tem um tênis associado.');
+        }
+    
+        // Carregar os comentários com os usuários associados
         $post->load('comments.user');
-
-        return view('posts.show', compact('post'));
+    
+        // Buscar posts relacionados com o mesmo 'shoe_id' do post atual, excluindo o próprio post
+        $relatedPosts = Post::with(['user', 'shoe.brand'])
+            ->where('shoe_id', $post->shoe_id)
+            ->where('id', '!=', $post->id) // Excluir o próprio post
+            ->latest() // Ordenar pelos posts mais recentes
+            ->limit(3) // Limitar a quantidade de posts relacionados
+            ->get();
+    
+        // Passar os dados para a view
+        return view('posts.show', compact('post', 'relatedPosts'));
     }
+    
 
     public function following(Request $request)
     {
@@ -152,4 +168,16 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('success', 'Post excluído com sucesso!');
     }
+    
+    public function shoe()
+    {
+        return $this->belongsTo(Shoe::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+    
+
 }
