@@ -19,7 +19,6 @@ class CreateShoeTable extends Migration
             $table->foreignId('brand_id')->constrained('brand')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('user')->onDelete('cascade');
             $table->decimal('price', 10, 2);
-            $table->string('size', 100);
             $table->string('description', 999);
             $table->string('color', 100);
             $table->string('image', 100);

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+
 class Shoe extends Model
 {
     use HasFactory;
@@ -12,7 +14,7 @@ class Shoe extends Model
     // Define o nome da tabela, caso seja diferente do padrão
     protected $table = 'shoe';
 
-    
+
 
     // Define os campos que podem ser preenchidos em massa
     protected $fillable = [
@@ -20,13 +22,13 @@ class Shoe extends Model
         'brand_id',
         'user_id',
         'price',
-        'size',
         'description',
         'color',
         'image',
         'data_upload',
-        'category',  // Adicionado o campo 'category'
+        'category',
     ];
+
 
     // Define os relacionamentos
     public function brand()
@@ -45,5 +47,10 @@ class Shoe extends Model
         $cheapestShoe = Shoe::orderBy('price', 'asc')->first(); // Supondo que o campo de preço seja 'price'
 
         return view('sua_view', compact('cheapestShoe')); // Substitua 'sua_view' pelo nome da sua view
+    }
+
+    public function sizes()
+    {
+        return $this->hasMany(ShoeSize::class, 'shoe_id');
     }
 }

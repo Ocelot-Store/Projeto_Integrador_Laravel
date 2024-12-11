@@ -16,17 +16,24 @@
                 <p><strong>Categoria:</strong> {{ $shoe->category }}</p>
             </div>
 
-            <div class="size-selection my-4">
-                <label class="form-label">Selecione o Tamanho:</label>
-                <div class="size-options">
-                    <span class="size-circle">36</span>
-                    <span class="size-circle">37</span>
-                    <span class="size-circle">38</span>
-                    <span class="size-circle">39</span>
-                    <span class="size-circle">40</span>
-                    <span class="size-circle">41</span>
+            <form action="{{ route('cart.add', ['shoeId' => $shoe->id]) }}" method="POST" class="d-inline">
+                @csrf
+                <div class="size-selection my-4">
+                    <label class="form-label">Selecione o Tamanho:</label>
+                    <select name="size" class="form-control" required>
+                        <option value="">Selecione o Tamanho</option>
+                        @foreach ($shoe->sizes as $size)
+                        <option value="{{ $size->size }}">{{ $size->size }}</option>
+                        @endforeach
+                    </select>
+
                 </div>
-            </div>
+
+                <button type="submit" class="btn btn-primary rounded-button mb-2">
+                    Adicionar ao Carrinho
+                </button>
+            </form>
+
         </div>
 
         <div class="col-md-4 d-flex justify-content-center">
@@ -42,21 +49,13 @@
                 <div class="seller mt-4 text-center">
                     <div class="seller-image-container">
                         <img src="{{ $shoe->user->profileImage ? asset('storage/' . $shoe->user->profileImage) : asset('assets/DarkUser.png') }}" alt="Imagem do Vendedor" class="user-image">
-
-
                     </div>
                     <span>Vendedor(a): <strong>{{ $shoe->user->name ?? 'Desconhecido(a)' }}</strong></span>
                 </div>
 
                 <div class="text-center mt-4">
                     <div class="button-group">
-                        <form action="{{ route('cart.add', ['shoeId' => $shoe->id]) }}" method="POST" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-primary rounded-button mb-2">
-                                Adicionar ao Carrinho
-                            </button>
-                        </form>
-
+                        <!-- O botão de adicionar ao carrinho já está no formulário acima, então removemos o formulário duplicado abaixo -->
                         <form action="{{ route('addFavorite') }}" method="POST" class="d-inline">
                             @csrf
                             <input type="hidden" name="shoe_id" value="{{ $shoe->id }}">
