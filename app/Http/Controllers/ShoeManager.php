@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Shoe;
 use App\Models\Brand;
 use App\Models\Favorite;
-use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ShoeManager extends Controller
 {
@@ -25,11 +25,10 @@ class ShoeManager extends Controller
             'model' => 'required',
             'size' => 'required',
             'color' => 'required',
-            'brand_id' => 'required|exists:brand,id',  // Validação para garantir que o brand_id exista
+            'brand_id' => 'required|exists:brands,id',  // Validação para garantir que o brand_id exista
             'price' => 'required|numeric|min:0', // Validação para o preço
             'description' => 'required|string|max:500', // Validação para a descrição
             'image' => 'required|image|mimes:jpg,jpeg,png|max:2048', // Validação da imagem
-
         ]);
 
         $data = $request->only('model', 'size', 'color', 'brand_id', 'price', 'description'); // Incluindo brand_id
@@ -43,9 +42,9 @@ class ShoeManager extends Controller
         $shoe = Shoe::create($data);
 
         if (!$shoe) {
-            return redirect(route('addShoe'))->with(" error", "Unable to add shoe, try again.");
+            return redirect(route('addShoe'))->with('error', 'Unable to add shoe, try again.');
         }
-        return redirect(route('addShoe'))->with("success", "Shoe successfully added.");
+        return redirect(route('addShoe'))->with('success', 'Shoe successfully added.');
     }
 
     public function displayShoes()
@@ -55,39 +54,38 @@ class ShoeManager extends Controller
             ->orderBy('price', 'asc')
             ->take(20)
             ->get();
-
+    
         $latestShoe = Shoe::orderBy('created_at', 'desc')->first(); // Obtém o tênis mais recente
-
+    
         // Definindo $isSearch como false para a exibição padrão
         $isSearch = false;
-
+    
         return view('shoe.home', compact('shoes', 'cheapestShoes', 'latestShoe', 'isSearch'));
     }
-
-
 
     public function search(Request $request)
     {
         $query = $request->input('query');
-
-        // Valida se o termo de busca está presente
+    
         if (!$query) {
             return redirect()->route('home')->with('error', 'Digite um termo para buscar.');
         }
-
-        // Realiza a busca nos modelos e nas marcas
+    
         $shoes = Shoe::where('model', 'LIKE', "%{$query}%")
             ->orWhereHas('brand', function ($q) use ($query) {
                 $q->where('name', 'LIKE', "%{$query}%");
             })
             ->get();
-
-        // Indica que a página está em modo de busca
+    
         $isSearch = true;
-
+    
         return view('shoe.home', compact('shoes', 'isSearch', 'query'));
-    }
+    }    
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
 
 
     public function addFavorite(Request $request)
@@ -111,21 +109,32 @@ class ShoeManager extends Controller
             return redirect()->back()->with('success', 'Item removido dos favoritos.');
         }
     }
-
-
+    
     public function show($id)
     {
         $shoe = Shoe::with('brand')->findOrFail($id);
-
+    
         // Verifica se o tênis está nos favoritos do usuário autenticado
         $isFavorite = Favorite::where('user_id', auth()->id())
             ->where('shoe_id', $shoe->id)
             ->exists();
-
-        return view('shoe.viewShoe', compact('shoe', 'isFavorite'));
+    
+        // Pega a marca do tênis selecionado
+        $brand = $shoe->brand->name;
+    
+        // Buscar tênis relacionados com o mesmo nome de marca
+        $relatedShoes = Shoe::where('id', '!=', $id)
+            ->whereHas('brand', function($query) use ($brand) {
+                $query->where('name', $brand);
+            })
+            ->take(4)
+            ->get();
+    
+        return view('shoe.viewShoe', compact('shoe', 'isFavorite', 'relatedShoes'));
     }
-
-
+    
+    
+    
 
     public function CheapestShoeHighlight()
     {
@@ -142,7 +151,7 @@ class ShoeManager extends Controller
             // Validação dos dados recebidos
             $validatedData = $request->validate([
                 'model' => 'required|string|max:100',
-                'brand_id' => 'required|exists:brand,id',
+                'brand_id' => 'required|exists:brands,id',
                 'size' => 'required|string|max:100',
                 'color' => 'required|string|max:100',
                 'description' => 'required|string|max:999',
@@ -196,9 +205,6 @@ class ShoeManager extends Controller
             return redirect()->back()->withInput()->with('error', 'Erro ao atualizar o tênis. Tente novamente. ' . $e->getMessage());
         }
     }
-
-
-
 
     public function edit($id)
     {

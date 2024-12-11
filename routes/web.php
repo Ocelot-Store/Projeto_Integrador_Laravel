@@ -67,7 +67,7 @@ Route::get('/shoe/{id}', [ShoeManager::class, 'show'])->name('viewShoe');
 Route::get('/shoe/edit/{id}', [ShoeManager::class, 'edit'])->name('shoe.edit');
 Route::put('/shoe/update/{id}', [ShoeManager::class, 'update'])->name('shoe.update');
 
-
+Route::get('/shoes/{id}', [ShoeManager::class, 'view'])->name('shoes.view');
 
 // Rota para adicionar aos favoritos
 Route::post('/add-favorite', [ShoeManager::class, 'addFavorite'])->name('addFavorite');
@@ -97,3 +97,4 @@ Route::post('/posts/{post}/comment', [PostController::class, 'storeComment'])->n
 // Rota para excluir um comentário
 Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('posts.delete');
 
+Route::get('shoes/{id}', [ShoeManager::class, 'show'])->name('shoe.show');
