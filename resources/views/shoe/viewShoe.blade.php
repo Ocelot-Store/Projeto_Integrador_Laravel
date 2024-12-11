@@ -82,5 +82,34 @@
             </div>
         </div>
     </div>
+
+    <div class="row mt-5">
+    <div class="col-12">
+        <h3 class="related-title">Tênis Relacionados</h3>
+        <div class="d-flex flex-wrap justify-content-center gap-4">
+            @forelse ($relatedShoes as $relatedShoe)
+                <a href="{{ route('shoe.show', $relatedShoe->id) }}">
+                    <div class="shoe-item">
+                        <img src="{{ asset('storage/' . $relatedShoe->image) }}" alt="{{ $relatedShoe->model }}" width="200">
+                        <div class="shoe-info">
+                            <div class="shoe-info-name">
+                                <span class="model">{{ $relatedShoe->model }}</span>
+                            </div>
+                            <div class="shoe-info-price">
+                                <span class="price">$ {{ $relatedShoe->price }}</span>
+                            </div>
+                        </div>
+                        <div class="shoe-info-otherinfo">
+                            <span class="brand">{{ $relatedShoe->brand->name }}</span>
+                        </div>
+                    </div>
+                </a>
+            @empty
+                <p>Não há tênis relacionados disponíveis.</p>
+            @endforelse
+        </div>
+    </div>
 </div>
+
+
 @endsection
